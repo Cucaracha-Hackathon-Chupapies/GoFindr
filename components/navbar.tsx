@@ -19,10 +19,7 @@ const Navbar = () => {
             <ExplorerButton />
             <SearchButton />
             <MapButton />
-            <ProfileButton 
-                but_d={but_d}
-                icon_d={icon_d}
-            />
+            <ProfileButton />
 
         </nav>
     )
