@@ -4,17 +4,17 @@ import Image from "next/image";
 
 interface Props {
     href: string;
-    src: string;
-    alt: string;
+    icon: string;
     active: boolean;
 }
 
 const NavButton: NextPage<Props> = (props) => {
-    const {href, src, alt, active} = props;
+    const {href, icon, active} = props;
+    const image = require(icon);
     return (
         <Link href={href}>
             <div className={`nav__link`}>
-                <Image src={src} alt={alt} width={50} height={50}/>
+                <image width={50} height={50} fill={'red'}/>
             </div>
         </Link>
     )

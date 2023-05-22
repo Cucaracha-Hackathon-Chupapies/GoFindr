@@ -1,15 +1,19 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import NavButton from "./navbutton";
 import { useState } from "react";
 
+// import ExplorerSVG from "/explorer.svg";
+// import SearchSVG from "/search.svg";
+// import MapSVG from "/map.svg";
+// import ProfileSVG from "/profile.svg";
+
 const MENU_ITEMS = [
-    {href: "/explorer", src: "/explorer.svg", alt: "explorer"},
-    {href: "/search", src: "/search.svg", alt: "search"},
-    {href: "/map", src: "/map.svg", alt: "map"},
-    {href: "/profile", src: "/profile.svg", alt: "profile"},
+    {href: "/explorer", icon: "/explorer.svg"},
+    // {href: "/search", icon: SearchSVG},
+    // {href: "/map", icon: MapSVG},
+    // {href: "/profile", icon: ProfileSVG},
 ];
 
 const Navbar = () => {
@@ -25,7 +29,7 @@ const Navbar = () => {
                             setActiveIdx(idx);
                             setNavActive(false);
                         }}
-                        key={menu.alt}>
+                        key={menu.href}>
                             <NavButton active={activeIdx === idx} {...menu} />
                         </div>
                     ))}
