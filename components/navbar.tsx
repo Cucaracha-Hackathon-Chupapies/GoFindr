@@ -11,9 +11,9 @@ import ProfileButton from "./NavButtons/ProfileButton";
 
 
 const Navbar = () => {
-    const but_d = "50";
-    const icon_d = "35";
-    
+    const but_d = "100";
+    const icon_d = "40";
+
     return (
         <nav className="navbar">
             <ExplorerButton />
