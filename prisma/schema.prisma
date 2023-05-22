@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Theme {
+  id              Int        @id @default(autoincrement())
+  backgroundImage String
+  font            String     @db.VarChar(255)
+  componentColor  String     @db.VarChar(7)
+  Location        Location[]
+  History         History[]
+  Rating          Rating[]
+}
+
+//model Store & model Location
+
+//model Store = name center radius
+
+model Location {
+  lat         Float     @db.Double
+  lng         Float     @db.Double
+  name        String    @id @unique @db.VarChar(255)
+  radius      Int       @db.TinyInt //10-100
+  displayName String    @unique @db.VarChar(255)
+  description String    @db.Text
+  rating      Float     @default(0) @db.Float
+  theme       Theme?    @relation(fields: [themeId], references: [id])
+  //Icon?
+  created     DateTime  @default(now())
+  items       Item[]
+  Customer    Customer? @relation(fields: [customerId], references: [username])
+  customerId  String?
+  Seller      Seller?   @relation(fields: [sellerId], references: [username])
+  sellerId    String?
+  themeId     Int?
+}
+
+model Item {
+  id           Int       @id @default(autoincrement())
+  name         String    @db.VarChar(255)
+  displayName  String    @db.VarChar(255)
+  rating       Float     @db.Float
+  price        String    @db.VarChar(255)
+  description  String    @db.Text
+  image        String? //@default later
+  featured     Boolean   @default(false)
+  popular      Boolean   @default(false)
+  Location     Location? @relation(fields: [locationName], references: [name])
+  locationName String?   @db.VarChar(255)
+}
+
+model History {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique @db.VarChar(255)
+  displayName String    @unique @db.VarChar(255)
+  rating      Float     @db.Float
+  visited     DateTime  @db.DateTime()
+  theme       Theme?    @relation(fields: [themeId], references: [id])
+  entered     Boolean //did the person enter the geofence or just view it outside
+  Customer    Customer? @relation(fields: [customerId], references: [username])
+  customerId  String?
+  themeId     Int?
+}
+
+model Rating {
+  id Int @id @default(autoincrement())
+
+  name        String    @db.VarChar(255)
+  displayName String    @db.VarChar(255)
+  rating      Float     @db.Float
+  theme       Theme?    @relation(fields: [themeId], references: [id])
+  Customer    Customer? @relation(fields: [customerId], references: [username])
+  customerId  String?
+  themeId     Int?
+}
+
+model Customer {
+  username  String   @id @unique @db.VarChar(255)
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  icon      Bytes?
+
+  dynamicStyling Boolean    @default(false)
+  savedLocations Location[]
+  history        History[]
+  ratings        Rating[]
+}
+
+model Seller {
+  username  String   @id @unique @db.VarChar(255)
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  icon      Bytes?
+
+  createdLocations Location[]
+}
