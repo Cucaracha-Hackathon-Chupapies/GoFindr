@@ -11,11 +11,9 @@ import ProfileButton from "./NavButtons/ProfileButton";
 
 
 const Navbar = () => {
-    const but_d = "100";
-    const icon_d = "40";
 
     return (
-        <nav className="navbar">
+        <nav className="fixed bottom-0 w-full h-[100px] flex gap-[45px] justify-center items-center">
             <ExplorerButton />
             <SearchButton />
             <MapButton />
