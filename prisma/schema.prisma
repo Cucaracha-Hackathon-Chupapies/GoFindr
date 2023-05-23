@@ -11,24 +11,33 @@ datasource db {
 }
 
 model Theme {
-  id              Int        @id @default(autoincrement())
+  id              Int         @id @default(autoincrement())
   backgroundImage String
-  font            String     @db.VarChar(255)
-  componentColor  String     @db.VarChar(7)
-  Location        Location[]
+  font            String      @db.VarChar(255)
+  componentColor  String      @db.VarChar(7)
+  stores          StoreInfo[]
   History         History[]
   Rating          Rating[]
+  Store           Store[]
+  Seller          Seller?     @relation(fields: [sellerUsername], references: [username])
+  sellerUsername  String?     @db.VarChar(255)
 }
 
 //model Store & model Location
 
-//model Store = name center radius
+model Store {
+  lat         Float  @db.Double
+  lng         Float  @db.Double
+  name        String @id @unique @db.VarChar(255)
+  //radius Int? @db.TinyInt not sure if I'll keep this
+  displayName String @unique @db.VarChar(255)
+  description String @db.Text
+  theme       Theme? @relation(fields: [themeId], references: [id])
+  themeId     Int?
+}
 
-model Location {
-  lat         Float     @db.Double
-  lng         Float     @db.Double
+model StoreInfo {
   name        String    @id @unique @db.VarChar(255)
-  radius      Int       @db.TinyInt //10-100
   displayName String    @unique @db.VarChar(255)
   description String    @db.Text
   rating      Float     @default(0) @db.Float
@@ -44,17 +53,17 @@ model Location {
 }
 
 model Item {
-  id           Int       @id @default(autoincrement())
-  name         String    @db.VarChar(255)
-  displayName  String    @db.VarChar(255)
-  rating       Float     @db.Float
-  price        String    @db.VarChar(255)
-  description  String    @db.Text
-  image        String? //@default later
-  featured     Boolean   @default(false)
-  popular      Boolean   @default(false)
-  Location     Location? @relation(fields: [locationName], references: [name])
-  locationName String?   @db.VarChar(255)
+  id          Int        @id @default(autoincrement())
+  name        String     @db.VarChar(255)
+  displayName String     @db.VarChar(255)
+  rating      Float      @db.Float
+  price       String     @db.VarChar(255)
+  description String     @db.Text
+  image       String? //@default later
+  featured    Boolean    @default(false)
+  popular     Boolean    @default(false)
+  store       StoreInfo? @relation(fields: [storeName], references: [name])
+  storeName   String?    @db.VarChar(255)
 }
 
 model History {
@@ -83,24 +92,29 @@ model Rating {
 }
 
 model Customer {
-  username  String   @id @unique @db.VarChar(255)
-  email     String   @unique
-  password  String
+  id String @id @unique @default(uuid())
+
+  username  String   @unique @db.VarChar(255)
+  email     String   @unique @db.VarChar(255)
+  password  String   @unique @db.VarChar(255)
   createdAt DateTime @default(now())
   icon      Bytes?
 
-  dynamicStyling Boolean    @default(false)
-  savedLocations Location[]
+  dynamicStyling Boolean     @default(false)
+  savedStores    StoreInfo[]
   history        History[]
   ratings        Rating[]
 }
 
 model Seller {
-  username  String   @id @unique @db.VarChar(255)
+  id String @id @unique @default(uuid())
+
+  username  String   @unique @db.VarChar(255)
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
   icon      Bytes?
+  themes    Theme[]
 
-  createdLocations Location[]
+  createdStores StoreInfo[]
 }
