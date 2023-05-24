@@ -20,7 +20,7 @@ const Found = () => {
                 <div className="text-[36px] font-light">
                     Approaching...
                 </div>
-                <div className="text-[44px] font-medium">
+                <div className="text-[44px] font-medium leading-[50px]">
                     {name}
                 </div>
                 <div className="text-[16px] font-light text-[#747474] italic">
