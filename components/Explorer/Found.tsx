@@ -8,15 +8,16 @@ const Found = () => {
         { id: "2", name: 'Tako Wasabi', price: '$5.39', img: '/placeholder.jpg' },
         { id: "3", name: 'Chicken Karaage', price: '$7.89', img: '/placeholder.jpg' },
         { id: "4", name: 'Fatty Short Ribs', price: '$18.99', img: '/placeholder.jpg' },
-        { id: "1", name: 'Corn Kakikage', price: '8.99', img: '/placeholder.jpg' },
-        { id: "2", name: 'Tako Wasabi', price: '$5.39', img: '/placeholder.jpg' },
-        { id: "3", name: 'Chicken Karaage', price: '$7.89', img: '/placeholder.jpg' },
-        { id: "4", name: 'Fatty Short Ribs', price: '$18.99', img: '/placeholder.jpg' },
+        { id: "5", name: 'Corn Kakikage', price: '8.99', img: '/placeholder.jpg' },
+        { id: "6", name: 'Tako Wasabi', price: '$5.39', img: '/placeholder.jpg' },
+        { id: "7", name: 'Chicken Karaage', price: '$7.89', img: '/placeholder.jpg' },
+        { id: "8", name: 'Fatty Short Ribs', price: '$18.99', img: '/placeholder.jpg' },
     ];
+    const fill = "#ffffff";
 
     return (
         <div className="relative z-999 ">
-            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[80px]">
+            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[100px] md:mt-[70px] lg:mt-[40px]">
                 <div className="text-[36px] font-light">
                     Approaching...
                 </div>
@@ -30,9 +31,9 @@ const Found = () => {
                     Featured Items
                 </div>
 
-                <div className="overflow-x-scroll bg-[#D9D9D9] whitespace-nowrap pt-4 pl-4">
+                <div className="overflow-x-scroll bg-[#D9D9D9] rounded whitespace-nowrap pt-4 pl-4 pb-4">
                     {templateItems.map((item) => (
-                        <Item id={item.id} name={item.name} price={item.price} img={item.img} />
+                        <Item id={item.id} name={item.name} price={item.price} img={item.img} fill={fill} key={item.id}/>
                     ))}
                 </div>
 
@@ -40,9 +41,9 @@ const Found = () => {
                     Popular Items
                 </div>
 
-                <div className="overflow-x-scroll bg-[#D9D9D9] whitespace-nowrap pt-4 pl-4">
+                <div className="overflow-x-scroll bg-[#D9D9D9] rounded whitespace-nowrap pt-4 pl-4 pb-4">
                     {templateItems.map((item) => (
-                        <Item id={item.id} name={item.name} price={item.price} img={item.img} />
+                        <Item id={item.id} name={item.name} price={item.price} img={item.img} fill={fill} key={item.id}/>
                     ))}
                 </div>
             </div>
