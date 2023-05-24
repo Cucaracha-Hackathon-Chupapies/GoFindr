@@ -14,6 +14,7 @@ const Found = () => {
         { id: "8", name: 'Fatty Short Ribs', price: '$18.99', img: '/placeholder.jpg' },
     ];
     const fill = "#ffffff";
+    const fill2 = "#D9D9D9";
 
     return (
         <div className="relative z-999 ">
@@ -31,7 +32,7 @@ const Found = () => {
                     Featured Items
                 </div>
 
-                <div className="overflow-x-scroll bg-[#D9D9D9] rounded whitespace-nowrap pt-4 pl-4 pb-4">
+                <div className={`overflow-x-scroll bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
                     {templateItems.map((item) => (
                         <Item id={item.id} name={item.name} price={item.price} img={item.img} fill={fill} key={item.id}/>
                     ))}
@@ -41,7 +42,7 @@ const Found = () => {
                     Popular Items
                 </div>
 
-                <div className="overflow-x-scroll bg-[#D9D9D9] rounded whitespace-nowrap pt-4 pl-4 pb-4">
+                <div className={`overflow-x-scroll bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
                     {templateItems.map((item) => (
                         <Item id={item.id} name={item.name} price={item.price} img={item.img} fill={fill} key={item.id}/>
                     ))}
