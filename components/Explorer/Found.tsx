@@ -16,7 +16,7 @@ const Found = () => {
 
     return (
         <div className="relative z-999 ">
-            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[100px]">
+            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[80px]">
                 <div className="text-[36px] font-light">
                     Approaching...
                 </div>
@@ -40,6 +40,11 @@ const Found = () => {
                     Popular Items
                 </div>
 
+                <div className="overflow-x-scroll bg-[#D9D9D9] whitespace-nowrap pt-4 pl-4">
+                    {templateItems.map((item) => (
+                        <Item id={item.id} name={item.name} price={item.price} img={item.img} />
+                    ))}
+                </div>
             </div>
         </div>
         
