@@ -1,18 +1,17 @@
 /** @type {import('next').NextConfig} */
 
-
-const withPWA = require("next-pwa");
+import withPWA from 'next-pwa'
 
 const prod = process.env.PROD === "true"
 
 const nextConfig = {
   reactStrictMode: false,
   env: {
-    ACCESS_KEY_ID: process.env.ACCESS_KEY_ID,
-    ACCESS_SECRET_KEY: process.env.ACCESS_SECRET_KEY,
-    BUCKET_NAME: process.env.BUCKET_NAME,
-    BUCKET_ENDPOINT: process.env.BUCKET_ENDPOINT,
-    PROD: process.env.PROD
+    ACCESS_KEY_ID: process.env.ACCESS_KEY_ID || "",
+    ACCESS_SECRET_KEY: process.env.ACCESS_SECRET_KEY || "",
+    BUCKET_NAME: process.env.BUCKET_NAME || "",
+    BUCKET_ENDPOINT: process.env.BUCKET_ENDPOINT || "",
+    PROD: process.env.PROD || "false"
   },
   images: {
     remotePatterns: [
