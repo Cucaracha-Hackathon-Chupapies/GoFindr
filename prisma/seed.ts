@@ -3,7 +3,17 @@ import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
 async function main() {
-    const mishkamushka = await prisma.store.upsert({
+    await prisma.theme.upsert({
+      where: { id: 1 },
+      update: {},
+      create: {
+        font: 'Poppins',
+        backgroundImage: 'https://images.pexels.com/photos/7130555/pexels-photo-7130555.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        componentColor: '#1d9aef'
+      }
+    })
+
+    await prisma.store.upsert({
       where: { name: 'mishkamushka' },
       update: {},
       create: {
@@ -14,7 +24,7 @@ async function main() {
         description: 'poopie poopie :)'
       },
     })
-    const mishkamushka_storeinfo = await prisma.storeInfo.upsert({
+    await prisma.storeInfo.upsert({
       where: { name: 'mishkamushka' },
       update: {},
       create: {
