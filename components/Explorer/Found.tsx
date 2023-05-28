@@ -1,6 +1,7 @@
 import axios from "axios";
 import Item from "./Item";
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 const Found = () => {
     /*
@@ -31,10 +32,15 @@ const Found = () => {
             setDescription(res.data.description)
             setItems(res.data.items)
         })
-    })
+    }, [])
 
     return (
         <div className="relative z-999 ">
+            <Head>
+                <title>{name || "Store Found!"}</title>
+                <meta name="description" content="Viewing store found using geolocation! Wowzaa that's pretty cool if you ask me :) " />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[100px] md:mt-[70px] lg:mt-[40px]">
                 <div className="text-[36px] font-light">
                     Approaching...
