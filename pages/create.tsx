@@ -9,7 +9,7 @@ const formReducer = (state: any, event: any) => {
     }
 }
 
-const create = () => {
+const Create = () => {
     const [formData, setFormData] = useReducer(formReducer, {})
     const [inputFile, setInputFile] = useState<File | null>()
     const [url, setUrl] = useState<string>()
@@ -39,7 +39,7 @@ const create = () => {
         })
     }
 
-    const upload = () => {
+    const upload = useCallback(() => {
         let data = new FormData()
         if (!inputFile) return
        
@@ -50,14 +50,15 @@ const create = () => {
                 'Content-Type': 'multipart/form-data'
             }
         }).then((res) => setUrl(res.data.url))
-    }
+        
+    }, [inputFile])
 
     useEffect(() => {
         if (inputFile){
             upload()
 
         }
-    }, [inputFile])
+    }, [inputFile, upload])
 
     return (
         <>
@@ -104,10 +105,10 @@ const create = () => {
                     <button type="submit">Submit</button>
                 
                 </form>
-                <h3>INFO: Store's Stored Geolocation Will Be Your Current Location</h3>
+                <h3>*Store Geolocation Will Be Your Current Location*</h3>
             </div>
         </>
     )
 }
 
-export default create;
+export default Create;
