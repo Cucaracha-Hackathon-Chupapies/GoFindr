@@ -1,8 +1,9 @@
+import axios from "axios";
 import Item from "./Item";
+import { useEffect, useState } from "react";
 
 const Found = () => {
-    const name = "MISHKA MUSHKA";
-    const description = "Japanese izakaya with splashy decor & a sake-bottle chandelier, serving creative, intricate plates...";
+    /*
     const templateItems = [
         { id: "1", name: 'Corn Kakikage', price: '8.99', img: '/placeholder.jpg' },
         { id: "2", name: 'Tako Wasabi', price: '$5.39', img: '/placeholder.jpg' },
@@ -13,8 +14,24 @@ const Found = () => {
         { id: "7", name: 'Chicken Karaage', price: '$7.89', img: '/placeholder.jpg' },
         { id: "8", name: 'Fatty Short Ribs', price: '$18.99', img: '/placeholder.jpg' },
     ];
+    */
+
+    const storeName = "mishkamushka"; //id of the store found
+
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [items, setItems] = useState<any>([]) //HAHAHAHAAH LOLLLLL FUNNY LMFAAO any :))))
     const fill = "#ffffff";
     const fill2 = "#D9D9D9";
+
+    useEffect(() => {
+        axios.post('/api/getshop', {name: storeName})
+        .then((res) => {
+            setName(res.data.displayName)
+            setDescription(res.data.description)
+            setItems(res.data.items)
+        })
+    })
 
     return (
         <div className="relative z-999 ">
@@ -33,8 +50,8 @@ const Found = () => {
                 </div>
 
                 <div className={`overflow-x-scroll bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
-                    {templateItems.map((item) => (
-                        <Item id={item.id} name={item.name} price={item.price} img={item.img} fill={fill} key={item.id}/>
+                    {items.map((item: any) => (
+                        item.featured && <Item id={item.id} name={item.displayName} price={item.price} img={'/placeholder.jpg'} fill={fill} key={item.id}/>
                     ))}
                 </div>
 
@@ -43,8 +60,8 @@ const Found = () => {
                 </div>
 
                 <div className={`overflow-x-scroll bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
-                    {templateItems.map((item) => (
-                        <Item id={item.id} name={item.name} price={item.price} img={item.img} fill={fill} key={item.id}/>
+                    {items.map((item: any) => (
+                        item.popular && <Item id={item.id} name={item.displayName} price={item.price} img={'/placeholder.jpg'} fill={fill} key={item.id}/>
                     ))}
                 </div>
             </div>

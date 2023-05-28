@@ -20,7 +20,7 @@ async function main() {
       create: {
         displayName: 'Mishka Mushka',
         name: 'mishkamushka',
-        description: 'poopie poopie :)',
+        description: 'Japanese izakaya with splashy decor & a sake-bottle chandelier, serving creative, intricate plates...',
         rating: 3.9,
         items: {
           create: [
