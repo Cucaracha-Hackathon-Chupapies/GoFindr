@@ -22,6 +22,11 @@ const nextConfig = {
         pathname: '/GoFindr/**'
       }
     ]
+  },
+  api: {
+    bodyParser: {
+      sizeLimit: '4mb'
+    }
   }
 }
 

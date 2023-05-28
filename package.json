@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "reset": "prisma db push --force-reset && prisma db seed"
   },
   "prisma": {
     "seed": "node --loader ts-node/esm prisma/seed.ts"
@@ -14,8 +15,11 @@
   "type": "module",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.335.0",
+    "@paralleldrive/cuid2": "^2.2.0",
     "@prisma/client": "^4.14.1",
     "@svgr/webpack": "^8.0.1",
+    "@types/multer": "^1.4.7",
+    "@types/multer-s3": "^3.0.0",
     "@types/node": "^20.2.4",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
@@ -23,6 +27,8 @@
     "axios": "^1.4.0",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
+    "multer": "^1.4.5-lts.1",
+    "multer-s3": "^3.0.1",
     "next": "13.4.3",
     "next-pwa": "^5.6.0",
     "postcss": "8.4.23",
@@ -33,7 +39,8 @@
     "tailwindcss": "3.3.2",
     "text-encoding": "^0.7.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@types/next-pwa": "^5.6.4"
