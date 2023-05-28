@@ -8,13 +8,12 @@ interface ShopData {
   displayName: string,
   description: string,
   createTheme: boolean,
-  sellerId: string,
   theme?: {
     backgroundImage: string,
     font: string,
     componentColor: string
   },
-  themeId?: number
+  themeId?: string
 }
 
 export const config = {
@@ -23,26 +22,67 @@ export const config = {
   }
 }
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
 
   let data: ShopData = req.body;
 
-  if (!data.lat || !data.lng || !data.name || !data.displayName || !data.description || !data.createTheme || !data.sellerId){
+  if (!data.lat || !data.lng || !data.name || !data.displayName || !data.description){
     res.status(400).end()
     return
   }
 
-  if (data.createTheme && data.theme){
-    prisma.theme.create({
-      data: {
-        backgroundImage: data.theme.backgroundImage,
-        font: data.theme.font,
-        componentColor: data.theme.componentColor
-      }
-    }).then((theme) => {
+  if (await prisma.store.count({
+    where: {
+      name: data.name
+    }
+  }) > 0){
+    res.status(400).end()
+  } else {
+
+    if (data.createTheme && data.theme){
+      prisma.theme.create({
+        data: {
+          backgroundImage: data.theme.backgroundImage,
+          font: data.theme.font,
+          componentColor: data.theme.componentColor
+        }
+      }).then((theme) => {
+        prisma.store.create({
+          data: {
+            lat: data.lat,
+            lng: data.lng,
+            name: data.name,
+            displayName: data.displayName,
+            description: data.description,
+            theme: {
+              connect: {
+                id: theme.id
+              }
+            },
+          }
+         }).then((res) => console.log(res))
+    
+         prisma.storeInfo.create({
+          data: {
+            name: data.name,
+            displayName: data.displayName,
+            description: data.description,
+            rating: 0,
+            theme: {
+              connect: {
+                id: theme.id
+              }
+            }
+          }
+        }).then((res) => console.log(res))
+
+      })
+    } else {
+      if (!data.themeId) return res.status(400).end();
+
       prisma.store.create({
         data: {
           lat: data.lat,
@@ -52,13 +92,14 @@ export default function handler(
           description: data.description,
           theme: {
             connect: {
-              id: theme.id
+              id: parseInt(data.themeId)
             }
-          },
+          }
         }
-       })
-  
-       prisma.storeInfo.create({
+      }).then((res) => console.log(res))
+      .catch(() => res.status(400).end())
+      
+      prisma.storeInfo.create({
         data: {
           name: data.name,
           displayName: data.displayName,
@@ -66,54 +107,13 @@ export default function handler(
           rating: 0,
           theme: {
             connect: {
-              id: theme.id
-            }
-          },
-          Seller: {
-            connect: {
-              id: data.sellerId
+              id: parseInt(data.themeId)
             }
           }
         }
-      })
-    })
-
-  } else {
-    prisma.store.create({
-      data: {
-        lat: data.lat,
-        lng: data.lng,
-        name: data.name,
-        displayName: data.displayName,
-        description: data.description,
-        theme: {
-          connect: {
-            id: data.themeId
-          }
-        }
-      }
-    })
-
-    prisma.storeInfo.create({
-      data: {
-        name: data.name,
-        displayName: data.displayName,
-        description: data.description,
-        rating: 0,
-        theme: {
-          connect: {
-            id: data.themeId
-          }
-        },
-        Seller: {
-          connect: {
-            id: data.sellerId
-          }
-        }
-      }
-    })
-
+      }).then((res) => console.log(res))
+      .catch(() => res.status(400).end())
+    }
   }
-
   res.status(200).end()
 }

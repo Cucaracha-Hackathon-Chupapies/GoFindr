@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "reset": "prisma db push --force-reset && prisma db seed"
   },
   "prisma": {
     "seed": "node --loader ts-node/esm prisma/seed.ts"
