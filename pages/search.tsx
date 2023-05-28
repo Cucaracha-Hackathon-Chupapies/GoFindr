@@ -1,7 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import SearchBG from "@/components/Backgrounds/SearchBG";
+import SearchList from "@/components/Search/SearchList";
+
+type Section = "forYou" | "popular" | "new";
 
 const Search = () => {
+
+    const [activeSection, setActiveSelection] = useState<Section>("forYou");
     return (
         <div>
             <SearchBG />
@@ -10,10 +15,27 @@ const Search = () => {
                     <div className="text-[36px] font-light">
                         Where's your
                     </div>
-                    <div className="text-[20px] mt-[10px] font-medium">
+                    <div className="text-[44px] font-medium leading-[50px]">
                         Adventure?
                     </div>
                 </div>
+                <nav>
+                    <ul>
+                        <li className={activeSection === 'forYou' ? 'active' : ''}
+                        onClick={() => setActiveSelection('forYou')}>
+                            For You
+                        </li>
+                        <li className={activeSection === 'popular' ? 'active' : ''}
+                        onClick={() => setActiveSelection('popular')}>
+                            Popular
+                        </li>
+                        <li className={activeSection === 'new' ? 'active' : ''}
+                        onClick={() => setActiveSelection('new')}>
+                            New
+                        </li>
+                    </ul>
+                </nav>
+                <SearchList sortBy={activeSection} />
             </div>
         </div>
     )
