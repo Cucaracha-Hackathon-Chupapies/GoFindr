@@ -27,7 +27,7 @@ const SearchList = (props: Props) => {
     const [description, setDescription] = useState("");
     const [items, setItems] = useState<any>([]) //HAHAHAHAAH LOLLLLL FUNNY LMFAAO any :))))
     const fill = "#ffffff";
-    const fill2 = "#D9D9D9";
+    const fill2 = "#d9d9d9";
 
     useEffect(() => {
         axios.post('/api/getshop', {name: storeName})
@@ -39,21 +39,19 @@ const SearchList = (props: Props) => {
     })
 
     return (
-        <div className="relative z-999 ">
-            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[100px] md:mt-[70px] lg:mt-[40px]">
+        <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] h-[40%] mt-[100px] md:mt-[70px] lg:mt-[40px]">
 
-                <div className={`overflow-scroll bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
-                    {/* {items.map((item: any) => (
-                        item.popular && <Item id={item.id} name={item.displayName} price={item.price} img={'/placeholder.jpg'} fill={fill} key={item.id}/>
-                    ))} */}
-                    
-                    CURRENT SORT: { sortBy }
-                    {templatePlaces.map((item: any) => (
-                        <Place id={item.id} name={item.name} rating={item.rating} img={'/placeholder.jpg'} fill={fill} key={item.id}/>
-                    ))}
-                </div>
-
+            <div className={`overflow-y-scroll bg-[${fill2}] h-full rounded pt-4 pl-4 pb-4`}>
+                {/* {items.map((item: any) => (
+                    item.popular && <Item id={item.id} name={item.displayName} price={item.price} img={'/placeholder.jpg'} fill={fill} key={item.id}/>
+                ))} */}
+                
+                CURRENT SORT: { sortBy }
+                {templatePlaces.map((item: any) => (
+                    <Place id={item.id} name={item.name} rating={item.rating} img={'/placeholder.jpg'} fill={fill} key={item.id}/>
+                ))}
             </div>
+
         </div>
         
     )

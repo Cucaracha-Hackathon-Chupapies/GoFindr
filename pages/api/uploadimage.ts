@@ -5,8 +5,8 @@ import cuid2 from '@paralleldrive/cuid2';
 //called immediately when uploaded and stored on frontend 
 export const config = {
     api: {
-      bodyParser: false,
-      externalResolver: true
+        bodyParser: false,
+        externalResolver: true
     }
 }
 
@@ -17,10 +17,10 @@ const s3 = new S3Client({
     endpoint: process.env.BUCKET_ENDPOINT,
     region: "us-west-3",
     credentials: {
-      accessKeyId: process.env.ACCESS_KEY_ID || "",
-      secretAccessKey: process.env.ACCESS_SECRET_KEY || ""
+        accessKeyId: process.env.ACCESS_KEY_ID || "",
+        secretAccessKey: process.env.ACCESS_SECRET_KEY || ""
     }
-  })
+})
 
 const upload = multer({
     storage: multerS3({
@@ -36,8 +36,7 @@ const upload = multer({
 
 export default function handler(
     req: any,
-    res: any
-  ) {
+    res: any ) {
     upload.array('image')(req, res, function(err) {
         if (err){
             console.log(err)
@@ -46,7 +45,7 @@ export default function handler(
             res.status(200).json({url: 'https://' + process.env.BUCKET_NAME + '.' + process.env.BUCKET_ENDPOINT?.split('://')[1] + '/' + filePath})
         }
     })
-  }
+}
 
 
 /*

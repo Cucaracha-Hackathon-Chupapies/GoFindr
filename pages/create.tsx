@@ -4,8 +4,8 @@ import { useCallback, useEffect, useReducer, useState } from "react";
 
 const formReducer = (state: any, event: any) => {
     return {
-      ...state,
-      [event.name]: event.value
+        ...state,
+        [event.name]: event.value
     }
 }
 
