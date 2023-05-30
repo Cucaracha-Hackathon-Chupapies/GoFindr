@@ -24,6 +24,17 @@ async function main() {
         description: 'poopie poopie :)'
       },
     })
+
+    await prisma.account.upsert({
+      where: {username: 'chubkey'},
+      update: {},
+      create: {
+        id: 'e9583445-6ddc-44ab-a453-26e68cbfe98f',
+        username: 'chubkey',
+        password: '123',
+
+      }
+    })
     await prisma.storeInfo.upsert({
       where: { name: 'mishkamushka' },
       update: {},
@@ -32,6 +43,11 @@ async function main() {
         name: 'mishkamushka',
         description: 'Japanese izakaya with splashy decor & a sake-bottle chandelier, serving creative, intricate plates...',
         rating: 3.9,
+        owner: {
+          connect: {
+            id: 'e9583445-6ddc-44ab-a453-26e68cbfe98f'
+          }
+        },        
         items: {
           create: [
             {

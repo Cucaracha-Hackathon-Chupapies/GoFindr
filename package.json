@@ -16,7 +16,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.335.0",
     "@paralleldrive/cuid2": "^2.2.0",
-    "@prisma/client": "^4.14.1",
+    "@prisma/client": "^4.15.0",
     "@svgr/webpack": "^8.0.1",
     "@types/multer": "^1.4.7",
     "@types/multer-s3": "^3.0.0",

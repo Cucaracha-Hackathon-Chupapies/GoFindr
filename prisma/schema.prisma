@@ -16,20 +16,15 @@ model Theme {
   font            String      @db.VarChar(255)
   componentColor  String      @db.VarChar(7)
   stores          StoreInfo[]
-  //History         History[]
-  //Rating          Rating[]
   Store           Store[]
   //seller          seller?     @relation(fields: [sellerUsername], references: [username])
   //sellerUsername  String?     @db.VarChar(255)
 }
 
-//model Store & model Location
-
 model Store {
   lat         Float  @db.Double
   lng         Float  @db.Double
   name        String @id @unique @db.VarChar(50)
-  //radius Int? @db.TinyInt not sure if I'll keep this
   displayName String @unique @db.VarChar(50)
   description String @db.Text
   theme       Theme? @relation(fields: [themeId], references: [id])
@@ -45,11 +40,10 @@ model StoreInfo {
   //Icon?
   created     DateTime  @default(now())
   items       Item[]
-  //Customer    Customer? @relation(fields: [customerId], references: [username])
-  //customerId  String?
-  //seller      seller?   @relation(fields: [sellerId], references: [username])
-  //sellerId    String?
   themeId     Int?
+  owner       Account   @relation("CreatedStores", fields: [ownerId], references: [id])
+  ownerId     String
+  savedBy     Account[] @relation("SavedStores")
 }
 
 model Item {
@@ -66,55 +60,13 @@ model Item {
   storeName   String?    @db.VarChar(255)
 }
 
-model History {
-  id          Int       @id @default(autoincrement())
-  name        String    @unique @db.VarChar(255)
-  displayName String    @unique @db.VarChar(255)
-  rating      Float     @db.Float
-  visited     DateTime  @db.DateTime()
-  //theme       Theme?    @relation(fields: [themeId], references: [id])
-  entered     Boolean //did the person enter the geofence or just view it outside
-  Customer    Customer? @relation(fields: [customerId], references: [username])
-  customerId  String?
-  themeId     Int?
-}
-
-model Rating {
-  id Int @id @default(autoincrement())
-
-  name        String    @db.VarChar(255)
-  displayName String    @db.VarChar(255)
-  rating      Float     @db.Float
-  //theme       Theme?    @relation(fields: [themeId], references: [id])
-  Customer    Customer? @relation(fields: [customerId], references: [username])
-  customerId  String?
-  themeId     Int?
-}
-
-model Customer {
+model Account {
   id String @id @unique @default(uuid())
 
-  username  String   @unique @db.VarChar(255)
-  email     String   @unique @db.VarChar(255)
-  password  String   @unique @db.VarChar(255)
-  createdAt DateTime @default(now())
-  icon      Bytes?
-
-  dynamicStyling Boolean     @default(false)
-  //savedStores    StoreInfo[]
-  history        History[]
-  ratings        Rating[]
-}
-
-model seller {
-  id String @id @unique @default(uuid())
-
-  username  String   @unique @db.VarChar(255)
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  icon      Bytes?
+  username      String      @unique @db.VarChar(255)
+  password      String      @db.VarChar(255)
+  createdAt     DateTime    @default(now())
+  createdStores StoreInfo[] @relation("CreatedStores")
+  savedStores   StoreInfo[] @relation("SavedStores")
   //themes    Theme[]
-
-  //createdStores StoreInfo[]
 }
