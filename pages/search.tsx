@@ -18,30 +18,31 @@ const Search = () => {
                     <div className="text-[44px] font-medium leading-[50px]">
                         Adventure?
                     </div>
-                    <nav className="flex">
-                        <ul className="flex space-x-4">
-                            <li className={activeSection === 'forYou' ? 'text-black border-b-2 border-black' : 'text-gray-400'}
+                    <nav className="flex mt-[10px]">
+                        <ul className="flex space-x-6">
+                            <button className={activeSection === 'forYou' ? 'text-black border-b-2 border-black' : 'text-gray-400'}
                             onClick={() => setActiveSelection('forYou')}>
                                 For You
-                            </li>
-                            <li className={activeSection === 'popular' ? 'text-black border-b-2 border-black' : 'text-gray-400'}
+                            </button>
+                            <button className={activeSection === 'popular' ? 'text-black border-b-2 border-black' : 'text-gray-400'}
                             onClick={() => setActiveSelection('popular')}>
                                 Popular
-                            </li>
-                            <li className={activeSection === 'new' ? 'text-black border-b-2 border-black' : 'text-gray-400'}
+                            </button>
+                            <button className={activeSection === 'new' ? 'text-black border-b-2 border-black' : 'text-gray-400'}
                             onClick={() => setActiveSelection('new')}>
                                 New
-                            </li>
+                            </button>
                         </ul>
                     </nav>
-                    <div className="flex justify-center content-center">
-
-                        <div className="w-[80%] md:w-[80%] lg:w-[50%]">
-                            <SearchList sortBy={activeSection} />
-                        </div>
-                        
-                    </div>
                 </div>
+                <div className="flex justify-center content-center mt-[40px]">
+
+                    <div className="w-[80%] sm:w-[80%] md:w-[80%] lg:w-[40%] h-[550px] sm:h-[300px] md:h-[400px] lg:h-[500px]">
+                        <SearchList sortBy={activeSection} />
+                    </div>
+                    
+                </div>
+                
                 
             </div>
         </div>

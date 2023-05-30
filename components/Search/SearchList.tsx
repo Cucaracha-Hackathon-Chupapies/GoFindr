@@ -40,9 +40,9 @@ const SearchList = (props: Props) => {
     })
 
     return (
-        <div className="w-full h-[800px] md:h-[400px] lg:h-[800px]">
+        <div className="w-full h-full">
 
-            <div className={`overflow-y-scroll ${bg} h-full rounded pt-4 pl-4 pb-4`}>
+            <div className={`overflow-y-scroll ${bg} h-full rounded p-4`}>
                 {/* {items.map((item: any) => (
                     item.popular && <Item id={item.id} name={item.displayName} price={item.price} img={'/placeholder.jpg'} fill={fill} key={item.id}/>
                 ))} */}

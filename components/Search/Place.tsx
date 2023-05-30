@@ -11,7 +11,7 @@ const Place = (props: Props) => {
     const bg = "bg-[" + fill + "]";
     return (
         <div key={id} className="w-full p-[2%]">
-            <img src={img} alt={name} className="w-full h-[200px] rounded-t object-cover border-x border-t border-black"/>
+            <img src={img} alt={name} className="w-full h-[250px] lg:h-[400px] rounded-t object-cover border-x border-t border-black"/>
             <div className={`${bg} rounded-b text-[14px] pt-[5px] pb-[5px] pl-[10px] pr-[10px] border border-black`}>
                 <div>{name}</div>
                 <div className="opacity-50 italic">{rating}/5</div>
