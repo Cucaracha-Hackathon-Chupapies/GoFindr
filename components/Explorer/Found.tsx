@@ -41,7 +41,7 @@ const Found = () => {
                 <meta name="description" content="Viewing store found using geolocation! Wowzaa that's pretty cool if you ask me :) " />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[100px] md:mt-[70px] lg:mt-[40px]">
+            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[100px] ">
                 <div className="text-[36px] font-light">
                     Approaching...
                 </div>
