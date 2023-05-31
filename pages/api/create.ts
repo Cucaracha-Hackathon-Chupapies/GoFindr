@@ -3,11 +3,12 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 interface ShopData {
   lat: number,
-  lng: number,
+  lng: number,  
   name: string,
   displayName: string,
   description: string,
   createTheme: boolean,
+  ownerId: string,
   theme?: {
     backgroundImage: string,
     font: string,
@@ -29,10 +30,12 @@ export default async function handler(
 
   let data: ShopData = req.body;
 
-  if (!data.lat || !data.lng || !data.name || !data.displayName || !data.description){
+  if (!data.lat || !data.lng || !data.displayName || !data.description || !data.ownerId){
     res.status(400).end()
     return
   }
+
+  data.name =  data.displayName.toLowerCase().replaceAll(' ', '-')
 
   if (await prisma.store.count({
     where: {
@@ -71,6 +74,11 @@ export default async function handler(
             displayName: data.displayName,
             description: data.description,
             rating: 0,
+            owner: {
+              connect: {
+                id: data.ownerId
+              }
+            },
             theme: {
               connect: {
                 id: theme.id
@@ -105,6 +113,11 @@ export default async function handler(
           displayName: data.displayName,
           description: data.description,
           rating: 0,
+          owner: {
+            connect: {
+              id: data.ownerId
+            }
+          },
           theme: {
             connect: {
               id: parseInt(data.themeId)

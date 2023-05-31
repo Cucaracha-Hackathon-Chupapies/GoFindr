@@ -17,8 +17,6 @@ model Theme {
   componentColor  String      @db.VarChar(7)
   stores          StoreInfo[]
   Store           Store[]
-  //seller          seller?     @relation(fields: [sellerUsername], references: [username])
-  //sellerUsername  String?     @db.VarChar(255)
 }
 
 model Store {
@@ -37,7 +35,7 @@ model StoreInfo {
   description String    @db.Text
   rating      Float     @default(0) @db.Float
   theme       Theme?    @relation(fields: [themeId], references: [id])
-  //Icon?
+  icon        String?
   created     DateTime  @default(now())
   items       Item[]
   themeId     Int?
@@ -50,10 +48,10 @@ model Item {
   id          Int        @id @default(autoincrement())
   name        String     @db.VarChar(255)
   displayName String     @db.VarChar(255)
-  rating      Float      @db.Float
+  rating      Float      @default(0) @db.Float
   price       String     @db.VarChar(255)
   description String     @db.Text
-  image       String? //@default later
+  image       String
   featured    Boolean    @default(false)
   popular     Boolean    @default(false)
   store       StoreInfo? @relation(fields: [storeName], references: [name])

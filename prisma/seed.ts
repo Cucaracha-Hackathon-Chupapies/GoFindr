@@ -57,7 +57,8 @@ async function main() {
               price: '$8.99',
               description: 'yummy!',
               featured: true,
-              popular: true
+              popular: true,
+              image: "https://bandlabimages.azureedge.net/v1.0/users/297fa3f6-f06c-459e-ba5f-c297b6790fee/260x260"
             },
             {
               name: 'tako-wasabi',
@@ -66,7 +67,8 @@ async function main() {
               price: '$5.39',
               description: 'yummy!',
               featured: true,
-              popular: true
+              popular: true,
+              image: "https://bandlabimages.azureedge.net/v1.0/users/297fa3f6-f06c-459e-ba5f-c297b6790fee/260x260"
             },
             {
               name: 'chicken-karaage',
@@ -75,7 +77,8 @@ async function main() {
               price: '$7.89',
               description: 'yummy!',
               featured: true,
-              popular: true
+              popular: true,
+              image: "https://bandlabimages.azureedge.net/v1.0/users/297fa3f6-f06c-459e-ba5f-c297b6790fee/260x260"
             },
             {
               name: 'fatty-short-ribs',
@@ -84,7 +87,8 @@ async function main() {
               price: '$18.99',
               description: 'yummy!',
               featured: true,
-              popular: true
+              popular: true,
+              image: "https://bandlabimages.azureedge.net/v1.0/users/297fa3f6-f06c-459e-ba5f-c297b6790fee/260x260"
             }
           ],
         },

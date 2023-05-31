@@ -2,15 +2,12 @@
 import prisma from '@/lib/prisma'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type Data = {
-  name: string
-}
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
-
+        
     const account = await prisma.account.findUnique({
         where: {
             id: req.body.id
@@ -34,7 +31,9 @@ export default async function handler(
             },
             data: {
                 savedStores: {
-                    update: [...account.savedStores, storeData]
+                    connect: {
+                        name: req.body.name
+                    }
                 }
             }
         }).then(() => res.status(200).end())
