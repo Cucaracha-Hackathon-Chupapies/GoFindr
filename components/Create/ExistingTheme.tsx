@@ -34,11 +34,11 @@ const ExistingTheme = () => {
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col items-center">
-            <input type="text" id="displayName" name="displayName" placeholder="Name" className="h-[55px] w-[330px] border border-black rounded italic pl-4 mt-8"/>
-            <input type="text" id="displayName" name="displayName" placeholder="Description" className="h-[55px] w-[330px] border border-black rounded italic pl-4 mt-8"/>
-            <input type="text" id="displayName" name="displayName" placeholder="Theme ID" className="h-[55px] w-[330px] border border-black rounded italic pl-4 mt-8"/>
+            <input type="text" id="displayName" name="displayName" placeholder="Name" className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
+            <input type="text" id="displayName" name="displayName" placeholder="Description" className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
+            <input type="text" id="displayName" name="displayName" placeholder="Theme ID" className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
 
-            <button className="h-[55px] w-[330px] bg-[#F1AAD4] text-white rounded mt-8" type="submit">Submit</button>
+            <button className="h-[55px] w-[330px] lg:h-[50px] bg-[#F1AAD4] text-white rounded mt-8" type="submit">Submit</button>
         
         </form>
     )

@@ -54,20 +54,20 @@ const NewTheme = () => {
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col items-center">
-            <input type="text" id="displayName" name="displayName" placeholder="Name" className="h-[55px] w-[330px] border border-black rounded italic pl-4 mt-8"/>
-            <input type="text" id="displayName" name="displayName" placeholder="Description" className="h-[55px] w-[330px] border border-black rounded italic pl-4 mt-8"/>
+            <input type="text" id="displayName" name="displayName" placeholder="Name" className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
+            <input type="text" id="displayName" name="displayName" placeholder="Description" className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
 
             <div className="flex flex-row items-center">
-                <input type="text" id="displayName" name="displayName" placeholder="Font" className="h-[55px] w-[155px] border border-black rounded italic pl-4 mt-8 mr-[20px]"/>
-                <input type="text" id="displayName" name="displayName" placeholder="Accent Color" className="h-[55px] w-[155px] border border-black rounded italic pl-4 mt-8"/>
+                <input type="text" id="displayName" name="displayName" placeholder="Font" className="h-[55px] w-[155px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 mr-[20px] lg:mt-4"/>
+                <input type="text" id="displayName" name="displayName" placeholder="Accent Color" className="h-[55px] w-[155px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
             </div>
 
-            <div className="flex h-[55px] w-[330px] border border-black rounded italic pl-4 mt-8 items-center">
+            <div className="flex h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4 items-center">
                 {url && <img src={url} alt="ignore"/>}
                 <input type="file" accept="image/*" onChange={(e) => setInputFile(e.target.files ? e.target.files[0] : null)}/>
             </div>
             
-            <button className="h-[55px] w-[330px] bg-[#F1AAD4] text-white rounded mt-8" type="submit">Submit</button>
+            <button className="h-[55px] w-[330px] lg:h-[50px] bg-[#F1AAD4] text-white rounded mt-8 lg:mt-4" type="submit">Submit</button>
         
         </form>
     )
