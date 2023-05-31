@@ -3,6 +3,8 @@ import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
 async function main() {
+
+    
     await prisma.theme.upsert({
       where: { id: 1 },
       update: {},
@@ -93,6 +95,20 @@ async function main() {
           ],
         },
       },
+    })
+
+    await prisma.storeRating.upsert({
+      where: {id: 1},
+      update: {},
+      create: {
+        store: {
+          connect: {
+            name: 'mishkamushka'
+          }
+        },
+        rating: 3,
+        accountId: 'e9583445-6ddc-44ab-a453-26e68cbfe98f'
+      }
     })
 
   }
