@@ -37,7 +37,7 @@ const Search = () => {
                 </div>
                 <div className="flex justify-center content-center mt-[40px]">
 
-                    <div className="w-[80%] sm:w-[80%] md:w-[80%] lg:w-[40%] h-[550px] sm:h-[300px] md:h-[400px] lg:h-[500px]">
+                    <div className="w-[80%] sm:w-[80%] md:w-[80%] lg:w-[40%] h-[550px] sm:h-[300px] md:h-[400px] lg:h-[400px]">
                         <SearchList sortBy={activeSection} />
                     </div>
                     

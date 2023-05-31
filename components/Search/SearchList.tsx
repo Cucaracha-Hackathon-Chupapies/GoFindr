@@ -42,7 +42,7 @@ const SearchList = (props: Props) => {
     return (
         <div className="w-full h-full">
 
-            <div className={`overflow-y-scroll ${bg} h-full rounded p-4`}>
+            <div className={`flex flex-col overflow-y-scroll ${bg} h-full rounded p-4 content-center items-center`}>
                 {/* {items.map((item: any) => (
                     item.popular && <Item id={item.id} name={item.displayName} price={item.price} img={'/placeholder.jpg'} fill={fill} key={item.id}/>
                 ))} */}
