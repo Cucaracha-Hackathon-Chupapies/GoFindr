@@ -25,7 +25,7 @@ const Create = () => {
                 <div className="text-[44px] font-medium leading-[50px]">
                     The Path
                 </div>
-                <div className="text-[16px] text-[#7A7A7A] font-light italic mt-[15px]">
+                <div className="text-[16px] text-[#7A7A7A] font-light italic mt-[5px]">
                     Something new around the corner? Let others see what’s happening in their daily explorations by adding a new shop!
                 </div>
                 <div className="text-[16px] text-[#7A7A7A] font-light italic font-medium">
