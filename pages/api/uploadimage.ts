@@ -27,8 +27,8 @@ const upload = multer({
         s3: s3,
         bucket: process.env.BUCKET_NAME || "",
         acl: 'public-read',
-        key: function(req, file, cb) {
-            filePath = imageDirectory + cuid2.createId() + '.' + file.originalname.split('.')[1]
+        key: function(req, file, cb) {            
+            filePath = imageDirectory + cuid2.createId() + '.' + file.originalname.split('.')[1]            
             cb(null, filePath)
         }
     })
@@ -37,7 +37,7 @@ const upload = multer({
 export default function handler(
     req: any,
     res: any ) {
-    upload.array('image')(req, res, function(err) {
+    upload.single('image')(req, res, function(err) {
         if (err){
             console.log(err)
             res.status(400).end()
