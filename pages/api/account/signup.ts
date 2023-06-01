@@ -19,7 +19,8 @@ export default async function handler(
       const account = await prisma.account.create({
           data: {
             username: req.body.username,
-            password: req.body.password
+            password: req.body.password,
+            ...(req.body.icon ? {icon: req.body.icon} : {})
           }
       })
 
