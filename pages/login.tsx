@@ -13,7 +13,7 @@ const Login = () => {
         axios.post('/api/account/login', {username: username, password: password})
         .then((res) => {localStorage.setItem('id', res.data); router.push('/')})
 
-    }, [username, password])
+    }, [username, password, router])
 
     return (
         <div>
