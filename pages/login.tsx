@@ -22,16 +22,14 @@ const Login = () => {
             <div className="relative ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[100px] flex flex-col items-center">
                 <div className="text-[20px] mt-[10px] font-medium">Log In</div>
                 <form onSubmit={handleSubmit} className="flex flex-col items-center">
-                    <label>
-                        Username
-                    </label>
-                    <input type={'text'} value={username} onChange={(e) => setUsername(e.target.value)}/>
-                    <label>
-                        Password
-                    </label>
-                    <input type={'password'} value={password} onChange={(e) => setPassword(e.target.value)}/>
-                    <button type="submit">Login</button>
+                    <input type={'text'} value={username} placeholder="Username" onChange={(e) => setUsername(e.target.value)} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
+                    <input type={'password'} value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
+                    <button type="submit" className="h-[55px] w-[330px] lg:h-[50px] bg-[#ed7bbe] text-white rounded mt-8">Login</button>
                 </form>
+                <div className="text-[16px] italic mt-8 lg:mt-4">
+                    Not a user yet?
+                    <a href="/signup"> Sign up </a>
+                </div>
             </div>
             
         </div>

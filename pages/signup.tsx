@@ -50,7 +50,7 @@ const Login = () => {
                 </form>
                 <div className="text-[16px] italic mt-8 lg:mt-4">
                     Already a user?
-                    <a href="/login"> Log in</a>
+                    <a href="/login"> Log in </a>
                 </div>
             </div>
             
