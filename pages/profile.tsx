@@ -22,20 +22,23 @@ const Profile = () => {
 
     //     }).catch(() => {logFlag = false;})
     // }, [router])
-    console.log(signFlag);
+
     return (
         <div>
+            
             <ProfileBG />
-
             {localStorage.getItem('id') === null ? 
                 <div>
                     <img src={userData?.icon}/>
                     <h1>{userData?.username}</h1>
                     <button>Edit Profile</button>
                 </div>
-            : 
-            (signFlag === true ? <SignUp setSignFlag={setSignFlag}/> : <Login setSignFlag={setSignFlag}/>)}
-
+            : (
+                <div className="mt-[100px]">
+                    {signFlag === true ? <SignUp setSignFlag={setSignFlag}/> : <Login setSignFlag={setSignFlag}/>}
+                </div>
+            )}
+            
             
         </div>
     )
