@@ -20,7 +20,7 @@ const NewTheme = () => {
         navigator.geolocation.getCurrentPosition((data) => {
 
                 
-            axios.post('/api/create', {...formData, lat: data.coords.latitude, lng: data.coords.longitude, createTheme: true,
+            axios.post('/api/create/shop', {...formData, lat: data.coords.latitude, lng: data.coords.longitude, createTheme: true,
             theme: {
                 backgroundImage: url || "https://images.pexels.com/photos/7130555/pexels-photo-7130555.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                 font: formData.font || "Poppins",

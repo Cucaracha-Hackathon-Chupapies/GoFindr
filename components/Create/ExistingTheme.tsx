@@ -17,7 +17,7 @@ const ExistingTheme = () => {
         navigator.geolocation.getCurrentPosition((data) => {
 
                 
-            axios.post('/api/create', {...formData, lat: data.coords.latitude, lng: data.coords.longitude, createTheme: false, ownerId: 'e9583445-6ddc-44ab-a453-26e68cbfe98f'})
+            axios.post('/api/create/shop', {...formData, lat: data.coords.latitude, lng: data.coords.longitude, createTheme: false, ownerId: 'e9583445-6ddc-44ab-a453-26e68cbfe98f'})
             
         
             

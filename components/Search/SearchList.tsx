@@ -31,7 +31,7 @@ const SearchList = (props: Props) => {
     const bg = "bg-[" + fill2 + "]";
 
     useEffect(() => {
-        axios.post('/api/getshop', {name: storeName})
+        axios.post('/api/get/shop', {name: storeName})
         .then((res) => {
             setName(res.data.displayName)
             setDescription(res.data.description)
