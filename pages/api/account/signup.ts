@@ -1,16 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import prisma from '@/lib/prisma'
+import { Account } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type Data = {
-  name: string
-}
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Account>
 ) {
-
     
     if (await prisma.account.count({
       where: {
@@ -27,7 +24,7 @@ export default async function handler(
       })
 
       if (account){
-        return res.status(200).end(account)
+        return res.status(200).end(account.id)
       } else {
         return res.status(400).end()
       }
