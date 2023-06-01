@@ -42,6 +42,7 @@ model StoreInfo {
   owner       Account   @relation("CreatedStores", fields: [ownerId], references: [id])
   ownerId     String
   savedBy     Account[] @relation("SavedStores")
+  ratings StoreRating[]
 }
 
 model Item {
@@ -67,4 +68,20 @@ model Account {
   createdStores StoreInfo[] @relation("CreatedStores")
   savedStores   StoreInfo[] @relation("SavedStores")
   //themes    Theme[]
+}
+
+model StoreRating {
+  id Int @id @unique @default(autoincrement())
+  store StoreInfo @relation(fields: [storeId], references: [name])
+  storeId String
+  rating Int
+  comment String @default("") 
+  accountId String
+}
+
+model ItemRating {
+  id Int @id @unique @default(autoincrement())
+  itemId Int
+  rating Int
+  accountId String
 }

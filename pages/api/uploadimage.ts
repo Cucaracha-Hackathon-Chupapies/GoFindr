@@ -28,8 +28,8 @@ const upload = multer({
         s3: s3,
         bucket: process.env.BUCKET_NAME || "",
         acl: 'public-read',
-        key: function(req, file, cb) {
-            filePath = imageDirectory + cuid2.createId() + '.' + file.originalname.split('.')[1]
+        key: function(req, file, cb) {            
+            filePath = imageDirectory + cuid2.createId() + '.' + file.originalname.split('.')[1]            
             cb(null, filePath)
         }
     })
