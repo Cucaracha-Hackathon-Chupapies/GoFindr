@@ -24,9 +24,7 @@ const nextConfig = {
     ]
   },
   api: {
-    bodyParser: {
-      sizeLimit: '4mb'
-    }
+    externalResolver: true
   }
 }
 
