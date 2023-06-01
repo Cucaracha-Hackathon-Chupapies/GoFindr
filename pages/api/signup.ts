@@ -19,13 +19,19 @@ export default async function handler(
     }) > 0){
       res.status(400).end()
     } else {
-      prisma.account.create({
+      const account = await prisma.account.create({
           data: {
             username: req.body.username,
             password: req.body.password
           }
       })
+
+      if (account){
+        return res.status(200).end(account)
+      } else {
+        return res.status(400).end()
+      }
     }
     
-  res.status(200).json({ name: 'John Doe' })
+    
 }

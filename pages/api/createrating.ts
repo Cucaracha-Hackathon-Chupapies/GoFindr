@@ -10,6 +10,12 @@ interface Props {
     comment?: string
 }
 
+export const config = {
+    api: {
+      externalResolver: true
+    }
+  }
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -20,6 +26,14 @@ export default async function handler(
 
     if (!data.rating) return res.status(400).end()
 
+    if (!(await prisma.account.findUnique({
+        where: {
+            id: data.id
+        }
+    }))){
+        return res.status(400).end()
+    }
+
     if (data.storeName){
         
         if (await prisma.storeRating.count({
@@ -29,14 +43,6 @@ export default async function handler(
             }
         }) > 0){
             return res.status(401).end()
-        }
-
-        if (await prisma.account.findUnique({
-            where: {
-                id: data.id
-            }
-        })){
-            return res.status(400).end()
         }
 
         const rating = await prisma.storeRating.create({
@@ -84,5 +90,59 @@ export default async function handler(
 
 
         return res.status(400).end()
-    }  
+
+
+    } else if (data.itemId){
+
+        if (await prisma.itemRating.count({
+            where: {
+                itemId: data.itemId,
+                accountId: data.id
+            }
+        }) > 0){
+            return res.status(401).end()
+        }
+
+        const rating = await prisma.itemRating.create({
+            data: {
+                itemId: data.itemId,
+                rating: data.rating,
+                accountId: data.id                
+            }
+        })          
+
+        if (rating){
+            //update rating of item
+
+            const newRating = await prisma.itemRating.aggregate({
+                where: {
+                    itemId: data.itemId
+                },
+                _avg: {
+                    rating: true
+                }
+            })                
+    
+            
+            if (newRating._avg.rating){
+                const update = await prisma.item.update({
+                    where: {
+                        id: data.itemId
+                    },
+                    data: {
+                        rating: newRating._avg.rating
+                    }
+                })
+
+                if (update) {
+                    return res.status(200).json(rating)
+                }
+            }
+        }
+
+        return res.status(400).end()
+
+    } else {
+        return res.status(400).end()
+    }
 }

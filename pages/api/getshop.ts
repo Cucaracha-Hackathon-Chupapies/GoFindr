@@ -11,13 +11,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<StoreData>
 ) {
+
+    if (!req.body.name) return res.status(400).end()
+
     let data = await prisma.storeInfo.findUnique({
         where: {
-            name: req.body.name
+            name: req.body.name            
         },
         include: {
-            items: true
-        }
+            items: true,
+            ratings: true
+        }        
+        
     })
 
     const isRated = (await prisma.storeRating.count({where: {accountId: req.body.id, storeId: req.body.name}})) > 0
