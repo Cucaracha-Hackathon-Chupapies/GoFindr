@@ -107,7 +107,8 @@ async function main() {
           }
         },
         rating: 3,
-        accountId: 'e9583445-6ddc-44ab-a453-26e68cbfe98f'
+        accountId: 'e9583445-6ddc-44ab-a453-26e68cbfe98f',
+        comment: "wow it was incomprehensibly mid no cap on jiggidy dig dawg dawg."
       }
     })
 
