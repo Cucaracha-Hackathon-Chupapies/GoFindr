@@ -4,7 +4,8 @@ import axios from "axios"
 import { useRouter } from "next/router"
 import { useCallback, useState } from "react"
 
-const Login = () => {
+
+const SignUp = ({ setSignFlag }: { setSignFlag: React.Dispatch<React.SetStateAction<boolean>> }) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -50,7 +51,7 @@ const Login = () => {
                 </form>
                 <div className="text-[16px] italic mt-8 lg:mt-4">
                     Already a user?
-                    <a href="/login"> Log in </a>
+                    <button className="text-pink-500 ml-[5px] text-[16px] italic" onClick={() => setSignFlag(false)}> Log in </button>
                 </div>
             </div>
             
@@ -58,4 +59,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default SignUp
