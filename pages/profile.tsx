@@ -17,7 +17,7 @@ const Profile = () => {
             setUserData(res.data)
 
         }).catch(() => router.push('/login'))
-    }, [])
+    }, [router])
 
     return (
         <div>
