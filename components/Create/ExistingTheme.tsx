@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useCallback, useEffect, useReducer, useState } from "react";
+import Uploader from "../ImageUpload/Uploader";
 
 const formReducer = (state: any, event: any) => {
     return {
@@ -10,7 +11,7 @@ const formReducer = (state: any, event: any) => {
 
 const ExistingTheme = () => {
     const [formData, setFormData] = useReducer(formReducer, {})    
-    const [iconUrl, setIconUrl] = useState<string | null>()
+    const [iconUrl, setIconUrl] = useState<string>()
     const [uploadError, setUploadError] = useState<boolean>(false)
 
     const handleSubmit = useCallback((e: any) => {        
@@ -35,46 +36,17 @@ const ExistingTheme = () => {
     }
 
 
-    const handleUpload = useCallback(async (e: any, setState: any) => {
-        let file = e.target.files[0]
-
-        if (file){
-
-            let data = new FormData()
-
-            data.append('image', file)
-
-            let upload = await axios.post('/api/uploadimage', data, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-            }
-            
-            })
-
-            if (upload){
-                setState(upload.data.url)
-                return
-            }
-
-
-        }
-
-        setUploadError(true)
-
-        throw 'upload error'
-    }, [])
-
+   
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col items-center">
             <input type="text" id="displayName" name="displayName" placeholder="Name" onChange={handleChange} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
             <textarea id="description" name="description" placeholder="Description" onChange={handleChange} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
             
-            <div className="flex h-[55px] w-[330px] lg:h-[50px] bg-white border border-black rounded italic pl-4 mt-8 lg:mt-4 items-center">
-                {iconUrl && <img src={iconUrl} alt="user image"/>}
-                {uploadError && <h1>Error uploading image!</h1>}
-                <input type="file" accept="image/*" onChange={(e) => handleUpload(e, setIconUrl)}/>
-            </div>
+            
+            {iconUrl && <img src={iconUrl} alt="user image"/>}
+            {uploadError && <h1>Error uploading image!</h1>}
+            <Uploader setState={setIconUrl} setUploadError={setUploadError}/>
             
             <input type="text" id="themeId" name="themeId" placeholder="Theme ID" onChange={handleChange} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
             <button className="h-[55px] w-[330px] lg:h-[50px] bg-[#ed7bbe] text-white rounded mt-8" type="submit">Submit</button>
