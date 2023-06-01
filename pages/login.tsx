@@ -1,3 +1,4 @@
+import ProfileBG from "@/components/Backgrounds/ProfileBG"
 import axios from "axios"
 import { useRouter } from "next/router"
 import { useCallback, useState } from "react"
@@ -17,18 +18,22 @@ const Login = () => {
 
     return (
         <div>
-            <h1>Log In</h1>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Username
-                </label>
-                <input type={'text'} value={username} onChange={(e) => setUsername(e.target.value)}/>
-                <label>
-                    Password
-                </label>
-                <input type={'password'} value={password} onChange={(e) => setPassword(e.target.value)}/>
-                <button type="submit">Login</button>
-            </form>
+            <ProfileBG />
+            <div className="relative ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[100px] flex flex-col items-center">
+                <div className="text-[20px] mt-[10px] font-medium">Log In</div>
+                <form onSubmit={handleSubmit} className="flex flex-col items-center">
+                    <label>
+                        Username
+                    </label>
+                    <input type={'text'} value={username} onChange={(e) => setUsername(e.target.value)}/>
+                    <label>
+                        Password
+                    </label>
+                    <input type={'password'} value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+            
         </div>
     )
 }
