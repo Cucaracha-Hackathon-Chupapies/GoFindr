@@ -14,7 +14,8 @@ interface ShopData {
     font: string,
     componentColor: string
   },
-  themeId?: string
+  themeId?: string,
+  icon?: string
 }
 
 export const config = {
@@ -60,6 +61,7 @@ export default async function handler(
             name: data.name,
             displayName: data.displayName,
             description: data.description,
+            ...(data.icon ? {icon: data.icon} : {}),
             theme: {
               connect: {
                 id: theme.id
@@ -74,6 +76,7 @@ export default async function handler(
             displayName: data.displayName,
             description: data.description,
             rating: 0,
+            ...(data.icon ? {icon: data.icon} : {}),
             owner: {
               connect: {
                 id: data.ownerId
@@ -98,6 +101,7 @@ export default async function handler(
           name: data.name,
           displayName: data.displayName,
           description: data.description,
+          ...(data.icon ? {icon: data.icon} : {}),
           theme: {
             connect: {
               id: parseInt(data.themeId)
@@ -113,6 +117,7 @@ export default async function handler(
           displayName: data.displayName,
           description: data.description,
           rating: 0,
+          ...(data.icon ? {icon: data.icon} : {}),
           owner: {
             connect: {
               id: data.ownerId
