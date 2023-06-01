@@ -11,6 +11,10 @@ const Login = ({ setSignFlag }: { setSignFlag: React.Dispatch<React.SetStateActi
 
     const handleSubmit = useCallback((e: any) => {
         e.preventDefault()
+
+        if (!username || !password){
+            return
+        }
         axios.post('/api/account/login', {username: username, password: password})
         .then((res) => {localStorage.setItem('id', res.data); router.push('/')})
 

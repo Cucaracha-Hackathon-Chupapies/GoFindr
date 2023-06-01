@@ -1,5 +1,4 @@
 import ProfileBG from "@/components/Backgrounds/ProfileBG"
-import Uploader from "@/components/ImageUpload/Uploader"
 import axios from "axios"
 import { useRouter } from "next/router"
 import { useCallback, useState } from "react"
@@ -10,23 +9,27 @@ const SignUp = ({ setSignFlag }: { setSignFlag: React.Dispatch<React.SetStateAct
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
-    const [iconUrl, setIconUrl] = useState<string>()
-    const [uploadError, setUploadError] = useState<boolean>(false)
     
     const router = useRouter()
 
     const handleSubmit = useCallback((e: any) => {
+
+        e.preventDefault()
+
         if (password !== confirmPassword) {
             setError("Passwords do not match!");
             return;
         }
 
-        e.preventDefault()
+        if (!username || !password){
+            setError("Username and/or password missing!")
+            return
+        }
 
-        axios.post('/api/account/signup', {username: username, password: password, ...(iconUrl ? {icon: iconUrl} : {})})
+        axios.post('/api/account/signup', {username: username, password: password})
         .then((res) => {localStorage.setItem('id', res.data); router.push('/')})
 
-    }, [username, password, confirmPassword, iconUrl])
+    }, [username, password, confirmPassword])
 
     return (
         <div>
@@ -38,15 +41,6 @@ const SignUp = ({ setSignFlag }: { setSignFlag: React.Dispatch<React.SetStateAct
                     <input type={'password'} value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
                     <input type={'password'} value={confirmPassword} placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
                     {error && <p className="error-message"> {error} </p>}
-                    {/* <label>
-                        Icon
-                    </label>
-
-                    {iconUrl && <img src={iconUrl} alt="user image"/>}
-                    {uploadError && <h1>Error uploading image!</h1>}
-
-                    <Uploader setState={setIconUrl} setUploadError={setUploadError}/> */}
-
                     <button type="submit" className="h-[55px] w-[330px] lg:h-[50px] bg-[#ed7bbe] text-white rounded mt-8">Sign Up</button>
                 </form>
                 <div className="text-[16px] italic mt-8 lg:mt-4">
