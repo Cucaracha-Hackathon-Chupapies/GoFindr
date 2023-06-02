@@ -37,8 +37,11 @@ const Uploader = ({setState, setUploadError}: Props) => {
 
     return (
 
-        <div className="flex h-[55px] w-[330px] lg:h-[50px] bg-white border border-black rounded italic pl-4 mt-8 lg:mt-4 items-center">          
-            <input type="file" accept="image/*" onChange={(e) => handleUpload(e)}/>
+        <div className="flex h-[55px] w-[330px] lg:h-[50px] bg-white rounded italic pl-4 mt-8 lg:mt-4 items-center bg-gray-200">
+            <label htmlFor="uploadInput" className="flex items-center justify-center w-full h-full cursor-pointer ">
+                Upload image of store
+                <input type="file" id="uploadInput" accept="image/*" onChange={(e) => handleUpload(e)} className="hidden"/>
+            </label>          
         </div>
 
     )
