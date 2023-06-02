@@ -10,11 +10,12 @@ const formReducer = (state: any, event: any) => {
 }
 
 const NewTheme = () => {
-    const [formData, setFormData] = useReducer(formReducer, {})
-    const [inputFile, setInputFile] = useState<File | null>()
-    const [url, setUrl] = useState<string>()
-    const [iconUrl, setIconUrl] = useState<string>()
-    const [uploadError, setUploadError] = useState<boolean>(false)
+    const [formData, setFormData] = useReducer(formReducer, {});
+    const [inputFile, setInputFile] = useState<File | null>();
+    const [url, setUrl] = useState<string>();
+    const [iconUrl, setIconUrl] = useState<string>();
+    const [firstUploadError, setFirstUploadError] = useState<boolean>(false);
+    const [secondUploadError, setSecondUploadError] = useState<boolean>(false);
 
     const handleSubmit = useCallback((e: any) => {
         e.preventDefault()
@@ -53,12 +54,12 @@ const NewTheme = () => {
                 <input type="text" id="componentColor" name="componentColor" placeholder="Accent Color" onChange={handleChange} className="h-[55px] w-[155px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
             </div>
 
-            {uploadError && <h1>Error uploading image!</h1>}
-            <Uploader message="Upload Background Theme" relate="themeUpload" setState={setUrl} setUploadError={setUploadError}/>
+            <Uploader message="Upload Background Theme" relate="themeUpload" setState={setUrl} setUploadError={setFirstUploadError}/>
+            {firstUploadError && <h1 className="text-red-600 italic">Error uploading image!</h1>}
 
-            {uploadError && <h1>Error uploading image!</h1>}            
-            <Uploader message="Upload Store Icon" relate="iconUpload" setState={setIconUrl} setUploadError={setUploadError}/>
-            
+            <Uploader message="Upload Store Icon" relate="iconUpload" setState={setIconUrl} setUploadError={setSecondUploadError}/>
+            {secondUploadError && <h1 className="text-red-600 italic">Error uploading image!</h1>}
+
             <button className="h-[55px] w-[330px] lg:h-[50px] bg-[#ed7bbe] text-white rounded mt-8 lg:mt-4" type="submit">Submit</button>
         
         </form>
