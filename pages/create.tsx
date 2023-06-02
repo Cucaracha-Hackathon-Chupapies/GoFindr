@@ -45,10 +45,11 @@ const Create = () => {
                         </button>
                     </ul>
                 </nav>
-                <div className="flex justify-center">
-                    <LocationMap/>
-                </div>
+                
                 {activeSection === "existingTheme" ? <ExistingTheme /> : <NewTheme />}
+                {/* <div className="flex justify-center">
+                    <LocationMap/>
+                </div> */}
                 
             </div>
         </div>
