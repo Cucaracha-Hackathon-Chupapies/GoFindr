@@ -3,6 +3,7 @@ import { useState } from "react";
 import CreateBG from "@/components/Backgrounds/CreateBG";
 import NewTheme from "@/components/Create/NewTheme";
 import ExistingTheme from "@/components/Create/ExistingTheme";
+import LocationMap from "@/components/Create/LocationMap";
 
 type Section = "existingTheme" | "newTheme";
 
@@ -44,6 +45,7 @@ const Create = () => {
                         </button>
                     </ul>
                 </nav>
+                <LocationMap/>
                 {activeSection === "existingTheme" ? <ExistingTheme /> : <NewTheme />}
                 
             </div>
