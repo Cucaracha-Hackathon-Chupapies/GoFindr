@@ -45,7 +45,9 @@ const Create = () => {
                         </button>
                     </ul>
                 </nav>
-                <LocationMap/>
+                <div className="flex justify-center">
+                    <LocationMap/>
+                </div>
                 {activeSection === "existingTheme" ? <ExistingTheme /> : <NewTheme />}
                 
             </div>
