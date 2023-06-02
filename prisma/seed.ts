@@ -23,7 +23,12 @@ async function main() {
         name: 'mishkamushka',
         lat: 49.2378333,
         lng: -123.0411864,
-        description: 'poopie poopie :)'
+        description: 'poopie poopie :)',
+        theme: {
+          connect: {
+            id: 1
+          }
+        }
       },
     })
 

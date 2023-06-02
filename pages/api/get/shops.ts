@@ -27,6 +27,9 @@ export default async function handler(
               lte: req.body.lng+lngdistance,
               gte: req.body.lng-lngdistance
             }
+        },
+        include: {
+          theme: true
         }
     })
   res.status(200).json(data)
