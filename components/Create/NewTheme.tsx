@@ -53,13 +53,11 @@ const NewTheme = () => {
                 <input type="text" id="componentColor" name="componentColor" placeholder="Accent Color" onChange={handleChange} className="h-[55px] w-[155px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
             </div>
 
-            {url && <img src={url} alt="user image"/>}
             {uploadError && <h1>Error uploading image!</h1>}
-            <Uploader message="Upload Background Theme" setState={setUrl} setUploadError={setUploadError}/>
+            <Uploader message="Upload Background Theme" relate="themeUpload" setState={setUrl} setUploadError={setUploadError}/>
 
-            {iconUrl && <img src={iconUrl} alt="user image"/>}
             {uploadError && <h1>Error uploading image!</h1>}            
-            <Uploader message="Upload Store Icon" setState={setIconUrl} setUploadError={setUploadError}/>
+            <Uploader message="Upload Store Icon" relate="iconUpload" setState={setIconUrl} setUploadError={setUploadError}/>
             
             <button className="h-[55px] w-[330px] lg:h-[50px] bg-[#ed7bbe] text-white rounded mt-8 lg:mt-4" type="submit">Submit</button>
         

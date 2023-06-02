@@ -22,8 +22,6 @@ const ExistingTheme = () => {
                 
             axios.post('/api/create/shop', {...formData, lat: data.coords.latitude, lng: data.coords.longitude, createTheme: false, ...(iconUrl ? {icon: iconUrl} : {}), ownerId: 'e9583445-6ddc-44ab-a453-26e68cbfe98f'})
             
-        
-            
         })
     }, [formData])
 
@@ -44,9 +42,8 @@ const ExistingTheme = () => {
             <input id="description" name="description" placeholder="Description" onChange={handleChange} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
             <input type="text" id="themeId" name="themeId" placeholder="Theme ID" onChange={handleChange} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
 
-            {iconUrl && <img src={iconUrl} alt="user image"/>}
             {uploadError && <h1>Error uploading image!</h1>}
-            <Uploader message="Upload store icon" setState={setIconUrl} setUploadError={setUploadError}/>
+            <Uploader message="Upload store icon" relate="iconUpload" setState={setIconUrl} setUploadError={setUploadError}/>
             
             <button className="h-[55px] w-[330px] lg:h-[50px] bg-[#ed7bbe] text-white rounded mt-8 lg:mt-4" type="submit">Submit</button>
         
