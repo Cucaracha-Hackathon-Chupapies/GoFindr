@@ -41,7 +41,6 @@ const ExistingTheme = () => {
     return (
         <form onSubmit={handleSubmit} className="flex flex-col items-center">
             <input type="text" id="displayName" name="displayName" placeholder="Name" onChange={handleChange} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
-<<<<<<< Updated upstream
             <textarea id="description" name="description" placeholder="Description" onChange={handleChange} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
             
             
@@ -49,9 +48,7 @@ const ExistingTheme = () => {
             {uploadError && <h1>Error uploading image!</h1>}
             <Uploader setState={setIconUrl} setUploadError={setUploadError}/>
             
-=======
             <input id="description" name="description" placeholder="Description" onChange={handleChange} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
->>>>>>> Stashed changes
             <input type="text" id="themeId" name="themeId" placeholder="Theme ID" onChange={handleChange} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
             <button className="h-[55px] w-[330px] lg:h-[50px] bg-[#ed7bbe] text-white rounded mt-8" type="submit">Submit</button>
         

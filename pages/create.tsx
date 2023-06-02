@@ -29,8 +29,9 @@ const Create = () => {
                     Something new around the corner? Let others see what’s happening in their daily explorations by adding a new shop!
                 </div>
                 <div className="text-[16px] text-[#7A7A7A] font-light italic font-medium">
-                    *Store geolocation will be set to your current location!
+                    * Store geolocation will be set to your current location!
                 </div>
+                
                 <nav className="flex mt-[10px]">
                     <ul className="flex space-x-6">
                         <button className={activeSection === 'existingTheme' ? 'text-black border-b-2 border-black' : 'text-gray-400'}
