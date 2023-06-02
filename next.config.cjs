@@ -11,6 +11,7 @@ const nextConfig = {
     ACCESS_SECRET_KEY: process.env.ACCESS_SECRET_KEY || "",
     BUCKET_NAME: process.env.BUCKET_NAME || "",
     BUCKET_ENDPOINT: process.env.BUCKET_ENDPOINT || "",
+    GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY || "",
     PROD: process.env.PROD || "false"
   },
   images: {
