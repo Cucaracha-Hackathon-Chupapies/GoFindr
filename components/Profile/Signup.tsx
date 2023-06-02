@@ -28,6 +28,7 @@ const SignUp = ({ setSignFlag }: { setSignFlag: React.Dispatch<React.SetStateAct
 
         axios.post('/api/account/signup', {username: username, password: password})
         .then((res) => {localStorage.setItem('id', res.data); router.push('/')})
+        .catch(() => setError("User already exists!"))
 
     }, [username, password, confirmPassword])
 

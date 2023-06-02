@@ -27,11 +27,14 @@ const Profile = () => {
         <div>
             
             <ProfileBG />
-            {localStorage.getItem('id') === null ? 
+            {typeof window !== "undefined" && localStorage && localStorage.getItem('id') !== null ? 
                 <div>
                     <img src={userData?.icon}/>
                     <h1>{userData?.username}</h1>
                     <button>Edit Profile</button>
+                    <button>Saved Locations</button>
+                    <button>Contact Us</button>
+                    <button>Help</button>                    
                 </div>
             : (
                 <div className="mt-[100px]">

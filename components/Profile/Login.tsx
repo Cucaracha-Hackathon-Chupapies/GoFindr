@@ -6,6 +6,7 @@ import { useCallback, useState } from "react"
 const Login = ({ setSignFlag }: { setSignFlag: React.Dispatch<React.SetStateAction<boolean>> }) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState<string>()
     
     const router = useRouter()
 
@@ -17,6 +18,7 @@ const Login = ({ setSignFlag }: { setSignFlag: React.Dispatch<React.SetStateActi
         }
         axios.post('/api/account/login', {username: username, password: password})
         .then((res) => {localStorage.setItem('id', res.data); router.push('/')})
+        .catch(() => setError("Username and/or password is incorrect!"))
 
     }, [username, password, router])
 
@@ -28,6 +30,7 @@ const Login = ({ setSignFlag }: { setSignFlag: React.Dispatch<React.SetStateActi
                 <form onSubmit={handleSubmit} className="flex flex-col items-center">
                     <input type={'text'} value={username} placeholder="Username" onChange={(e) => setUsername(e.target.value)} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
                     <input type={'password'} value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
+                    {error && <p className="error-message text-red-500"> {error} </p>}
                     <button type="submit" className="h-[55px] w-[330px] lg:h-[50px] bg-[#ed7bbe] text-white rounded mt-8">Login</button>
                 </form>
                 <div className="text-[16px] italic mt-8 lg:mt-4">

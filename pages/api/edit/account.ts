@@ -1,13 +1,33 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import prisma from '@/lib/prisma'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type Data = {
-  name: string
+interface Props {
+  id: string,
+  username: string,
+  password: string,
+  icon: string
 }
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
-  res.status(200).json({ name: 'John Doe' })
+  let data: Props = req.body
+  const account = await prisma.account.update({
+      where: {
+        id: data.id
+      },
+      data: {
+        username: data.username,
+        password: data.password,
+        icon: data.icon
+      }
+  })
+  
+  if (account){
+    res.status(200).json(account)
+  } else {
+    res.status(400).end()
+  }
 }
