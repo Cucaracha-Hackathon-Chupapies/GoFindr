@@ -26,7 +26,7 @@ const Profile = () => {
     return (
         <div>
             
-            <ProfileBG />
+            
             {localStorage.getItem('id') === null ? 
                 <div>
                     <img src={userData?.icon}/>
@@ -35,7 +35,10 @@ const Profile = () => {
                 </div>
             : (
                 <div className="mt-[100px]">
-                    {signFlag === true ? <SignUp setSignFlag={setSignFlag}/> : <Login setSignFlag={setSignFlag}/>}
+                    <ProfileBG />
+                    {signFlag === true ? 
+                        <SignUp setSignFlag={setSignFlag}/> :
+                        <Login setSignFlag={setSignFlag}/>}
                 </div>
             )}
             
