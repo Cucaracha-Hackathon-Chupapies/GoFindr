@@ -46,7 +46,7 @@ const ExistingTheme = () => {
 
             {iconUrl && <img src={iconUrl} alt="user image"/>}
             {uploadError && <h1>Error uploading image!</h1>}
-            <Uploader message="Upload image of store" setState={setIconUrl} setUploadError={setUploadError}/>
+            <Uploader message="Upload store icon" setState={setIconUrl} setUploadError={setUploadError}/>
             
             <button className="h-[55px] w-[330px] lg:h-[50px] bg-[#ed7bbe] text-white rounded mt-8 lg:mt-4" type="submit">Submit</button>
         

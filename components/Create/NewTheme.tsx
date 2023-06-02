@@ -47,24 +47,19 @@ const NewTheme = () => {
         <form onSubmit={handleSubmit} className="flex flex-col items-center">
             <input type="text" id="displayName" name="displayName" placeholder="Name" onChange={handleChange} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
             <input type="text" id="description" name="description" placeholder="Description" onChange={handleChange} className="h-[55px] w-[330px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
-
-            <label>Icon</label>
-            {iconUrl && <img src={iconUrl} alt="user image"/>}
-            {uploadError && <h1>Error uploading image!</h1>}
             
-            <Uploader setState={setIconUrl} setUploadError={setUploadError}/>
-         
-
             <div className="flex flex-row items-center">
                 <input type="text" id="font" name="font" placeholder="Font" onChange={handleChange} className="h-[55px] w-[155px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 mr-[20px] lg:mt-4"/>
                 <input type="text" id="componentColor" name="componentColor" placeholder="Accent Color" onChange={handleChange} className="h-[55px] w-[155px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
             </div>
 
-            <label>Theme Background</label>
             {url && <img src={url} alt="user image"/>}
             {uploadError && <h1>Error uploading image!</h1>}
-                
-            <Uploader setState={setUrl} setUploadError={setUploadError}/>
+            <Uploader message="Upload Background Theme" setState={setUrl} setUploadError={setUploadError}/>
+
+            {iconUrl && <img src={iconUrl} alt="user image"/>}
+            {uploadError && <h1>Error uploading image!</h1>}            
+            <Uploader message="Upload Store Icon" setState={setIconUrl} setUploadError={setUploadError}/>
             
             <button className="h-[55px] w-[330px] lg:h-[50px] bg-[#ed7bbe] text-white rounded mt-8 lg:mt-4" type="submit">Submit</button>
         
