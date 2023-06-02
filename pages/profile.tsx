@@ -14,24 +14,25 @@ const Profile = () => {
     
     const [signFlag, setSignFlag] = useState(true);
 
-    // useEffect(() => {
-    //     axios.post('/api/get/account', {id: localStorage.getItem('id')})
-    //     .then((res) => {
+    useEffect(() => {
 
-    //         setUserData(res.data)
+        if (!localStorage.getItem('id')) return;
+        axios.post('/api/get/account', {id: localStorage.getItem('id')})
+        .then((res) => {
 
-    //     }).catch(() => {logFlag = false;})
-    // }, [router])
+            setUserData(res.data)
+
+        })
+    }, [router])
 
     return (
-        <div>
-            
+        <div>            
             <ProfileBG />
             {typeof window !== "undefined" && localStorage && localStorage.getItem('id') !== null ? 
                 <div className="relative ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[20px] flex flex-col items-center">
                     <img src={userData?.icon} className="border border-black rounded-full w-[130px] h-[130px] mt-[100px]"/>
-                    <h1 className="text-[32px] font-medium mt-2">{userData?.username}Quandale Dingle</h1>
-                    <button className="w-[125px] h-[40px] text-[18px] bg-gray-100 rounded-full border border-black mt-2">Edit Profile</button>
+                    <h1 className="text-[32px] font-medium mt-2">{userData?.username || "Quandale Dingle"}</h1>
+                    <button onClick={() => router.push('/profile/edit')} className="w-[125px] h-[40px] text-[18px] bg-gray-100 rounded-full border border-black mt-2">Edit Profile</button>
 
                     <div className="mt-8" />
 
