@@ -6,7 +6,7 @@ const Wandering = () => {
                     What's next?
                 </div>
                 <div className="text-[18px] font-light italic">
-                    We’ll let you know whenever something pops up nearby... 
+                    We Will let you know whenever something pops up nearby... 
                 </div>
                 <div className="text-[15px] font-light text-[#747474] italic">
                     View your visit history in your profile section!

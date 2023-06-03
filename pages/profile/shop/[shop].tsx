@@ -35,7 +35,7 @@ const EditShop = () => {
         //name -> displayname
         axios.post('/api/edit/shop', {...shopData, icon: url, createTheme: false, id: localStorage.getItem('id'), displayName: newShopName})
 
-    }, [shopData, url])
+    }, [shopData, url, newShopName])
  
     const addItem = useCallback((e: any) => {
         e.preventDefault()
@@ -43,7 +43,7 @@ const EditShop = () => {
         
         axios.post('/api/create/item', data)
         .then(() => router.reload())
-    }, [itemData, itemUrl, router.query.shop])
+    }, [itemData, itemUrl, router])
 
     const handleChange = (event: any) => {
         setItemData({
@@ -69,7 +69,7 @@ const EditShop = () => {
 
             <h1>Items</h1>
             {shopData?.items.map((item) => (
-                <div>
+                <div key={item.id}>
                     <h1>{item.displayName}</h1>
                     <p>{item.description}</p>
                     <h1>{item.rating}</h1>

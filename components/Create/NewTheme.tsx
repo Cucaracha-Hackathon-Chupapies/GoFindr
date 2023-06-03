@@ -33,7 +33,7 @@ const NewTheme = () => {
             })
             
         })
-    }, [url, formData])
+    }, [url, formData, iconUrl])
 
 
     const handleChange = (event: any) => {

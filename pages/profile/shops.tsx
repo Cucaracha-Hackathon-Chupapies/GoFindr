@@ -17,12 +17,12 @@ const Shops = () => {
         axios.post('/api/account/shops', {id: localStorage.getItem('id')})
         .then((res) => setShops(res.data))
 
-    }, [])
+    }, [router])
 
     return (
         <div>
             {shops?.map((shop) => (
-                <div>
+                <div key={shop.name}>
                     <img className="w-[200px]" src={shop.icon || ""}/>
 
                     <h1>{shop.displayName}</h1>
