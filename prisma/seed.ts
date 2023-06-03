@@ -49,12 +49,18 @@ async function main() {
         displayName: 'Mishka Mushka',
         name: 'mishkamushka',
         description: 'Japanese izakaya with splashy decor & a sake-bottle chandelier, serving creative, intricate plates...',
+        icon: 'https://nature-images.sfo3.cdn.digitaloceanspaces.com/gofindr/userfiles/mqio6y714t6o96g5i6f99ikx.jpg',
         rating: 3.9,
         owner: {
           connect: {
             id: 'e9583445-6ddc-44ab-a453-26e68cbfe98f'
           }
         },        
+        theme: {
+          connect: {
+            id: 1
+          }
+        },
         items: {
           create: [
             {

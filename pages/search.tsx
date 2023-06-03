@@ -13,7 +13,7 @@ const Search = () => {
             <div className="relative z-999 overflow-hidden">
                 <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[100px]">
                     <div className="text-[36px] font-light">
-                        Where's your
+                        Where is your
                     </div>
                     <div className="text-[44px] font-medium leading-[50px]">
                         Adventure?

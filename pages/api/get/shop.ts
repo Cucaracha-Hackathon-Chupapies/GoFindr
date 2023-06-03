@@ -25,7 +25,7 @@ export default async function handler(
         
     })
 
-    const isRated = (await prisma.storeRating.count({where: {accountId: req.body.id, storeId: req.body.name}})) > 0
+    const isRated = req.body.id ? (await prisma.storeRating.count({where: {accountId: req.body.id, storeId: req.body.name}})) > 0 : false
 
     if (data){
         res.status(200).json({...data, rated: isRated})

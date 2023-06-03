@@ -36,6 +36,10 @@ const Profile = () => {
 
                     <div className="mt-8" />
 
+                    <button onClick={() => router.push('/profile/shops')}>
+                        My Shops
+                    </button>
+
                     <button className="w-[370px] h-[54px] text-[18px] bg-white rounded-full border border-black mt-4 pl-8 flex flex-row place-items-center">
                         Saved Locations
                         <svg className="ml-[130px]" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
