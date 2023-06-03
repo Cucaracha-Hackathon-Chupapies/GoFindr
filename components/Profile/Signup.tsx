@@ -30,7 +30,7 @@ const SignUp = ({ setSignFlag }: { setSignFlag: React.Dispatch<React.SetStateAct
         .then((res) => {localStorage.setItem('id', res.data); router.push('/')})
         .catch(() => setError("User already exists!"))
 
-    }, [username, password, confirmPassword])
+    }, [username, password, confirmPassword, router])
 
     return (
         <div>

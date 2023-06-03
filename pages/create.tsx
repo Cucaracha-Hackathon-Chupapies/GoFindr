@@ -19,7 +19,7 @@ const Create = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             
-            <div className="relative z-999 overflow-hidden ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[100px]">
+            <div className="relative z-999 overflow-hidden ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[50px]">
                 <div className="text-[36px] font-light">
                     Pave
                 </div>
@@ -29,9 +29,7 @@ const Create = () => {
                 <div className="text-[16px] text-[#7A7A7A] font-light italic mt-[5px]">
                     Starting new around the corner? Let others see what’s happening in their daily explorations by adding a new shop!
                 </div>
-                <div className="text-[16px] text-[#7A7A7A] font-light italic font-medium">
-                    * Store geolocation will be set to your current location!
-                </div>
+                
 
                 <nav className="flex mt-[10px]">
                     <ul className="flex space-x-6">
@@ -45,11 +43,12 @@ const Create = () => {
                         </button>
                     </ul>
                 </nav>
+                <div className="flex items-center flex-col">
+                    <LocationMap/>
+                </div>
                 
                 {activeSection === "existingTheme" ? <ExistingTheme /> : <NewTheme />}
-                {/* <div className="flex justify-center">
-                    <LocationMap/>
-                </div> */}
+                
                 
             </div>
         </div>

@@ -23,7 +23,7 @@ const ExistingTheme = () => {
             axios.post('/api/create/shop', {...formData, lat: data.coords.latitude, lng: data.coords.longitude, createTheme: false, ...(iconUrl ? {icon: iconUrl} : {}), ownerId: 'e9583445-6ddc-44ab-a453-26e68cbfe98f'})
             
         })
-    }, [formData])
+    }, [formData, iconUrl])
 
 
     const handleChange = (event: any) => {

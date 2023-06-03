@@ -98,7 +98,7 @@ const Found = () => {
                 <div>
                     <h1>Reviews</h1>
                     {ratings?.map((rating) => (
-                        <div>
+                        <div key={rating.id}>
                             <h1>{rating.rating}</h1>
                             <h3>{rating.comment}</h3>            
                             <p>{new Date(rating.created).toDateString()}</p>           

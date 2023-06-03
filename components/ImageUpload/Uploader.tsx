@@ -22,7 +22,7 @@ const Uploader = ({message, relate, setState, setUploadError}: Props) => {
                 let data = new FormData();
                 data.append("image", file);
 
-                let upload = await axios.post("api/uploadimage", data, {
+                let upload = await axios.post("/api/uploadimage", data, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     }
