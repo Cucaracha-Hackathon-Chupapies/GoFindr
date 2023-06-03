@@ -27,7 +27,7 @@ export default async function handler(
   
     let data: Props = req.body        
 
-    if (!data.itemName || !data.price || !data.description || !data.storeName){
+    if (!data.itemName || !data.price  || !data.storeName){
         return res.status(400).end()
     }
 
@@ -46,7 +46,7 @@ export default async function handler(
             name: data.itemName.toLowerCase().replaceAll(' ', '-'),
             displayName: data.itemName,
             price: data.price,
-            description: data.description,
+            description: data.description || "",
             rating: 0,
             image: data.image || "https://bandlabimages.azureedge.net/v1.0/users/297fa3f6-f06c-459e-ba5f-c297b6790fee/260x260",
             featured: data.featured ? data.featured : false,

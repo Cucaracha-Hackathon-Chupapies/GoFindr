@@ -5,9 +5,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 interface Props {
     id: string,
-    storeName: string,    
-    lat: number,
-    lng: number,    
+    name: string,        
     displayName: string,
     description: string,
     createTheme: boolean,    
@@ -35,7 +33,7 @@ export default async function handler(
 
     const validateUser = await prisma.storeInfo.findUnique({
         where: {
-            name: data.storeName
+            name: data.name
         }
     })
 
@@ -47,7 +45,7 @@ export default async function handler(
         return res.status(401).end()
     }
     
-    if (!data.id || !data.storeName || !data.lat || !data.lng || !data.displayName || !data.description || !data.createTheme || !data.icon){
+    if (!data.id || !data.name  || !data.displayName || !data.description || !data.icon){
         return res.status(400).end()
     }
 
@@ -62,11 +60,9 @@ export default async function handler(
 
         const update = await prisma.store.update({
             where: {
-                name: data.storeName
+                name: data.name
             },
-            data: {
-                lat: data.lat,
-                lng: data.lng,
+            data: {                
                 description: data.description,
                 theme: {
                     connect: {
@@ -78,7 +74,7 @@ export default async function handler(
 
         const updateInfo = await prisma.storeInfo.update({
             where: {
-                name: data.storeName
+                name: data.name
             },
             data: {
                 description: data.description,
@@ -96,13 +92,18 @@ export default async function handler(
         }
 
     } else {
+        const isExisting = await prisma.theme.count({
+            where: {
+                id: parseInt(data.themeId || "")
+            }
+        })
+
+        if (isExisting === 0) return res.status(404).end()
         const update = await prisma.store.update({
             where: {
-                name: data.storeName
+                name: data.name
             },
-            data: {
-                lat: data.lat,
-                lng: data.lng,
+            data: {                
                 description: data.description,
                 theme: {
                     connect: {
@@ -114,7 +115,7 @@ export default async function handler(
 
         const updateInfo = await prisma.storeInfo.update({
             where: {
-                name: data.storeName
+                name: data.name
             },
             data: {
                 description: data.description,

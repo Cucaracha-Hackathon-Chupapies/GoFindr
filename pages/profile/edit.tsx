@@ -26,7 +26,7 @@ const EditAccount = () => {
             <form onSubmit={saveChanges}>
                 
                 <img src={url}/>
-                <Uploader message="Upload Account Icon" setState={setUrl}/>                
+                <Uploader relate="iconUpload" message="Upload Account Icon" setState={setUrl}/>                
                 <input value={accountData?.username} onChange={(e) => setAccountData(accountData ? {...accountData, username: e.target.value} : undefined)}/>
                 <input value={accountData?.password || ""} onChange={(e) => setAccountData(accountData ? {...accountData, password: e.target.value} : undefined)}/>
                 <button type="submit">Save</button>
