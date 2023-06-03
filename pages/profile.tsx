@@ -16,7 +16,7 @@ const Profile = () => {
 
     useEffect(() => {
 
-        if (!localStorage.getItem('id')) return;
+        if (!localStorage.getItem('id'))return;
         axios.post('/api/get/account', {id: localStorage.getItem('id')})
         .then((res) => {
 

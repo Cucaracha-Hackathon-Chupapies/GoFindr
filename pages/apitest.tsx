@@ -1,67 +1,54 @@
-import React, { useEffect, useState } from 'react';
+import { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState, } from 'react';
+import {ApiError, Client, Environment} from 'square';
+
+const basePath = `https://connect.squareupsandbox.com`;
+let environment = Environment.Sandbox;
+const client_id = process.env.SQ_APPLICATION_ID;
+const client_secret = process.env.SQ_APPLICATION_SECRET;
+
+
+const scopes = [
+    'ITEMS_READ',
+    'MERCHANT_PROFILE_READ',
+]
+
+const squareClient = new Client({
+    environment,
+})
+
+const oauthInstance = squareClient.oAuthApi;
 
 const APITest = () => {
-    const [accessToken, setAccessToken] = useState<string | null>(null);
     useEffect(() => {
-
-        const handleCallback = async () => {
-            const params = new URLSearchParams(window.location.search);
-            const code = params.get('code');
-    
-            if (code) {
-                try {
-
-                    const response = await fetch('https://connect.squareup.com/oauth2/token', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        client_id: 'sandbox-sq0idb-vnIblv35DnSWu7UBvFEmSw',
-                        client_secret: 'sandbox-sq0csb-QvKJFVqELR5O_uGE5CMIMXJG-DxBySVFFcgGnVwn23k',
-                        code,
-                        grant_type: 'authorization_code',
-                        redirect_uri: 'http://localhost:3000/apitest',
-                    }),
-                    });
-        
-                    const data = await response.json();
-                    const accessToken = data.access_token;
+        const handleRequestToken = async () => {
+            const state = String(Date.now());
+            const url = `${basePath}/oauth2/authorize?client_id=${process.env.SQ_APPLICATION_ID}&response_type=code&scope=${scopes.join('+')}&state=${state}`;
             
-                    setAccessToken(accessToken);
+            const content = `
+                <div class="wrapper">
+                    <a class="btn" href="${url}">
+                        <strong>Authorize</strong>
+                    </a>
+                </div>
+            `;
 
-                } catch (error) {
-                    console.error('Error exchanging authorization code for access token:', error);
-                }
+            const contentElement = document.getElementById('content');
+            if (contentElement) {
+				contentElement.innerHTML = content;
             }
         };
     
-        handleCallback();
+        handleRequestToken();
     }, []);
 
-    const handleAuthorization = () => {
-        const authorizationUrl = `https://connect.squareup.com/oauth2/authorize?client_id=sandbox-sq0idb-vnIblv35DnSWu7UBvFEmSw&scope=ITEMS_WRITE&state=RANDOM_STATE_VALUE&response_type=code&redirect_uri=http://localhost:3000/apitest`;
-        window.location.href = authorizationUrl;
-    }
-
     return (
-        <div className="flex min-h-screen flex-col items-center justify-between p-24">
-            {accessToken ? (
-                <div>
-                    <h2>Access Token Obtained!</h2>
-                    <p>Access Token: {accessToken}</p>
-                    {/* Step 6: Make requests to the Catalog API */}
-                    {/* You can use the accessToken to make API requests to the Catalog API */}
-                </div>
-            ) : (
-                    <div>
-                    <h2>Authorize Application</h2>
-                    <p>Click the button below to authorize the application to access your Square store:</p>
-                    <button onClick={handleAuthorization}>Authorize</button>
-                    </div>
-            )}
+        <div>
+            <h1>REQUEST TOKEN PAGE</h1>
+            <div id="content"></div>
         </div>
-    )
+    );
 }
 
 export default APITest;
