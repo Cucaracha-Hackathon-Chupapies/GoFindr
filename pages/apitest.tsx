@@ -15,7 +15,6 @@ const scopes = [
 const url = `${basePath}/oauth2/authorize?client_id=${client_id}&response_type=code&scope=${scopes.join('+')}`;
 
 const APITest = () => {
-    const router = useRouter();
     useEffect(() => {
         const fetchAuthURL = async () => {
             try {
@@ -40,9 +39,6 @@ const APITest = () => {
             fetchAuthURL();
         }
     }, [])
-
-
-    
 
     return (
         <div>

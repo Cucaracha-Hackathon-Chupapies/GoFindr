@@ -8,7 +8,7 @@ const CatalogTest = () => {
     useEffect(() => {
         const tokenGet = async () => {
             try {
-                const response = await fetch(`/api/tokentest?code=${accessKey}`)
+                const response = await fetch(`/api/square/accesstoken?code=${accessKey}`)
                 const data = await response.json();
                 
                 if (!response.ok) {
