@@ -1,8 +1,8 @@
 import React, { useEffect, useState, } from 'react';
 
-const accessKey = "sandbox-sq0cgb-141zjx8W4ZpIzPemGnZeMw"
+const accessKey = "sandbox-sq0cgb-Bq2G3sSUN-PpX5jwqgggtA"
 
-const CatalogTest = () => {
+const AccessToken = () => {
     const [accessToken, setAccessToken] = useState('');
 
     useEffect(() => {
@@ -37,4 +37,4 @@ const CatalogTest = () => {
     );
 }
 
-export default CatalogTest;
+export default AccessToken;

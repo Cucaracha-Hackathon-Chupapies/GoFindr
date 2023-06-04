@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useReducer, useState, } from 'react';
 import { Environment, Client } from 'square';
-import { v4 as uuidv4 } from 'uuid';
 
-const accessToken = "EAAAECXwU7D4wQf5uefqELg334vq5M6R6yxjnVdbgSdylbxbVQu1yeibhsx2Ac1B";
+const accessToken = "EAAAEDJYkyxw6jAYZDDIB2lSN9OuqANI2sZXXIBr1kg2WQxxqKi3hvaIoPHauv8a";
 
 let environment = Environment.Sandbox;
 const client = new Client({
@@ -20,43 +19,35 @@ const formReducer = (state: any, event: any) => {
 const BombasticTest = () => {
     const [formData, setFormData] = useReducer(formReducer, {});
 
-    const handleSubmit = useCallback((e: any) => {        
+
+
+    const handleSubmit = useCallback(async (e: any) => {        
         e.preventDefault()
-        const id = uuidv4();
-        const catalogWrite = async () => {
-            try {
-                const response = await client.catalogApi.upsertCatalogObject({
-                    idempotencyKey: uuidv4(),
-                    object: {
-                        type: 'ITEM',
-                        id: id,
-                        itemData: {
-                            name: `${formData.displayName}`,
-                            variations: [
-                                {
-                                    type: 'ITEM_VARIATION',
-                                    id: `#${formData.displayName}`,
-                                    itemVariationData: {
-                                        itemId: id,
-                                        pricingType: 'FIXED_PRICING',
-                                        priceMoney: {
-                                            amount: BigInt(`${formData.price}`),
-                                            currency: 'CAD',
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                })
-            } catch (error) {
-                console.log("ERROR!");
+        try {
+            console.log("HELLO")
+            console.log(JSON.stringify(formData))
+            const response = await fetch('/api/square/catalogwrite', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to Create Catalog Item');
             }
+
+            const data = await response.json();
+            console.log(data.catalogItem);
+        } catch (error) {
+            console.error(error);
         }
-        
-        catalogWrite();
-        console.log(formData);        
+
     }, [formData])
+
+
 
     const handleChange = (event: any) => {
         setFormData({
