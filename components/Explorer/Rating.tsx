@@ -18,7 +18,7 @@ export default function Rating({data}: Props) {
                 {Array.from(Array(data.rating).keys()).map(() => (
 
                 
-                        <AiFillStar fontSize={'20px'} color={'yellow'}/>    
+                        <AiFillStar key={data.id} fontSize={'20px'} color={'yellow'}/>    
                     
                 ))}
                 

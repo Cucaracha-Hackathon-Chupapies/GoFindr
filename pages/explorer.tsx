@@ -9,7 +9,7 @@ const Explorer = () => {
     const [background, setBackground] = useState<string>()
     return (
         <div className="h-screen relative">
-            {background ?  <Image mt={0} src={background} objectFit={'cover'} pos={'absolute'} w={'100%'} h={'100%'} /> : <ExplorerBG />}
+            {background ?  <Image alt="Shop Background" mt={0} src={background} objectFit={'cover'} pos={'absolute'} w={'100%'} h={'100%'} /> : <ExplorerBG />}
             { flag ? <Wandering /> : <Found setBackground={setBackground}/>}            
         </div>
     )
