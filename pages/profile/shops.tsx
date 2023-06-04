@@ -1,3 +1,5 @@
+import Shop from "@/components/Profile/Shop"
+import { Flex } from "@chakra-ui/react"
 import { StoreInfo } from "@prisma/client"
 import axios from "axios"
 import Head from "next/head"
@@ -21,23 +23,17 @@ const Shops = () => {
     }, [router])
 
     return (
-        <div>
+        <div className="h-screen">
             <Head>
                 <title>GoFindr</title>
                 <meta name="description" content="GoFindr! An interactive and unique place to find shops near you!" />
                 <link rel="icon" href="/favicon.ico" />
-            </Head>
-            {shops?.map((shop) => (
-                <div key={shop.name}>
-                    <img className="w-[200px]" src={shop.icon || ""}/>
-
-                    <h1>{shop.displayName}</h1>
-
-                    <h3>{shop.description}</h3>                    
-
-                    <button onClick={() => router.push(`/profile/shop/${shop.name}`)}>Edit</button>
-                </div>
-            ))}
+            </Head>   
+                <Flex justifyContent={'center'}>     
+                    {shops?.map((shop) => (
+                        <Shop data={shop}/>
+                    ))}
+                </Flex>
         </div>
     )
 }
