@@ -20,7 +20,8 @@ export default async function handler(
         },
         include: {
             items: true,
-            ratings: true
+            ratings: true,
+            theme: true
         }        
         
     })

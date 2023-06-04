@@ -1,10 +1,22 @@
 import axios from "axios";
 import Item from "./Item";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Head from "next/head";
-import { StoreRating } from "@prisma/client";
+import { Item as ItemType, StoreInfo, StoreRating } from "@prisma/client";
+import { Box, Button, Flex, FormControl, FormHelperText, FormLabel, Heading, IconButton, Input, SimpleGrid, Text, VStack } from "@chakra-ui/react";
+import {MdOutlineSaveAlt} from 'react-icons/md'
+import Rating from "./Rating";
+import { AiFillStar } from "react-icons/ai";
+interface ShopData extends StoreInfo {
+    rated: boolean,
+    items: ItemType[]
+} 
 
-const Found = () => {
+interface Props {
+    setBackground: Dispatch<SetStateAction<string | undefined>>,
+}
+
+const Found = ({setBackground}: Props) => {
     /*
     const templateItems = [
         { id: "1", name: 'Corn Kakikage', price: '8.99', img: '/placeholder.jpg' },
@@ -20,23 +32,22 @@ const Found = () => {
 
     const storeName = "mishkamushka"; //id of the store found
 
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [rated, setRated] = useState(false)
-    const [rating, setRating] = useState(3)
+  
+    const [shopData, setShopData] = useState<ShopData>()
+    const [rating, setRating] = useState(0)
     const [comment, setComment] = useState("")
     const [ratings, setRatings] = useState<StoreRating[]>()
-    const [items, setItems] = useState<any>([]) //HAHAHAHAAH LOLLLLL FUNNY LMFAAO any :))))
+
+    const [reviews, toggleReviews] = useState<boolean>(false)
+
     const fill = "#ffffff";
     const fill2 = "#D9D9D9";
 
     useEffect(() => {
         axios.post('/api/get/shop', {name: storeName})
         .then((res) => {
-            setName(res.data.displayName)
-            setDescription(res.data.description)
-            setItems(res.data.items)
-            setRated(res.data.rated)
+            setShopData(res.data)
+            setBackground(res.data.theme.backgroundImage)
         })
 
         axios.post('/api/get/ratings', {storeName: storeName})
@@ -58,66 +69,102 @@ const Found = () => {
     }
 
     return (
-        <div className="relative z-999 ">
+        <div className="relative z-999">
             <Head>
-                <title>{name || "Store Found!"}</title>
+                <title>{shopData?.displayName || "Store Found!"}</title>
                 <meta name="description" content="Viewing store found using geolocation! Wowzaa that's pretty cool if you ask me :) " />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[100px] ">
+
+            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%]">
                 <div className="text-[36px] font-light">
                     Approaching...
                 </div>
+                {}
                 <div className="text-[44px] font-medium leading-[50px]">
-                    {name}
+                    {shopData?.displayName}
                 </div>
                 <div className="text-[16px] font-light text-[#747474] italic">
-                    {description}
+                    {shopData?.description}
                 </div>
-                <div className="text-[20px] mt-[10px] font-medium">
-                    Featured Items
-                </div>
-
-                <div className={`overflow-x-scroll bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
-                    {items.map((item: any) => (
-                        item.featured && <Item id={item.id} name={item.displayName} price={item.price} img={'/placeholder.jpg'} fill={fill} key={item.id}/>
-                    ))}
-                </div>
-
-                <div className="text-[20px] mt-[10px] font-medium">
-                    Popular Items
-                </div>
-
-                <div className={`overflow-x-scroll bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
-                    {items.map((item: any) => (
-                        item.popular && <Item id={item.id} name={item.displayName} price={item.price} img={'/placeholder.jpg'} fill={fill} key={item.id}/>
-                    ))}
-                </div>
-
-                {/* The Following HTML Shows the Reviews the Store Has */}
+                <nav className="flex mt-[10px] mb-[30px]">
+                    <ul className="flex space-x-6">
+                        <button className={!reviews ? 'text-black border-b-2 border-black' : 'text-gray-400'}
+                        onClick={() => toggleReviews(false)}>
+                            Items
+                        </button>
+                        <button className={reviews ? 'text-black border-b-2 border-black' : 'text-gray-400'}
+                        onClick={() => toggleReviews(true)}>
+                            Reviews
+                        </button>
+                    </ul>
+                </nav>
+                {!reviews ? 
                 <div>
-                    <h1>Reviews</h1>
+                    <div className="text-[20px] mt-[10px] font-medium">
+                        Featured Items
+                    </div>
+
+                    <div className={`overflow-x-auto bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
+                        {shopData?.items.map((item: any) => (
+                            item.featured && <Item id={item.id} name={item.displayName} price={item.price} img={'/placeholder.jpg'} fill={fill} key={item.id}/>
+                        ))}
+                    </div>
+
+                    <div className="text-[20px] mt-[10px] font-medium">
+                        Popular Items
+                    </div>
+
+                    <div className={`overflow-x-auto bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
+                        {shopData?.items.map((item: any) => (
+                            item.popular && <Item id={item.id} name={item.displayName} price={item.price} img={'/placeholder.jpg'} fill={fill} key={item.id}/>
+                        ))}                        
+                    </div>
+
+                   
+                    
+                   
+
+                    <Flex w={'100%'} justifyContent={'center'} mt={'30px'}>
+                        <Button fontWeight={'normal'} onClick={saveShop} size={'lg'} bgColor={'#ed7bbe'} color={'white'} rightIcon={<MdOutlineSaveAlt/>}>Save</Button>
+                    </Flex>
+                </div>
+                :
+                <Flex flexDir={'column'}>
+                    <SimpleGrid columns={2} maxH={'360px'} overflow={'auto'}>
                     {ratings?.map((rating) => (
-                        <div key={rating.id}>
-                            <h1>{rating.rating}</h1>
-                            <h3>{rating.comment}</h3>            
-                            <p>{new Date(rating.created).toDateString()}</p>           
-                        </div>
+                        <Rating data={rating} />
                     ))}
-                </div>
-                
-                {/* The Following HTML Shows a Button Used to Save/Pin The Store To the Users Account */}
-                <button onClick={saveShop}>Save</button>
+                    </SimpleGrid>
 
-                {/* The Following HTML Shows a Form To Write A Review For the Store Given That The User Hasn't Already Written One */}
-                <div>
-                    <h2>Write A Review</h2>
-                    <form onSubmit={createReview}>
-                        <input type="range" min={1} max={5} value={rating} onChange={(e) => setRating(parseInt(e.target.value))}/>
-                        <textarea value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
-                        <button type="submit" disabled={rated ? true : false}>Submit</button>
-                    </form>
-                </div>
+                     {/* The Following HTML Shows a Form To Write A Review For the Store Given That The User Hasn't Already Written One */}
+                    <Flex justifyContent={'center'} flexDir={'column'} alignItems={'center'}>
+                    <Heading mt={'10vh'}>Write a Review</Heading>
+                    <Flex justifyContent={'center'} alignItems={'center'}>
+                        <FormControl onSubmit={createReview}>
+                            <VStack flexDir={'column'} spacing={5} mt={5}>
+                                <Flex>
+                            {[...Array(5)].map((star, index) => (
+                                <IconButton fontSize={'20px'} bgColor={'transparent'} color={(index + 1 <= rating) ? 'yellow' : 'black'} aria-label="star" icon={<AiFillStar/>} onClick={() => setRating(index + 1)} />
+                            ))}
+                            </Flex>                      
+                            <FormLabel>Comment (optional)</FormLabel>
+                            <Input outline={'1px solid black'} value={comment} onChange={(e) => setComment(e.target.value)} />
+                            <FormHelperText>Enter what you thought of your experience here.</FormHelperText>
+                            <Button color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'} type="submit" disabled={shopData?.rated ? true : false}>Submit</Button>
+                            </VStack>
+                        </FormControl>
+                    </Flex>
+                    </Flex>
+                </Flex>
+
+                }
+
+
+
+
+                 {/* The Following HTML Shows a Button Used to Save/Pin The Store To the Users Account */}
+                 
             </div>
         </div>
         
