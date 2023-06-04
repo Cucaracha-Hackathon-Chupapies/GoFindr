@@ -20,7 +20,7 @@ const Found = ({setBackground}: Props) => {
 
     const storeName = "mishkamushka"; //id of the store found
 
-  
+
     const [shopData, setShopData] = useState<ShopData>()
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState("")
@@ -64,7 +64,7 @@ const Found = ({setBackground}: Props) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%]">
+            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] pt-[100px]">
                 <div className="text-[36px] font-light">
                     Approaching...
                 </div>
@@ -111,7 +111,7 @@ const Found = ({setBackground}: Props) => {
 
 
                     <Flex w={'100%'} justifyContent={'center'} mt={'30px'}>
-                        <Button fontWeight={'normal'} onClick={saveShop} size={'lg'} bgColor={'#ed7bbe'} color={'white'} rightIcon={<MdOutlineSaveAlt/>}>Save</Button>
+                        <Button fontWeight={'normal'} onClick={saveShop} size={'lg'} bgColor={'#ed7bbe'} color={'white'} rightIcon={<MdOutlineSaveAlt/>}>Save Shop</Button>
                     </Flex>
                 </div>
                 :
