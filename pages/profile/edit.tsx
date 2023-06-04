@@ -1,4 +1,5 @@
 import Uploader from "@/components/ImageUpload/Uploader"
+import { Button, Flex, FormControl, FormHelperText, FormLabel, Image, Input, Text, VStack } from "@chakra-ui/react"
 import { Account } from "@prisma/client"
 import axios from "axios"
 import Head from "next/head"
@@ -29,17 +30,24 @@ const EditAccount = () => {
                 <meta name="description" content="GoFindr! An interactive and unique place to find shops near you!" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <form onSubmit={saveChanges}>
-                
-                <img src={url}/>
-                <Uploader relate="iconUpload" message="Upload Account Icon" setState={setUrl}/>                
-                <input value={accountData?.username} onChange={(e) => setAccountData(accountData ? {...accountData, username: e.target.value} : undefined)}/>
-                <input value={accountData?.password || ""} onChange={(e) => setAccountData(accountData ? {...accountData, password: e.target.value} : undefined)}/>
-                <button type="submit">Save</button>
-
-            </form>
-            <button onClick={() => {window.location.href = "/editshops"}}>My Shops</button>
-
+            <Flex flexDir={'column'} alignItems={'center'}>
+                <Text mt={10} fontSize={'2xl'} fontWeight={'bold'}>Edit Account</Text>
+                <FormControl onSubmit={saveChanges} mt={10}>
+                    <VStack flexDir={'column'} alignItems={'center'} spacing={5}>
+                        <Image borderRadius={'50%'} src={url}/>                        
+                        <Uploader relate="iconUpload" message="Upload Account Icon" setState={setUrl}/>                
+                        <Flex flexDir={'column'}>
+                        <FormLabel>Username</FormLabel>
+                        <Input border={'1px solid black'} w={'330px'} value={accountData?.username} onChange={(e) => setAccountData(accountData ? {...accountData, username: e.target.value} : undefined)}/>
+                        </Flex>
+                        <Flex flexDir={'column'}>
+                        <FormLabel>Password</FormLabel>
+                        <Input border={'1px solid black'} w={'330px'} value={accountData?.password || ""} onChange={(e) => setAccountData(accountData ? {...accountData, password: e.target.value} : undefined)}/>
+                        </Flex>
+                        <Button fontSize={'20px'} color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'} type="submit">Submit</Button>
+                    </VStack>
+                </FormControl>                
+            </Flex>
         </>
     )
 

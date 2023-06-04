@@ -7,13 +7,24 @@ import SignUp from "@/components/Profile/Signup";
 import Login from "@/components/Profile/Login";
 import ProfileBG from "@/components/Backgrounds/ProfileBG";
 import Head from "next/head";
+import { Button, Icon } from "@chakra-ui/react";
+import { BsShop } from 'react-icons/bs'
 
 const Profile = () => {
 
     const [userData, setUserData] = useState<Account>()
     const router = useRouter()
+    const [isLoggedIn, setLoggedIn] = useState<boolean>()
     
     const [signFlag, setSignFlag] = useState(true);
+
+    useEffect(() => {
+        if (localStorage.getItem('id')){
+            setLoggedIn(true)
+        } else {
+            setLoggedIn(false)
+        }
+    }, [])
 
     useEffect(() => {
 
@@ -34,17 +45,18 @@ const Profile = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <ProfileBG />
-            {typeof window !== "undefined" && localStorage && localStorage.getItem('id') !== null ? 
+            {isLoggedIn ? 
                 <div className="relative ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[20px] flex flex-col items-center">
-                    <img src={userData?.icon} className="border border-black rounded-full w-[130px] h-[130px] mt-[100px]"/>
+                    <img src={"https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?resize=300%2C300&ssl=1"} className="border border-black rounded-full w-[130px] h-[130px] mt-[100px]"></img>
                     <h1 className="text-[32px] font-medium mt-2">{userData?.username || "Quandale Dingle"}</h1>
                     <button onClick={() => router.push('/profile/edit')} className="w-[125px] h-[40px] text-[18px] bg-gray-100 rounded-full border border-black mt-2">Edit Profile</button>
 
                     <div className="mt-8" />
 
-                    <button onClick={() => router.push('/profile/shops')}>
+                    <Button onClick={() => router.push('/profile/shops')} w={'370px'} h={'54px'} fontSize={'18px'} bgColor={'white'} border={'1px solid black'} mt={4} pl={8} borderRadius={'full'} fontWeight={'normal'} _hover={{}} rightIcon={<Icon fontSize={'22px'} mr={'18px'} as={BsShop}/>} justifyContent={'space-between'}>
                         My Shops
-                    </button>
+                        
+                    </Button>
 
                     <button className="w-[370px] h-[54px] text-[18px] bg-white rounded-full border border-black mt-4 pl-8 flex flex-row place-items-center">
                         Saved Locations
