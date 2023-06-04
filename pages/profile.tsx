@@ -7,6 +7,8 @@ import SignUp from "@/components/Profile/Signup";
 import Login from "@/components/Profile/Login";
 import ProfileBG from "@/components/Backgrounds/ProfileBG";
 import Head from "next/head";
+import { Button, Icon } from "@chakra-ui/react";
+import { BsShop } from 'react-icons/bs'
 
 const Profile = () => {
 
@@ -42,9 +44,10 @@ const Profile = () => {
 
                     <div className="mt-8" />
 
-                    <button onClick={() => router.push('/profile/shops')}>
+                    <Button onClick={() => router.push('/profile/shops')} w={'370px'} h={'54px'} fontSize={'18px'} bgColor={'white'} border={'1px solid black'} mt={4} pl={8} borderRadius={'full'} fontWeight={'normal'} _hover={{}} rightIcon={<Icon fontSize={'22px'} mr={'18px'} as={BsShop}/>} justifyContent={'space-between'}>
                         My Shops
-                    </button>
+                        
+                    </Button>
 
                     <button className="w-[370px] h-[54px] text-[18px] bg-white rounded-full border border-black mt-4 pl-8 flex flex-row place-items-center">
                         Saved Locations
