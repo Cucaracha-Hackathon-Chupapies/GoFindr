@@ -2,14 +2,13 @@ import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api"
 import { CSSProperties, useEffect, useMemo, useState } from "react"
 
 const mapStyles: CSSProperties = {
-    width: '350px',
-    height: '180px',
+    width: 'full',
+    height: '300px',
     marginTop: '30px',
-    marginBottom: '10px',
+    marginLeft: '30px',
+    marginRight: '30px',
     borderRadius: '15px',
     outline: '2px solid #ed7bbe',
-    marginLeft: 0,
-    marginRight: 0
 }
 
 const mapOptions: google.maps.MapOptions = {

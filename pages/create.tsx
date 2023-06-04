@@ -9,6 +9,7 @@ type Section = "existingTheme" | "newTheme";
 
 const Create = () => {
     const [activeSection, setActiveSelection] = useState<Section>("existingTheme");
+    const [viewMap, setViewMap] = useState<boolean>(false);
 
     return (
         <div>
@@ -27,7 +28,28 @@ const Create = () => {
                     The Path
                 </div>
                 <div className="text-[16px] text-[#7A7A7A] font-light italic mt-[5px]">
-                    Starting new around the corner? Let others see what’s happening in their daily explorations by adding a new shop!
+                    Starting something new around the corner? Let others see what’s happening in their daily explorations by adding a new shop!
+                </div>
+                <div className="text-[16px] text-[#7A7A7A] font-medium italic mt-[5px]">
+                    *Store location will be set to current location
+                    <button className="text-[#ed7bbe] italic ml-[4px]" onClick={() => setViewMap(true)}>
+                        (Where am I?)
+                    </button>
+                </div>
+                
+                <div className="flex flex-col items-center">
+                    {viewMap && (
+                        <div className="fixed w-[20%] -ml-4 bg-gray-800 bg-opacity-70 items-center self-center rounded-2xl">
+                            <LocationMap/>
+                            <div className="flex flex-col items-center">
+                                <button className="text-white italic p-1 text-[18px] m-[10px]"
+                                    onClick={() => setViewMap(false)}>
+                                    Close
+                                </button>
+                            </div>
+                            
+                        </div>
+                    )}
                 </div>
                 
 
@@ -43,9 +65,6 @@ const Create = () => {
                         </button>
                     </ul>
                 </nav>
-                <div className="flex items-center flex-col">
-                    <LocationMap/>
-                </div>
                 
                 {activeSection === "existingTheme" ? <ExistingTheme /> : <NewTheme />}
                 

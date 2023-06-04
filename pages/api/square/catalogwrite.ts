@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Environment, Client } from 'square';
-import { bigint } from 'square/dist/types/schema';
 import { v4 as uuidv4 } from 'uuid';
 
 
