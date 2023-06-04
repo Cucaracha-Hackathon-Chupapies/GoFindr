@@ -3,7 +3,7 @@ import Item from "./Item";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Head from "next/head";
 import { Item as ItemType, StoreInfo, StoreRating } from "@prisma/client";
-import { Box, Button, Flex, FormControl, FormHelperText, FormLabel, Heading, IconButton, Input, SimpleGrid, Text, VStack } from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormHelperText, FormLabel, Heading, IconButton, Input, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import {MdOutlineSaveAlt} from 'react-icons/md'
 import Rating from "./Rating";
 import { AiFillStar } from "react-icons/ai";
@@ -17,18 +17,6 @@ interface Props {
 }
 
 const Found = ({setBackground}: Props) => {
-    /*
-    const templateItems = [
-        { id: "1", name: 'Corn Kakikage', price: '8.99', img: '/placeholder.jpg' },
-        { id: "2", name: 'Tako Wasabi', price: '$5.39', img: '/placeholder.jpg' },
-        { id: "3", name: 'Chicken Karaage', price: '$7.89', img: '/placeholder.jpg' },
-        { id: "4", name: 'Fatty Short Ribs', price: '$18.99', img: '/placeholder.jpg' },
-        { id: "5", name: 'Corn Kakikage', price: '8.99', img: '/placeholder.jpg' },
-        { id: "6", name: 'Tako Wasabi', price: '$5.39', img: '/placeholder.jpg' },
-        { id: "7", name: 'Chicken Karaage', price: '$7.89', img: '/placeholder.jpg' },
-        { id: "8", name: 'Fatty Short Ribs', price: '$18.99', img: '/placeholder.jpg' },
-    ];
-    */
 
     const storeName = "mishkamushka"; //id of the store found
 
@@ -128,7 +116,7 @@ const Found = ({setBackground}: Props) => {
                 </div>
                 :
                 <Flex flexDir={'column'}>
-                    <SimpleGrid columns={2} maxH={'360px'} overflow={'auto'}>
+                    <SimpleGrid columns={[1, 1, 2]} maxH={'360px'} overflow={'auto'}>
                     {ratings?.map((rating) => (
                         <Rating key={rating.id} data={rating} />
                     ))}
@@ -154,14 +142,7 @@ const Found = ({setBackground}: Props) => {
                     </Flex>
                     </Flex>
                 </Flex>
-
                 }
-
-
-
-
-                 {/* The Following HTML Shows a Button Used to Save/Pin The Store To the Users Account */}
-
             </div>
         </div>
         
