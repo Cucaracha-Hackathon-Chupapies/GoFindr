@@ -12,7 +12,7 @@ export default function Shop({data}: Props) {
 
   return (
     <Flex color={'white'} flexDir={'column'} alignItems={'center'} bgColor={'rgb(31, 41, 55)'} my={5} borderRadius={'md'} p={5}>
-        <Image src={data.icon || ""} w={'200px'} h={'200px'} borderRadius={'full'} objectFit={'cover'}/>
+        <Image alt={'Shop Icon'} src={data.icon || ""} w={'200px'} h={'200px'} borderRadius={'full'} objectFit={'cover'}/>
         <Text mt={3} fontSize={'2xl'}>{data.displayName}</Text>
         <Text mt={6} mb={10} maxW={'70%'} fontSize={'sm'} textAlign={'center'}>{data.description}</Text>
         <Flex justifyContent={'space-between'} w={'85%'}>

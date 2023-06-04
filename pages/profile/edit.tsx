@@ -34,7 +34,7 @@ const EditAccount = () => {
                 <Text mt={10} fontSize={'2xl'} fontWeight={'bold'}>Edit Account</Text>
                 <FormControl onSubmit={saveChanges} mt={10}>
                     <VStack flexDir={'column'} alignItems={'center'} spacing={5}>
-                        <Image borderRadius={'50%'} src={url}/>                        
+                        <Image alt="User Profile Picture" borderRadius={'50%'} src={url}/>                        
                         <Uploader relate="iconUpload" message="Upload Account Icon" setState={setUrl}/>                
                         <Flex flexDir={'column'}>
                         <FormLabel>Username</FormLabel>

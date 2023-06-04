@@ -54,7 +54,7 @@ const Found = ({setBackground}: Props) => {
         .then((res) => {
             setRatings(res.data)
         })
-    }, [])
+    }, [setBackground])
 
     const createReview = (e: any) => {
         e.preventDefault()
@@ -133,7 +133,7 @@ const Found = ({setBackground}: Props) => {
                 <Flex flexDir={'column'}>
                     <SimpleGrid columns={2} maxH={'360px'} overflow={'auto'}>
                     {ratings?.map((rating) => (
-                        <Rating data={rating} />
+                        <Rating key={rating.id} data={rating} />
                     ))}
                     </SimpleGrid>
 
@@ -145,7 +145,7 @@ const Found = ({setBackground}: Props) => {
                             <VStack flexDir={'column'} spacing={5} mt={5}>
                                 <Flex>
                             {[...Array(5)].map((star, index) => (
-                                <IconButton fontSize={'20px'} bgColor={'transparent'} color={(index + 1 <= rating) ? 'yellow' : 'black'} aria-label="star" icon={<AiFillStar/>} onClick={() => setRating(index + 1)} />
+                                <IconButton key={index} fontSize={'20px'} bgColor={'transparent'} color={(index + 1 <= rating) ? 'yellow' : 'black'} aria-label="star" icon={<AiFillStar/>} onClick={() => setRating(index + 1)} />
                             ))}
                             </Flex>                      
                             <FormLabel>Comment (optional)</FormLabel>

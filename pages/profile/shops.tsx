@@ -31,7 +31,7 @@ const Shops = () => {
             </Head>   
                 <Flex justifyContent={'center'}>     
                     {shops?.map((shop) => (
-                        <Shop data={shop}/>
+                        <Shop key={shop.name} data={shop}/>
                     ))}
                 </Flex>
         </div>
