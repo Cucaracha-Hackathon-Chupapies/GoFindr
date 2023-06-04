@@ -12,7 +12,7 @@
     "reset": "prisma db push --force-reset && prisma db seed"
   },
   "prisma": {
-    "seed": "node --loader ts-node/esm prisma/seed.ts"
+    "seed": "node prisma/seed.mjs"
   },
 
   "dependencies": {
