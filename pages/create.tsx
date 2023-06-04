@@ -20,7 +20,7 @@ const Create = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             
-            <div className="relative z-999 overflow-hidden ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[50px]">
+            <div className="relative z-999 overflow-hidden ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] pt-[100px]">
                 <div className="text-[36px] font-light">
                     Pave
                 </div>
@@ -39,7 +39,7 @@ const Create = () => {
                 
                 <div className="flex flex-col items-center">
                     {viewMap && (
-                        <div className="fixed w-[20%] -ml-4 bg-gray-800 bg-opacity-70 items-center self-center rounded-2xl">
+                        <div className="fixed w-[300px] bg-gray-800 bg-opacity-70 items-center self-center rounded-2xl">
                             <LocationMap/>
                             <div className="flex flex-col items-center">
                                 <button className="text-white italic p-1 text-[18px] m-[10px]"
