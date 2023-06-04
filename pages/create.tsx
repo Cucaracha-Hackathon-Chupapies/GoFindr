@@ -14,8 +14,8 @@ const Create = () => {
         <div>
             <CreateBG />
             <Head>
-                <title>create store</title>
-                <meta name="description" content="Makin' a store :)" />
+                <title>Create Shop</title>
+                <meta name="description" content="Makin' a shop :)" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             

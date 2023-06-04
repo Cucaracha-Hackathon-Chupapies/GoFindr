@@ -6,6 +6,7 @@ import axios from "axios";
 import SignUp from "@/components/Profile/Signup";
 import Login from "@/components/Profile/Login";
 import ProfileBG from "@/components/Backgrounds/ProfileBG";
+import Head from "next/head";
 
 const Profile = () => {
 
@@ -27,6 +28,11 @@ const Profile = () => {
 
     return (
         <div>            
+            <Head>
+                <title>My Profile</title>
+                <meta name="description" content="GoFindr! An interactive and unique place to find shops near you!" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <ProfileBG />
             {typeof window !== "undefined" && localStorage && localStorage.getItem('id') !== null ? 
                 <div className="relative ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[20px] flex flex-col items-center">

@@ -1,5 +1,6 @@
 import { StoreInfo } from "@prisma/client"
 import axios from "axios"
+import Head from "next/head"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
@@ -21,6 +22,11 @@ const Shops = () => {
 
     return (
         <div>
+            <Head>
+                <title>GoFindr</title>
+                <meta name="description" content="GoFindr! An interactive and unique place to find shops near you!" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             {shops?.map((shop) => (
                 <div key={shop.name}>
                     <img className="w-[200px]" src={shop.icon || ""}/>

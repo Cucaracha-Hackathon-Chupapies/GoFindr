@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import SearchBG from "@/components/Backgrounds/SearchBG";
 import SearchList from "@/components/Search/SearchList";
+import Head from "next/head";
 
 type Section = "forYou" | "popular" | "new";
 
@@ -9,6 +10,11 @@ const Search = () => {
     const [activeSection, setActiveSelection] = useState<Section>("forYou");
     return (
         <div>
+            <Head>
+                <title>Search</title>
+                <meta name="description" content="GoFindr! An interactive and unique place to find shops near you!" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <SearchBG />
             <div className="relative z-999 overflow-hidden">
                 <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[100px]">

@@ -1,6 +1,7 @@
 import Uploader from "@/components/ImageUpload/Uploader"
 import { Account } from "@prisma/client"
 import axios from "axios"
+import Head from "next/head"
 import { useCallback, useEffect, useState } from "react"
 
 const EditAccount = () => {
@@ -23,6 +24,11 @@ const EditAccount = () => {
 
     return (
         <>
+            <Head>
+                <title>GoFindr</title>
+                <meta name="description" content="GoFindr! An interactive and unique place to find shops near you!" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <form onSubmit={saveChanges}>
                 
                 <img src={url}/>
