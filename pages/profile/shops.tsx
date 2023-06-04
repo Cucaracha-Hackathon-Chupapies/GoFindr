@@ -23,7 +23,7 @@ const Shops = () => {
     }, [router])
 
     return (
-        <div className="h-screen">
+        <div>
             <Head>
                 <title>GoFindr</title>
                 <meta name="description" content="GoFindr! An interactive and unique place to find shops near you!" />

@@ -128,7 +128,7 @@ const Found = ({setBackground}: Props) => {
                 </div>
                 :
                 <Flex flexDir={'column'}>
-                    <SimpleGrid columns={2} maxH={'360px'} overflow={'auto'}>
+                    <SimpleGrid columns={[1, 1, 2]} maxH={'360px'} overflow={'auto'}>
                     {ratings?.map((rating) => (
                         <Rating key={rating.id} data={rating} />
                     ))}
