@@ -6,7 +6,7 @@ import ProfileButton from "./NavButtons/ProfileButton";
 
 const NavBar = () => {
     return (
-        <nav className="absolute bottom-0 w-full h-[100px] z-999 flex gap-[45px] justify-center items-center overflow-hidden">
+        <nav className="fixed bottom-0 w-full h-[100px] z-999 flex gap-[45px] justify-center items-center overflow-hidden">
             <ExplorerButton />
             <SearchButton />
             <CreateButton />

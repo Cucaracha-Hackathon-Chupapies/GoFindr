@@ -121,9 +121,6 @@ const Found = ({setBackground}: Props) => {
                         ))}                        
                     </div>
 
-                   
-                    
-                   
 
                     <Flex w={'100%'} justifyContent={'center'} mt={'30px'}>
                         <Button fontWeight={'normal'} onClick={saveShop} size={'lg'} bgColor={'#ed7bbe'} color={'white'} rightIcon={<MdOutlineSaveAlt/>}>Save</Button>
@@ -164,7 +161,7 @@ const Found = ({setBackground}: Props) => {
 
 
                  {/* The Following HTML Shows a Button Used to Save/Pin The Store To the Users Account */}
-                 
+
             </div>
         </div>
         

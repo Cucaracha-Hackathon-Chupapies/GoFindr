@@ -8,8 +8,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <div className={poppins.className}>
-        <Component {...pageProps} />
-        <NavBar />
+        <div className="flex flex-col h-screen">
+          <Component {...pageProps} className="flex-grow"/>
+          <NavBar />
+        </div>
+        
       </div>
     </ChakraProvider>
     
