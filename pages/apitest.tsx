@@ -1,6 +1,4 @@
-import { useRouter } from 'next/router';
 import React, { useEffect, useState, } from 'react';
-import {ApiError, Client, Environment} from 'square';
 
 const basePath = `https://connect.squareupsandbox.com`;
 const client_id = process.env.SQ_APPLICATION_ID;

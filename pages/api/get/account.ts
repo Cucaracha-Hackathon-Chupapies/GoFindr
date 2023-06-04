@@ -5,9 +5,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+    req: NextApiRequest,
+    res: NextApiResponse ) {
     const account = await prisma.account.findUnique({
         where: {
             id: req.body.id
