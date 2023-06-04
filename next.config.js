@@ -23,6 +23,18 @@ const nextConfig = {
         pathname: '/GoFindr/**'
       }
     ]
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/",
+        destination: "/explorer"
+      },
+      {
+        source: "/index",
+        destination: "/explorer"
+      },
+    ]
   }
 }
 

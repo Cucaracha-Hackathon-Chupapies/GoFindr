@@ -47,7 +47,7 @@ const Uploader = ({message, relate, setState, setUploadError}: Props) => {
 
     return (
         
-        <div className="flex h-[55px] w-[330px] lg:h-[50px] bg-white rounded italic pl-4 mt-8 lg:mt-4 items-center bg-gray-200">
+        <div className="flex h-[55px] w-[330px] lg:h-[50px] bg-white rounded italic pl-4 mt-8 lg:mt-4 items-center border border-black">
             <label htmlFor={relate} className="flex items-center justify-center w-full h-full cursor-pointer ">
                 {fileName ? fileName : message}
                 <input type="file" id={relate} accept="image/*" onChange={handleUpload} className="hidden"/>
