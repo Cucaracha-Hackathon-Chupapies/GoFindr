@@ -1,18 +1,18 @@
 /** @type {import('next').NextConfig} */
 
-import withPWA from 'next-pwa'
+const withPWA = require('next-pwa')
 
 const prod = process.env.PROD === "true"
 
 const nextConfig = {
   reactStrictMode: false,
   env: {
-    ACCESS_KEY_ID: process.env.ACCESS_KEY_ID || "",
-    ACCESS_SECRET_KEY: process.env.ACCESS_SECRET_KEY || "",
-    BUCKET_NAME: process.env.BUCKET_NAME || "",
-    BUCKET_ENDPOINT: process.env.BUCKET_ENDPOINT || "",
-    GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY || "",
-    PROD: process.env.PROD || "false"
+    ACCESS_KEY_ID: process.env.ACCESS_KEY_ID,
+    ACCESS_SECRET_KEY: process.env.ACCESS_SECRET_KEY,
+    BUCKET_NAME: process.env.BUCKET_NAME ,
+    BUCKET_ENDPOINT: process.env.BUCKET_ENDPOINT,
+    GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
+    PROD: process.env.PROD
   },
   images: {
     remotePatterns: [
@@ -23,9 +23,6 @@ const nextConfig = {
         pathname: '/GoFindr/**'
       }
     ]
-  },
-  api: {
-    externalResolver: true
   }
 }
 

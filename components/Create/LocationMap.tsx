@@ -19,7 +19,7 @@ const mapOptions: google.maps.MapOptions = {
 const LocationMap = () => {
 
     const { isLoaded } = useLoadScript({
-        googleMapsApiKey: "AIzaSyAa8AwVw9QKRS5AyGTih-iqcXgJ0ImcJ7o"
+        googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || ""
     })
 
     const [center, setCenter] = useState<google.maps.LatLngLiteral>({lat: 0, lng: 0})

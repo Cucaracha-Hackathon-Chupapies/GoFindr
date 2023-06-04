@@ -3,7 +3,7 @@ const Wandering = () => {
         <div className="relative z-999 ">
             <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[100px]">
                 <div className="text-[36px] font-light">
-                    What's next?
+                    What&apos;s next?
                 </div>
                 <div className="text-[18px] font-light italic">
                     We Will let you know whenever something pops up nearby... 

@@ -14,21 +14,16 @@
   "prisma": {
     "seed": "node --loader ts-node/esm prisma/seed.ts"
   },
-  "type": "module",
+
   "dependencies": {
     "@aws-sdk/client-s3": "^3.335.0",
     "@paralleldrive/cuid2": "^2.2.0",
     "@prisma/client": "^4.15.0",
     "@react-google-maps/api": "^2.18.1",
     "@svgr/webpack": "^8.0.1",
-    "@types/multer": "^1.4.7",
-    "@types/multer-s3": "^3.0.0",
-    "@types/node": "^20.2.4",
-    "@types/react": "18.2.6",
-    "@types/react-dom": "18.2.4",
+    
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
-    "concurrently": "^8.0.1",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
     "multer": "^1.4.5-lts.1",
@@ -42,12 +37,18 @@
     "sharp": "^0.32.1",
     "square": "^27.0.0",
     "tailwindcss": "3.3.2",
-    "text-encoding": "^0.7.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.4",
+    "text-encoding": "^0.7.0", 
     "util": "^0.12.5"
   },
   "devDependencies": {
-    "@types/next-pwa": "^5.6.4"
+    "@types/next-pwa": "^5.6.4",
+    "@types/multer": "^1.4.7",
+    "@types/multer-s3": "^3.0.0",
+    "@types/node": "^20.2.4",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
+    "concurrently": "^8.0.1",
+    "typescript": "^5.0.4",
+    "ts-node": "^10.9.1"
   }
 }
