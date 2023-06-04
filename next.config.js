@@ -12,6 +12,8 @@ const nextConfig = {
     BUCKET_NAME: process.env.BUCKET_NAME ,
     BUCKET_ENDPOINT: process.env.BUCKET_ENDPOINT,
     GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
+    SQ_APPLICATION_ID: process.env.SQ_APPLICATION_ID,
+    SQ_APPLICATION_SECRET: process.env.SQ_APPLICATION_SECRET,
     PROD: process.env.PROD
   },
   images: {
