@@ -1,8 +1,9 @@
+import prisma from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const tokenUrl = 'https://connect.squareupsandbox.com/oauth2/token';
-    const { code } = req.query;
+    const code = req.body.code;
 
     const params = new URLSearchParams();
     params.append('client_id', process.env.SQ_APPLICATION_ID || '');
@@ -26,7 +27,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         const data = await response.json();
         const accessToken = data.access_token;
 
-        res.status(200).json({ accessToken });
+        if (accessToken){
+            const connectAccount = await prisma.account.update({
+                where: {
+                    id: req.body.id
+                },
+                data: {
+                    connected: true
+                }
+            })
+
+            if (connectAccount){
+                return res.status(200).json({ accessToken });
+            }
+        }
+
+        res.status(400).end()
+        
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to obtain access token' });

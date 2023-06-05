@@ -6,22 +6,24 @@ import ExistingTheme from "@/components/Create/ExistingTheme";
 import LocationMap from "@/components/Create/LocationMap";
 import { Flex, Link, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 type Section = "existingTheme" | "newTheme";
 
 const Create = () => {
     const [activeSection, setActiveSelection] = useState<Section>("existingTheme");
     const [viewMap, setViewMap] = useState<boolean>(false);
-    const [loggedIn, setLoggedIn] = useState<boolean>()
+    const [isConnected, setConnected] = useState<boolean>()    
     const router = useRouter()
 
     useEffect(() => {
-        if (localStorage.getItem('id')){
-            setLoggedIn(true)
-        } else {
-            setLoggedIn(false)
+        if (!localStorage.getItem('id')){
+            router.push('/profile')
+            return
         }
-    }, [])
+        axios.post('/api/account/connected', {id: localStorage.getItem('id')})
+        .then((res) => setConnected(res.data.connected))
+    }, [])    
 
     return (
         <div>
@@ -64,7 +66,7 @@ const Create = () => {
                     )}
                 </div>
                 
-                {loggedIn ?
+                {isConnected ?
                 (<>
                 <nav className="flex mt-[10px]">
                     <ul className="flex space-x-6">
@@ -83,8 +85,8 @@ const Create = () => {
                 </>)
                 :
                 <Flex flexDir={'column'}>
-                    <Text fontSize={'2xl'}>Please Log In to Create Shop!</Text>
-                    <Text>Click <Link textDecor={'underline'} color={'#ed7bbe'} onClick={() => router.push('/profile')}>Here</Link> to Log In.</Text>
+                    <Text fontSize={'2xl'}>Please connect your account with square to create shops.</Text>
+                    <Text>Click <Link textDecor={'underline'} color={'#ed7bbe'} onClick={() => router.push('/auth')}>Here</Link> to Connect Account with Square.</Text>
                 </Flex>
                 }
                 

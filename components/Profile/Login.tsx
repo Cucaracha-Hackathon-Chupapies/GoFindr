@@ -17,7 +17,7 @@ const Login = ({ setSignFlag }: { setSignFlag: React.Dispatch<React.SetStateActi
             return
         }
         axios.post('/api/account/login', {username: username, password: password})
-        .then((res) => {localStorage.setItem('id', res.data); router.push('/')})
+        .then((res) => {localStorage.setItem('id', res.data); router.reload()})
         .catch(() => setError("Username and/or password is incorrect!"))
 
     }, [username, password, router])
