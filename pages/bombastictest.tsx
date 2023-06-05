@@ -1,7 +1,8 @@
+import axios from 'axios';
 import React, { useCallback, useEffect, useReducer, useState, } from 'react';
 import { Environment, Client } from 'square';
 
-const accessToken = "EAAAEDJYkyxw6jAYZDDIB2lSN9OuqANI2sZXXIBr1kg2WQxxqKi3hvaIoPHauv8a";
+const accessToken = "EAAAEJgu_vwqvqLEZbM1eLBAiqd4lflY_2S5LGh7J0S72G5EZEcHqfsXy0C0oD7Z";
 
 let environment = Environment.Sandbox;
 const client = new Client({
@@ -24,16 +25,18 @@ const BombasticTest = () => {
     const handleSubmit = useCallback(async (e: any) => {        
         e.preventDefault()
         try {
+            /*
             console.log("HELLO")
-            console.log(JSON.stringify(formData))
+            console.log(formData)
             const response = await fetch('/api/square/catalogwrite', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `${accessToken}`
                 },
-                body: JSON.stringify(formData),
+                body: formData,
             });
+            
 
             if (!response.ok) {
                 throw new Error('Failed to Create Catalog Item');
@@ -41,6 +44,14 @@ const BombasticTest = () => {
 
             const data = await response.json();
             console.log(data.catalogItem);
+            */
+           axios.post('/api/square/catalogwrite', formData, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `${accessToken}`
+            }
+           }).catch(() => {throw new Error('Failed to Create Catalog Item')})
+           .then((res) => console.log(res.data.catalogItem))
         } catch (error) {
             console.error(error);
         }

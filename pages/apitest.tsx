@@ -8,6 +8,7 @@ const client_secret = process.env.SQ_APPLICATION_SECRET;
 const scopes = [
     'ITEMS_READ',
     'MERCHANT_PROFILE_READ',
+    'ITEMS_WRITE'
 ]
 
 const url = `${basePath}/oauth2/authorize?client_id=${client_id}&response_type=code&scope=${scopes.join('+')}`;
