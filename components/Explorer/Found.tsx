@@ -64,18 +64,19 @@ const Found = ({setBackground}: Props) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] pt-[100px]">
-                <div className="text-[36px] font-light">
+            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] pt-[50px]">
+                <div className="text-[30px] font-light">
                     Approaching...
                 </div>
                 {}
-                <div className="text-[44px] font-medium leading-[50px]">
+                <div className="text-[40px] font-medium leading-[50px] flex items-center">
                     {shopData?.displayName}
+                    <IconButton ml={3} aria-label="save shop button" onClick={saveShop} size={'md'} fontSize={'3xl'} bgColor={'#ed7bbe'} color={'white'} icon={<MdOutlineSaveAlt/>}/>                    
                 </div>
                 <div className="text-[16px] font-light text-[#747474] italic">
                     {shopData?.description}
                 </div>
-                <nav className="flex mt-[10px] mb-[30px]">
+                <nav className="flex mt-[10px] mb-[20px]">
                     <ul className="flex space-x-6">
                         <button className={!reviews ? 'text-black border-b-2 border-black' : 'text-gray-400'}
                         onClick={() => toggleReviews(false)}>
@@ -109,10 +110,7 @@ const Found = ({setBackground}: Props) => {
                         ))}                        
                     </div>
 
-
-                    <Flex w={'100%'} justifyContent={'center'} mt={'30px'}>
-                        <Button fontWeight={'normal'} onClick={saveShop} size={'lg'} bgColor={'#ed7bbe'} color={'white'} rightIcon={<MdOutlineSaveAlt/>}>Save Shop</Button>
-                    </Flex>
+                    
                 </div>
                 :
                 <Flex flexDir={'column'}>

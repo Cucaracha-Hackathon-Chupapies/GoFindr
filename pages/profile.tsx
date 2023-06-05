@@ -81,7 +81,11 @@ const Profile = () => {
                             <circle cx="13" cy="19.5" r="0.541667" fill="#33363F" stroke="#33363F"/>
                             <path d="M13 17.3333V15.7962C13 14.7733 13.6546 13.8652 14.625 13.5417V13.5417C15.5954 13.2182 16.25 12.31 16.25 11.2871V10.7312C16.25 8.99268 14.8407 7.58334 13.1022 7.58334H13C11.2051 7.58334 9.75 9.03842 9.75 10.8333V10.8333" stroke="#33363F" strokeWidth="2"/>
                         </svg>
-                    </button>                    
+                    </button>     
+                    <button className="w-[370px] h-[54px] text-[18px] bg-white rounded-full border border-black mt-4 pl-8 flex flex-row place-items-center" onClick={() => {localStorage.removeItem('id'); router.reload()}}>
+                        Log Out
+                        
+                    </button>               
                 </div>
             : (
                 <div className="mt-[100px]">
