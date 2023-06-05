@@ -7,18 +7,22 @@ import { Button, Flex, FormControl, FormHelperText, FormLabel, Heading, IconButt
 import {MdOutlineSaveAlt} from 'react-icons/md'
 import Rating from "./Rating";
 import { AiFillStar } from "react-icons/ai";
+import { useRouter } from "next/router";
+import { BiArrowBack } from "react-icons/bi";
 interface ShopData extends StoreInfo {
     rated: boolean,
     items: ItemType[]
 } 
 
 interface Props {
+    store: string,
     setBackground: Dispatch<SetStateAction<string | undefined>>,
+    setStore: Dispatch<SetStateAction<string | undefined>>
 }
 
-const Found = ({setBackground}: Props) => {
+const Found = ({store, setBackground, setStore}: Props) => {
 
-    const storeName = "mishkamushka"; //id of the store found
+    const storeName = store; //id of the store found
 
 
     const [shopData, setShopData] = useState<ShopData>()
@@ -32,6 +36,7 @@ const Found = ({setBackground}: Props) => {
     const fill2 = "#D9D9D9";
 
     const toast = useToast()
+    const router = useRouter()
 
     useEffect(() => {
         axios.post('/api/get/shop', {name: storeName, id: localStorage.getItem('id')})
@@ -39,6 +44,7 @@ const Found = ({setBackground}: Props) => {
             setShopData(res.data)
             setBackground(res.data.theme.backgroundImage)
         })
+        .catch(() => router.push('/explorer').then(() => {toast({title: 'Invalid Store', status: 'error', duration: 3000, isClosable: true}); setStore(undefined)}))
 
         axios.post('/api/get/ratings', {storeName: storeName})
         .then((res) => {
@@ -69,8 +75,10 @@ const Found = ({setBackground}: Props) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] pt-[50px]">
-                <div className="text-[30px] font-light">
+            <IconButton pos={'absolute'} top={2} left={2} aria-label="back button" w={'40px'} h={'40px'} onClick={() => setStore(undefined)} icon={<BiArrowBack />} />
+
+            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] pt-[60px]">
+                <div className="text-[28px] font-light">
                     Approaching...
                 </div>
                 {}
@@ -78,7 +86,7 @@ const Found = ({setBackground}: Props) => {
                     {shopData?.displayName}
                     {shopData?.displayName && <IconButton ml={3} aria-label="save shop button" onClick={saveShop} size={'md'} fontSize={'3xl'} bgColor={'#ed7bbe'} color={'white'} icon={<MdOutlineSaveAlt/>}/>}             
                 </div>
-                <div className="text-[16px] font-light text-[#747474] italic">
+                <div className="text-[14px] font-light text-[#747474] italic">
                     {shopData?.description}
                 </div>
                 <nav className="flex mt-[10px] mb-[20px]">

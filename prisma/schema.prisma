@@ -26,6 +26,7 @@ model Store {
   icon String?
   displayName String @unique @db.VarChar(50)
   description String @db.Text
+  rating Float @default(0) @db.Float
   theme       Theme? @relation(fields: [themeId], references: [id])
   themeId     Int?
   savedBy Account[]

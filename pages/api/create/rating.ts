@@ -76,7 +76,16 @@ export default async function handler(
                     }
                 })
 
-                if (update) {
+                const update2 = await prisma.store.update({
+                    where: {
+                        name: data.storeName
+                    },
+                    data: {
+                        rating: newRating._avg.rating
+                    }
+                })
+
+                if (update && update2) {
                     return res.status(200).json(rating)
                 }
 

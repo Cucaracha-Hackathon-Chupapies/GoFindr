@@ -1,4 +1,14 @@
-const Wandering = () => {
+import { Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Store } from "@prisma/client";
+import Shop from "../Profile/Shop";
+import { Dispatch, SetStateAction } from "react";
+
+interface Props {
+    shops: Store[] | undefined,
+    setStore: Dispatch<SetStateAction<string | undefined>>
+}
+
+const Wandering = ({shops, setStore}: Props) => {
     return (
         <div className="relative z-999 ">
             <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[100px]">
@@ -12,7 +22,18 @@ const Wandering = () => {
                     View your visit history in your profile section!
                 </div>
             </div>
-            
+            {shops ? 
+            <Flex>
+                {shops.map((data) => (
+                    <Flex color={'white'} flexDir={'column'} alignItems={'center'} bgColor={'rgb(31, 41, 55)'} my={5} borderRadius={'md'} p={5} key={data.name}>
+                        {data.icon && <Image alt={'Shop Icon'} src={data.icon} w={'200px'} h={'200px'} borderRadius={'full'} objectFit={'cover'}/>}
+                        <Text mt={3} fontSize={'2xl'}>{data.displayName}</Text>
+                        <Text mt={6} mb={10} maxW={'70%'} fontSize={'sm'} textAlign={'center'}>{data.description}</Text>                        
+                      <Button mt={6} px={10} fontSize={'20px'} onClick={() => setStore(data.name)} color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'}>View</Button>
+                     </Flex>
+                ))}
+            </Flex>
+            :
             <div className="flex justify-center items-center mt-[160px]">
                 <svg width="182" height="410" viewBox="0 0 182 410" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M57.8267 405.49C86.8482 403.859 115.785 408.645 144.849 409.516C156.095 409.878 167.51 409.625 178.462 407.304C180.062 406.977 182 406.216 182 404.801C182 403.351 180.062 402.626 178.462 402.263C159.676 398.165 139.963 399.616 120.545 399.978C82.7624 400.667 44.6006 396.932 7.36543 402.625C4.07997 403.133 -3.96516 405.962 2.35303 408.646C6.98636 410.604 15.0736 409.226 20.0439 408.899C32.7224 408.102 45.2324 406.216 57.8267 405.49Z" fill="url(#paint0_linear_20_1162)"/>
@@ -39,7 +60,7 @@ const Wandering = () => {
                     <path d="M75.2653 1.42826C67.9362 4.29318 67.8519 14.3385 67.3886 19.887C66.5041 30.6577 67.2201 41.4283 69.3683 52.0539C68.3995 52.4165 67.515 52.888 66.7989 53.6495C63.3871 57.1672 60.6492 60.9387 60.7756 65.7257C60.9019 70.9115 64.9877 75.9162 70.7583 77.4755C74.8862 78.5635 79.0141 77.7294 82.1732 75.626C84.1107 75.3359 86.0062 74.5744 87.6489 73.4139C92.198 70.1501 93.4616 64.7466 92.1138 60.0322C91.9453 56.8409 89.7128 53.5045 86.301 52.199C85.7956 52.0177 85.2901 51.8726 84.7847 51.7275C83.1419 51.0385 81.2886 50.6396 79.2247 50.6396C78.3823 50.6396 77.5398 50.7121 76.7816 50.8209C76.6553 43.2053 76.571 35.6259 76.6974 28.0103C76.7816 25.2904 76.908 22.6069 77.0765 19.887C76.1919 15.644 78.5086 12.9604 84.0265 11.7999C86.301 16.732 87.0592 22.0629 87.1013 27.3213C87.1013 31.0928 93.7144 31.0928 93.8829 27.3213C94.3462 16.5869 94.0935 -5.86096 75.2653 1.42826Z" fill="#EBCE5B"/>
                     <defs>
                     <linearGradient id="paint0_linear_20_1162" x1="0.0477281" y1="404.543" x2="182.025" y2="404.543" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#4D4D4D"/>
+                    <stop stopColor="#4D4D4D"/>
                     <stop offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint1_linear_20_1162" x1="0.0477281" y1="404.543" x2="182.025" y2="404.543" gradientUnits="userSpaceOnUse">
@@ -49,7 +70,7 @@ const Wandering = () => {
                     </defs>
                 </svg>
             </div>
-            
+            }
 
         </div>
         

@@ -24,6 +24,7 @@ async function main() {
         lat: 49.2378333,
         lng: -123.0411864,
         description: 'poopie poopie :)',
+        rating: 3.9,
         theme: {
           connect: {
             id: 1
