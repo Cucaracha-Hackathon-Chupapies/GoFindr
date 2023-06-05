@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -15,78 +12,85 @@ model Theme {
   backgroundImage String
   font            String      @db.VarChar(255)
   componentColor  String      @db.VarChar(7)
-  stores          StoreInfo[]
   Store           Store[]
+  stores          StoreInfo[]
 }
 
 model Store {
-  lat         Float  @db.Double
-  lng         Float  @db.Double
-  name        String @id @unique @db.VarChar(50)
-  icon String?
-  displayName String @unique @db.VarChar(50)
-  description String @db.Text
-  rating Float @default(0) @db.Float
-  theme       Theme? @relation(fields: [themeId], references: [id])
-  themeId     Int?
-  savedBy Account[]
-}
-
-model StoreInfo {
+  lat         Float
+  lng         Float
   name        String    @id @unique @db.VarChar(50)
+  icon        String?
   displayName String    @unique @db.VarChar(50)
   description String    @db.Text
   rating      Float     @default(0) @db.Float
-  theme       Theme?    @relation(fields: [themeId], references: [id])
-  icon        String?
-  created     DateTime  @default(now())
-  items       Item[]
   themeId     Int?
-  owner       Account   @relation("CreatedStores", fields: [ownerId], references: [id])
+  theme       Theme?    @relation(fields: [themeId], references: [id])
+  savedBy     Account[] @relation("AccountToStore")
+
+  @@index([themeId], map: "Store_themeId_fkey")
+}
+
+model StoreInfo {
+  name        String        @id @unique @db.VarChar(50)
+  displayName String        @unique @db.VarChar(50)
+  description String        @db.Text
+  rating      Float         @default(0) @db.Float
+  icon        String?
+  created     DateTime      @default(now())
+  themeId     Int?
   ownerId     String
-  ratings StoreRating[]
+  items       Item[]
+  owner       Account       @relation("CreatedStores", fields: [ownerId], references: [id])
+  theme       Theme?        @relation(fields: [themeId], references: [id])
+  ratings     StoreRating[]
+
+  @@index([ownerId], map: "StoreInfo_ownerId_fkey")
+  @@index([themeId], map: "StoreInfo_themeId_fkey")
 }
 
 model Item {
-  id          Int        @id @default(autoincrement())
-  name        String     @db.VarChar(255)
-  displayName String     @db.VarChar(255)
-  rating      Float      @default(0) @db.Float
-  price       String     @db.VarChar(255)
-  description String     @db.Text
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(255)
+  displayName String    @db.VarChar(255)
+  rating      Float     @default(0) @db.Float
+  price       String    @db.VarChar(255)
+  description String    @db.Text
   image       String
-  featured    Boolean    @default(false)
-  popular     Boolean    @default(false)
-  store       StoreInfo @relation(fields: [storeName], references: [name])
+  featured    Boolean   @default(false)
+  popular     Boolean   @default(false)
   storeName   String    @db.VarChar(255)
+  store       StoreInfo @relation(fields: [storeName], references: [name])
+
+  @@index([storeName], map: "Item_storeName_fkey")
 }
 
 model Account {
-  id String @id @unique @default(uuid())
-
+  id            String      @id @unique @default(uuid())
   username      String      @unique @db.VarChar(255)
   password      String      @db.VarChar(255)
-  icon String @default("https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?resize=300%2C300&ssl=1")
+  icon          String      @default("https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?resize=300%2C300&ssl=1")
   createdAt     DateTime    @default(now())
   createdStores StoreInfo[] @relation("CreatedStores")
-  savedStores Store[]
-  //themes    Theme[]
+  savedStores   Store[]     @relation("AccountToStore")
 }
 
 model StoreRating {
-  id Int @id @unique @default(autoincrement())
-  store StoreInfo @relation(fields: [storeId], references: [name])
-  storeId String
-  rating Int
-  comment String @default("")
+  id        Int       @id @unique @default(autoincrement())
+  storeId   String
+  rating    Int
+  comment   String    @default("")
   accountId String
-  created DateTime @default(now())
+  created   DateTime  @default(now())
+  store     StoreInfo @relation(fields: [storeId], references: [name])
+
+  @@index([storeId], map: "StoreRating_storeId_fkey")
 }
 
 model ItemRating {
-  id Int @id @unique @default(autoincrement())
-  itemId Int
-  rating Int
+  id        Int      @id @unique @default(autoincrement())
+  itemId    Int
+  rating    Int
   accountId String
-  created DateTime @default(now())
+  created   DateTime @default(now())
 }

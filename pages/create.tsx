@@ -1,15 +1,27 @@
 import Head from "next/head"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreateBG from "@/components/Backgrounds/CreateBG";
 import NewTheme from "@/components/Create/NewTheme";
 import ExistingTheme from "@/components/Create/ExistingTheme";
 import LocationMap from "@/components/Create/LocationMap";
+import { Flex, Link, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 type Section = "existingTheme" | "newTheme";
 
 const Create = () => {
     const [activeSection, setActiveSelection] = useState<Section>("existingTheme");
     const [viewMap, setViewMap] = useState<boolean>(false);
+    const [loggedIn, setLoggedIn] = useState<boolean>()
+    const router = useRouter()
+
+    useEffect(() => {
+        if (localStorage.getItem('id')){
+            setLoggedIn(true)
+        } else {
+            setLoggedIn(false)
+        }
+    }, [])
 
     return (
         <div>
@@ -52,7 +64,8 @@ const Create = () => {
                     )}
                 </div>
                 
-
+                {loggedIn ?
+                (<>
                 <nav className="flex mt-[10px]">
                     <ul className="flex space-x-6">
                         <button className={activeSection === 'existingTheme' ? 'text-black border-b-2 border-black' : 'text-gray-400'}
@@ -67,7 +80,13 @@ const Create = () => {
                 </nav>
                 
                 {activeSection === "existingTheme" ? <ExistingTheme /> : <NewTheme />}
-                
+                </>)
+                :
+                <Flex flexDir={'column'}>
+                    <Text fontSize={'2xl'}>Please Log In to Create Shop!</Text>
+                    <Text>Click <Link textDecor={'underline'} color={'#ed7bbe'} onClick={() => router.push('/profile')}>Here</Link> to Log In.</Text>
+                </Flex>
+                }
                 
             </div>
         </div>
