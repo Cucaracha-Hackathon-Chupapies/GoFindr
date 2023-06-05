@@ -21,8 +21,8 @@ async function main() {
       create: {
         displayName: 'Mishka Mushka',
         name: 'mishkamushka',
-        lat: 49.2378333,
-        lng: -123.0411864,
+        lat: 49.249434951721945,
+        lng: -123.11575076022022,
         description: 'poopie poopie :)',
         rating: 3.9,
         theme: {
