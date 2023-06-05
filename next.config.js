@@ -40,12 +40,16 @@ const nextConfig = {
   }
 }
 
-const PWAConfig = withPWA({
+const PWAConfig = {
   dest: "public",
   register: true,
   skipWaiting: true,
   disableDevLogs: true,
   disable: prod ? false : true
+}
+
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: false
 })
 
-module.exports = PWAConfig(nextConfig);
+module.exports = {...withPWA(PWAConfig)(nextConfig), ...withBundleAnalyzer({})}
