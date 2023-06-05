@@ -2,13 +2,17 @@ import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import NavBar from '@/components/NavBar/NavBar'
 import { poppins } from "../utils/fonts";
-import { ChakraProvider, Theme, extendTheme } from '@chakra-ui/react';
+import { ChakraProvider, Theme, ThemeConfig, extendTheme } from '@chakra-ui/react';
 
 const config = {
     fonts: {
       heading: poppins.style.fontFamily,
       body: poppins.style.fontFamily,
       mono: poppins.style.fontFamily
+    },
+    config: {
+      useSystemColorMode: false,
+      initialColorMode: 'light'
     }
 } 
 
