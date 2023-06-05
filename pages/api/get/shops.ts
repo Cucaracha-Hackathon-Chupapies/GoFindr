@@ -12,7 +12,7 @@ export default async function handler(
 ) {
 
 
-    let distance = (req.body.distance ? req.body.distance : 1); //in km
+    let distance = (req.body.distance ? req.body.distance/1000 : 100); //in km
     
     let latdistance = LAT_DISTANCE_CONSTANT*distance;
     let lngdistance = LNG_DISTANCE_CONSTANT*distance;

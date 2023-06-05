@@ -1,7 +1,8 @@
-import { Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Button, Flex, HStack, Icon, Image, Text } from "@chakra-ui/react";
 import { Store } from "@prisma/client";
 import Shop from "../Profile/Shop";
 import { Dispatch, SetStateAction } from "react";
+import { StarIcon } from "@chakra-ui/icons";
 
 interface Props {
     shops: Store[] | undefined,
@@ -17,22 +18,27 @@ const Wandering = ({shops, setStore}: Props) => {
                 </div>
                 <div className="text-[18px] font-light italic">
                     We Will let you know whenever something pops up nearby... 
-                </div>
-                <div className="text-[15px] font-light text-[#747474] italic">
-                    View your visit history in your profile section!
-                </div>
+                </div>                
             </div>
-            {shops ? 
-            <Flex>
+            {(shops && shops.length > 0) ? 
+            <HStack spacing={5} justifyContent={'center'} mt={'5vh'}>
                 {shops.map((data) => (
-                    <Flex color={'white'} flexDir={'column'} alignItems={'center'} bgColor={'rgb(31, 41, 55)'} my={5} borderRadius={'md'} p={5} key={data.name}>
-                        {data.icon && <Image alt={'Shop Icon'} src={data.icon} w={'200px'} h={'200px'} borderRadius={'full'} objectFit={'cover'}/>}
-                        <Text mt={3} fontSize={'2xl'}>{data.displayName}</Text>
-                        <Text mt={6} mb={10} maxW={'70%'} fontSize={'sm'} textAlign={'center'}>{data.description}</Text>                        
-                      <Button mt={6} px={10} fontSize={'20px'} onClick={() => setStore(data.name)} color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'}>View</Button>
+                    <Flex color={'white'} alignItems={'center'} bgColor={'rgb(31, 41, 55)'} borderRadius={'md'} p={3} key={data.name} flexDir={'column'}>                        
+                        <Flex flexDir={'row'} alignItems={'center'}>
+                            {data.icon && <Image mr={5} alt={'Shop Icon'} src={data.icon} w={'100px'} h={'100px'} borderRadius={'full'} objectFit={'cover'}/>}
+                            <Flex flexDir={'column'} alignItems={'start'}>
+                                <Text mt={3} fontSize={'xl'}>{data.displayName}</Text>
+                                <Flex alignItems={'center'}>
+                                    <Text color={'yellow.600'} mr={1}>{data.rating}</Text>       
+                                    <Icon mb={0.5} fontSize={'15px'} color={'#ed7bbe'} as={StarIcon}/>      
+                                </Flex>
+                                <Text maxW={'70%'} fontSize={'xs'} mt={2}>{data.description}</Text>                        
+                            </Flex>
+                        </Flex>
+                      <Button mt={2} px={6} fontSize={'16px'} onClick={() => setStore(data.name)} color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'}>View</Button>
                      </Flex>
                 ))}
-            </Flex>
+            </HStack>
             :
             <div className="flex justify-center items-center mt-[160px]">
                 <svg width="182" height="410" viewBox="0 0 182 410" fill="none" xmlns="http://www.w3.org/2000/svg">

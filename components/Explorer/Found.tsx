@@ -15,8 +15,8 @@ interface ShopData extends StoreInfo {
 } 
 
 interface Props {
-    store: string,
-    setBackground: Dispatch<SetStateAction<string | undefined>>,
+    store: string,    
+    setBackground: Dispatch<SetStateAction<string | undefined>>,        
     setStore: Dispatch<SetStateAction<string | undefined>>
 }
 
@@ -50,7 +50,7 @@ const Found = ({store, setBackground, setStore}: Props) => {
         .then((res) => {
             setRatings(res.data)
         })
-    }, [setBackground])
+    }, [])
 
     const createReview = (e: any) => {
         e.preventDefault()

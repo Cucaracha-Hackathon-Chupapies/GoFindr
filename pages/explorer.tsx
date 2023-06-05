@@ -7,14 +7,14 @@ import { Store } from "@prisma/client";
 import axios from "axios";
 
 const Explorer = () => {
-    const [shops, setShops] = useState<Store[]>()
+    const [shops, setShops] = useState<Store[]>()    
     const [storeChoice, setStoreChoice] = useState<string | undefined>()
-    const [background, setBackground] = useState<string>()
+    const [background, setBackground] = useState<string>()        
     const [location, setLocation] = useState<google.maps.LatLngLiteral>()
 
     const getLocation = useCallback(() => {
         navigator.geolocation.getCurrentPosition((data) => {
-          setLocation({lat: data.coords.latitude, lng: data.coords.longitude})
+          setLocation({lat: data.coords.latitude, lng: data.coords.longitude})          
         })
 
       }, [setLocation])
@@ -31,7 +31,7 @@ const Explorer = () => {
 
       useEffect(() => {
         if (location){
-            axios.post('/api/get/shops', location)
+            axios.post('/api/get/shops', {...location, distance: 50})
             .then((res) => setShops(res.data))
         }
         
@@ -39,7 +39,7 @@ const Explorer = () => {
 
     return (
         <div className="h-screen relative">
-            {background ?  <Image alt="Shop Background" mt={0} src={background} objectFit={'cover'} pos={'absolute'} w={'100%'} h={'100%'} /> : <ExplorerBG />}
+            {(background && storeChoice) ?  <Image alt="Shop Background" mt={0} src={background} objectFit={'cover'} pos={'absolute'} w={'100%'} h={'100%'} /> : <ExplorerBG />}
             { (storeChoice) ? <Found store={storeChoice} setBackground={setBackground} setStore={setStoreChoice}/> : <Wandering shops={shops} setStore={setStoreChoice} />}         
         </div>
     )
