@@ -28,7 +28,7 @@ const ExistingTheme = () => {
             .then(() => router.push('/profile/shops?new=' + formData.displayName.toLowerCase().replace(' ', '-')))
             .catch(() => toast({title: 'Error Creating Shop!', description: 'Something went wrong creating ' + formData.displayName + '.', status: 'error', duration: 3000, isClosable: true}))
         })
-    }, [formData, iconUrl])
+    }, [formData, iconUrl, router, toast])
 
 
     const handleChange = (event: any) => {

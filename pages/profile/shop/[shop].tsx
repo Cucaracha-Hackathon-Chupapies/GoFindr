@@ -62,7 +62,7 @@ const EditShop = () => {
         axios.post('/api/delete/item', {id: localStorage.getItem('id'), itemId: itemId, storeName: shopData?.name})
         .then(() => toast({title: 'Item Deleted!', status: 'success', duration: 3000, isClosable: true}))
         .catch(() => toast({title: 'Error!', description: 'A problem occured while deleting item!', status: 'error', duration: 3000, isClosable: true}))
-    }, [shopData])  
+    }, [shopData, toast])  
 
     return (
         <Flex justifyContent={'center'} alignItems={'center'}>
@@ -100,9 +100,7 @@ const EditShop = () => {
                         <form onSubmit={saveChanges}>
                             <FormControl>
                                 <VStack justifyContent={'center'} spacing={3}>
-
-                                
-                                    <Image w={'200px'} src={url}/>
+                                    <Image alt="Shop Icon" w={'200px'} src={url}/>
                                     <Uploader relate="shopIcon" message="Upload Account Icon" setState={setUrl}/>                
                                     <Input value={newShopName} onChange={(e) => setNewShopName(e.target.value)}/>
                                     <Input value={shopData?.description || ""} onChange={(e) => setShopData(shopData ? {...shopData, description: e.target.value} : undefined)}/>
@@ -117,7 +115,7 @@ const EditShop = () => {
                     {(page === "manage") && 
                         <SimpleGrid columns={2} spacing={3}>
                             {shopData?.items.map((item) => (
-                                <Flex flexDir={'column'} alignItems={'center'} w={'fit-content'}>
+                                <Flex key={item.id} flexDir={'column'} alignItems={'center'} w={'fit-content'}>
                                     <Item id={JSON.stringify(item.id)} price={item.price} name={item.displayName} img={item.image} rating={item.rating} />
                                     <IconButton colorScheme="red" m={1} w={'50%'} aria-label="delete item" icon={<DeleteIcon />} onClick={() => deleteItem(item.id)} />
                                 </Flex>
@@ -131,7 +129,7 @@ const EditShop = () => {
                         <FormControl>     
                             <VStack spacing={3}>                      
                                 <Input type="text" name="itemName" placeholder="Item Name" onChange={handleChange}/>
-                                <Image width={'200px'} src={itemUrl}/>
+                                <Image alt="Item Image" width={'200px'} src={itemUrl}/>
                                 <Uploader relate="itemUpload" setState={setItemUrl} message="Upload Image"/>
                                 <Input type="text" name="description" onChange={handleChange} placeholder="Description"/>
                                 <Input type="text" name="price" onChange={handleChange} placeholder="Price"/>
