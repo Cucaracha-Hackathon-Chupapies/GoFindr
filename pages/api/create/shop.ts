@@ -36,7 +36,7 @@ export default async function handler(
     return
   }
 
-  data.name =  data.displayName.toLowerCase().replaceAll(' ', '-')
+  data.name = data.displayName.toLowerCase().replaceAll(' ', '-')
 
   if (await prisma.store.count({
     where: {
@@ -93,6 +93,14 @@ export default async function handler(
       })
     } else {
       if (!data.themeId) return res.status(400).end();
+
+      const themeExist = await prisma.theme.count({
+        where: {
+          id: parseInt(data.themeId)
+        }
+      })
+
+      if (themeExist === 0) return res.status(404).end()
 
       prisma.store.create({
         data: {

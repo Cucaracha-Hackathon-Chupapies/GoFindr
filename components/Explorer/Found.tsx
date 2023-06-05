@@ -3,7 +3,7 @@ import Item from "./Item";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Head from "next/head";
 import { Item as ItemType, StoreInfo, StoreRating } from "@prisma/client";
-import { Button, Flex, FormControl, FormHelperText, FormLabel, Heading, IconButton, Input, SimpleGrid, Text, VStack } from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormHelperText, FormLabel, Heading, IconButton, Input, SimpleGrid, Text, VStack, useToast } from "@chakra-ui/react";
 import {MdOutlineSaveAlt} from 'react-icons/md'
 import Rating from "./Rating";
 import { AiFillStar } from "react-icons/ai";
@@ -31,8 +31,10 @@ const Found = ({setBackground}: Props) => {
     const fill = "#ffffff";
     const fill2 = "#D9D9D9";
 
+    const toast = useToast()
+
     useEffect(() => {
-        axios.post('/api/get/shop', {name: storeName})
+        axios.post('/api/get/shop', {name: storeName, id: localStorage.getItem('id')})
         .then((res) => {
             setShopData(res.data)
             setBackground(res.data.theme.backgroundImage)
@@ -46,15 +48,18 @@ const Found = ({setBackground}: Props) => {
 
     const createReview = (e: any) => {
         e.preventDefault()
-
         if (!localStorage.getItem('id') || !rating) return
-
+        
         axios.post('/api/create/rating', {id: localStorage.getItem('id'), storeName: storeName, rating: rating, comment: comment})
+        .then(() => toast({title: 'Review Created!', description: 'Thank you for sharing your feedback!', status: 'success', duration: 3000, isClosable: true}))
+        .catch(() => toast({title: 'Error Creating Review!', description: 'Maybe you already made one?', status: 'error', duration: 3000, isClosable: true}))
     }
 
     const saveShop = () => {
         axios.post('/api/account/save', {id: localStorage.getItem('id') || "", name: storeName})
-    }
+        .then(() => toast({title: 'Shop Saved!', status: 'success', duration: 3000, isClosable: true}))
+        .catch(() => toast({title: 'Error Saving Shop!', status: 'error', duration: 3000, isClosable: true}))
+    }   
 
     return (
         <div className="relative z-999">
@@ -71,7 +76,7 @@ const Found = ({setBackground}: Props) => {
                 {}
                 <div className="text-[40px] font-medium leading-[50px] flex items-center">
                     {shopData?.displayName}
-                    <IconButton ml={3} aria-label="save shop button" onClick={saveShop} size={'md'} fontSize={'3xl'} bgColor={'#ed7bbe'} color={'white'} icon={<MdOutlineSaveAlt/>}/>                    
+                    {shopData?.displayName && <IconButton ml={3} aria-label="save shop button" onClick={saveShop} size={'md'} fontSize={'3xl'} bgColor={'#ed7bbe'} color={'white'} icon={<MdOutlineSaveAlt/>}/>}             
                 </div>
                 <div className="text-[16px] font-light text-[#747474] italic">
                     {shopData?.description}
@@ -95,8 +100,8 @@ const Found = ({setBackground}: Props) => {
                     </div>
 
                     <div className={`overflow-x-auto bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
-                        {shopData?.items.map((item: any) => (
-                            item.featured && <Item id={item.id} name={item.displayName} price={item.price} img={'/placeholder.jpg'} fill={fill} key={item.id}/>
+                        {shopData?.items.map((item) => (
+                            item.featured && <Item id={JSON.stringify(item.id)} name={item.displayName} price={item.price} img={'/placeholder.jpg'} rating={item.rating} key={item.id}/>
                         ))}
                     </div>
 
@@ -105,8 +110,8 @@ const Found = ({setBackground}: Props) => {
                     </div>
 
                     <div className={`overflow-x-auto bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
-                        {shopData?.items.map((item: any) => (
-                            item.popular && <Item id={item.id} name={item.displayName} price={item.price} img={'/placeholder.jpg'} fill={fill} key={item.id}/>
+                        {shopData?.items.map((item) => (
+                            item.popular && <Item id={JSON.stringify(item.id)} name={item.displayName} price={item.price} img={'/placeholder.jpg'} rating={item.rating} key={item.id}/>
                         ))}                        
                     </div>
 
@@ -114,15 +119,15 @@ const Found = ({setBackground}: Props) => {
                 </div>
                 :
                 <Flex flexDir={'column'}>
-                    <SimpleGrid columns={[1, 1, 2]} maxH={'360px'} overflow={'auto'}>
+                    <SimpleGrid spacing={2} columns={[1, 1, 2]} maxH={'360px'} overflow={'auto'}>
                     {ratings?.map((rating) => (
                         <Rating key={rating.id} data={rating} />
                     ))}
                     </SimpleGrid>
 
-                     {/* The Following HTML Shows a Form To Write A Review For the Store Given That The User Hasn't Already Written One */}
+                    {!shopData?.rated &&
                     <Flex justifyContent={'center'} flexDir={'column'} alignItems={'center'}>
-                    <Heading mt={'10vh'}>Write a Review</Heading>
+                    <Text fontSize={'2xl'} fontWeight={'bold'} mt={'5vh'}>Write a Review</Text>
                     <Flex justifyContent={'center'} alignItems={'center'}>
                         <FormControl onSubmit={createReview}>
                             <VStack flexDir={'column'} spacing={5} mt={5}>
@@ -134,11 +139,12 @@ const Found = ({setBackground}: Props) => {
                             <FormLabel>Comment (optional)</FormLabel>
                             <Input outline={'1px solid black'} value={comment} onChange={(e) => setComment(e.target.value)} />
                             <FormHelperText>Enter what you thought of your experience here.</FormHelperText>
-                            <Button color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'} type="submit" disabled={shopData?.rated ? true : false}>Submit</Button>
+                            <Button onClick={createReview} color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'} type="submit" disabled={shopData?.rated ? true : false}>Submit</Button>
                             </VStack>
                         </FormControl>
                     </Flex>
                     </Flex>
+                    }
                 </Flex>
                 }
             </div>

@@ -1,14 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Environment, Client } from 'square';
+import { Environment, Client, UpsertCatalogObjectRequest } from 'square';
 import { v4 as uuidv4 } from 'uuid';
 
 
-const createCatalogItem = async (displayName: string, price: number, client: any, idekey: string, id: string) => {
+const createCatalogItem = async (displayName: string, price: string, client: Client, idekey: string, id: string) => {
 
-
+    
     try {
-        
-        const response = await client.catalogApi.upsertCatalogObject({
+
+        let body: UpsertCatalogObjectRequest = {
             idempotencyKey: idekey,
             object: {
                 type: 'ITEM',
@@ -23,15 +23,20 @@ const createCatalogItem = async (displayName: string, price: number, client: any
                                 itemId: `#${id}`,
                                 pricingType: 'FIXED_PRICING',
                                 priceMoney: {
-                                    amount: BigInt(price),
-                                    currency: 'CAD',
+                                   
+                                    currency: 'USD',
                                 },
                             },
                         },
                     ],
                 }
             }
-        });
+        }
+
+        console.log(body)
+
+        const response = await client.catalogApi.upsertCatalogObject(body);
+        
 
         return response.result;
 

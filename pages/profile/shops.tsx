@@ -1,5 +1,5 @@
 import Shop from "@/components/Profile/Shop"
-import { Flex } from "@chakra-ui/react"
+import { Flex, SimpleGrid } from "@chakra-ui/react"
 import { StoreInfo } from "@prisma/client"
 import axios from "axios"
 import Head from "next/head"
@@ -23,18 +23,18 @@ const Shops = () => {
     }, [router])
 
     return (
-        <div>
+        <Flex justifyContent={'center'} alignItems={'center'}>
             <Head>
                 <title>GoFindr</title>
                 <meta name="description" content="GoFindr! An interactive and unique place to find shops near you!" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>   
-                <Flex justifyContent={'center'}>     
+                <SimpleGrid w={'80%'} maxW={'600px'}>     
                     {shops?.map((shop) => (
-                        <Shop key={shop.name} data={shop}/>
+                        <Shop key={shop.name} data={shop} highlight={router.query.new === shop.name}/>                                                
                     ))}
-                </Flex>
-        </div>
+                </SimpleGrid>                
+        </Flex>
     )
 }
 

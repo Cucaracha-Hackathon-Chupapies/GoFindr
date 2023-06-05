@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useCallback, useEffect, useReducer, useState } from "react";
 import Uploader from "../ImageUpload/Uploader";
+import { useRouter } from "next/router";
+import { useToast } from "@chakra-ui/react";
 
 const formReducer = (state: any, event: any) => {
     return {
@@ -17,6 +19,9 @@ const NewTheme = () => {
     const [firstUploadError, setFirstUploadError] = useState<boolean>(false);
     const [secondUploadError, setSecondUploadError] = useState<boolean>(false);
 
+    const router = useRouter()
+    const toast = useToast()
+
     const handleSubmit = useCallback((e: any) => {
         e.preventDefault()
         if (!formData.displayName || formData.displayName.length > 30 || !formData.description) return;
@@ -31,6 +36,8 @@ const NewTheme = () => {
             }, ...(iconUrl ? {icon: iconUrl} : {}),
             ownerId: 'e9583445-6ddc-44ab-a453-26e68cbfe98f'   
             })
+            .then(() => router.push('/profile/shops?new=' + formData.displayName.toLowerCase().replace(' ', '-')))
+            .catch(() => toast({title: 'Error Creating Shop!', description: 'Something went wrong creating ' + formData.displayName + '.', status: 'error', duration: 3000, isClosable: true}))
             
         })
     }, [url, formData, iconUrl])

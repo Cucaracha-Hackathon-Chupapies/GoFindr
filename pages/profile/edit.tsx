@@ -32,7 +32,7 @@ const EditAccount = () => {
             </Head>
             <Flex flexDir={'column'} alignItems={'center'}>
                 <Text mt={10} fontSize={'2xl'} fontWeight={'bold'}>Edit Account</Text>
-                <FormControl onSubmit={saveChanges} mt={10}>
+                <FormControl mt={10}>
                     <VStack flexDir={'column'} alignItems={'center'} spacing={5}>
                         <Image alt="User Profile Picture" borderRadius={'50%'} src={url}/>                        
                         <Uploader relate="iconUpload" message="Upload Account Icon" setState={setUrl}/>                
@@ -44,7 +44,7 @@ const EditAccount = () => {
                         <FormLabel>Password</FormLabel>
                         <Input border={'1px solid black'} w={'330px'} value={accountData?.password || ""} onChange={(e) => setAccountData(accountData ? {...accountData, password: e.target.value} : undefined)}/>
                         </Flex>
-                        <Button fontSize={'20px'} color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'} type="submit">Submit</Button>
+                        <Button onClick={saveChanges} fontSize={'20px'} color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'} type="submit">Submit</Button>
                     </VStack>
                 </FormControl>                
             </Flex>

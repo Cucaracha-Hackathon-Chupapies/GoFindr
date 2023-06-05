@@ -16,7 +16,7 @@ const Profile = () => {
     const router = useRouter()
     const [isLoggedIn, setLoggedIn] = useState<boolean>()
     
-    const [signFlag, setSignFlag] = useState(true);
+    const [signFlag, setSignFlag] = useState(false);
 
     useEffect(() => {
         if (localStorage.getItem('id')){
@@ -47,7 +47,7 @@ const Profile = () => {
             <ProfileBG />
             {isLoggedIn ? 
                 <div className="relative ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[20px] flex flex-col items-center">
-                    <img src={"https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?resize=300%2C300&ssl=1"} className="border border-black rounded-full w-[130px] h-[130px] mt-[100px]"></img>
+                    <img src={userData?.icon || "https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?resize=300%2C300&ssl=1"} className="border border-black rounded-full w-[130px] h-[130px] mt-[100px]"></img>
                     <h1 className="text-[32px] font-medium mt-2">{userData?.username || "Quandale Dingle"}</h1>
                     <button onClick={() => router.push('/profile/edit')} className="w-[125px] h-[40px] text-[18px] bg-gray-100 rounded-full border border-black mt-2">Edit Profile</button>
 
@@ -58,7 +58,7 @@ const Profile = () => {
                         
                     </Button>
 
-                    <button className="w-[370px] h-[54px] text-[18px] bg-white rounded-full border border-black mt-4 pl-8 flex flex-row place-items-center">
+                    <button onClick={() => router.push('/profile/saved')} className="w-[370px] h-[54px] text-[18px] bg-white rounded-full border border-black mt-4 pl-8 flex flex-row place-items-center">
                         Saved Locations
                         <svg className="ml-[130px]" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.75 6.5L16.25 13L9.75 19.5" stroke="#33363F" strokeWidth="2"/>

@@ -8,7 +8,7 @@ interface Props {
 
 export default function Rating({data}: Props) {
   return (
-    <Flex bgColor={'rgb(31, 41, 55)'} borderRadius={'md'} flexDir={'column'} px={5} py={5}>
+    <Flex bgColor={'rgb(31, 41, 55)'} borderRadius={'md'} flexDir={'column'} px={5} py={5} justifyContent={'space-between'}>
         <Flex justifyContent={'center'}>
             <Text color={'gray.100'}>{data.comment}</Text>
         </Flex>
