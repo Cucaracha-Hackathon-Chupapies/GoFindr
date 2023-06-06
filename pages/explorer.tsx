@@ -12,6 +12,7 @@ const Explorer = () => {
     const [background, setBackground] = useState<string>()        
     const [location, setLocation] = useState<google.maps.LatLngLiteral>()    
 
+    /*
     const getLocation = useCallback(() => {                    
         navigator.geolocation.getCurrentPosition((data) => {
           setLocation({lat: data.coords.latitude, lng: data.coords.longitude})                            
@@ -30,8 +31,14 @@ const Explorer = () => {
         return () => clearInterval(geolocationPing)
 
       }, [storeChoice])
+      */
+     useEffect(() => {
+      if (!navigator.geolocation || storeChoice !== undefined) return;      
+      const watcher = navigator.geolocation.watchPosition((data) => setLocation({lat: data.coords.latitude, lng: data.coords.longitude}), () => {}, {enableHighAccuracy: true})
+      return () => navigator.geolocation.clearWatch(watcher)
+    }, [storeChoice])
 
-      useEffect(() => {
+      useEffect(() => {        
         if (location){
             axios.post('/api/get/shops', {...location, distance: 50})
             .then((res) => setShops(res.data))
@@ -43,7 +50,8 @@ const Explorer = () => {
     return (
         <div className=" relative pb-[90px] h-full">            
             {(background && storeChoice) ?  <Image alt="Shop Background" mt={0} src={background} objectFit={'cover'} pos={'absolute'} w={'100%'} h={'100%'} /> : <ExplorerBG />}
-            { (storeChoice) ? <Found store={storeChoice} setBackground={setBackground} setStore={setStoreChoice}/> : <Wandering shops={shops} setStore={setStoreChoice} />}                     
+            { (storeChoice) ? <Found store={storeChoice} setBackground={setBackground} setStore={setStoreChoice}/> : <Wandering shops={shops} setStore={setStoreChoice} />}                                 
+            {JSON.stringify(location)}   
         </div>
     )
 }
