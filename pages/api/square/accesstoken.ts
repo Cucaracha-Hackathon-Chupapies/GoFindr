@@ -2,7 +2,7 @@ import prisma from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-    const tokenUrl = 'https://connect.squareupsandbox.com/oauth2/token';
+    const tokenUrl = 'https://connect.squareup.com/oauth2/token';
     const code = req.body.code;
 
     const params = new URLSearchParams();

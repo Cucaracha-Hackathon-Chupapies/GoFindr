@@ -1,9 +1,8 @@
-import prisma from '@/lib/prisma';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect, } from 'react';
 
-const basePath = `https://connect.squareupsandbox.com`;
+const basePath = `https://connect.squareup.com`;
 const client_id = process.env.SQ_APPLICATION_ID;
 
 const scopes = [
