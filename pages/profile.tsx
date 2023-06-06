@@ -6,7 +6,7 @@ import SignUp from "@/components/Profile/Signup";
 import Login from "@/components/Profile/Login";
 import ProfileBG from "@/components/Backgrounds/ProfileBG";
 import Head from "next/head";
-import { Button, Icon } from "@chakra-ui/react";
+import { Button, Icon, useToast } from "@chakra-ui/react";
 import { BsShop } from 'react-icons/bs'
 
 const Profile = () => {
@@ -17,11 +17,25 @@ const Profile = () => {
     
     const [signFlag, setSignFlag] = useState(false);
 
+    const toast = useToast()
+
+    useEffect(() => {
+        if (isLoggedIn){
+            router.push('/profile')
+        }
+    }, [isLoggedIn])
+
     useEffect(() => {
         if (localStorage.getItem('id')){
             setLoggedIn(true)
         } else {
             setLoggedIn(false)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (router.query.errorMsg){
+            toast({title: 'Please Log In', description: 'You must log in to create shops.', status: 'error', duration: 3000, isClosable: true})
         }
     }, [])
 
@@ -79,7 +93,7 @@ const Profile = () => {
                     </button>               
                 </div>
             : (
-                <div className="mt-[100px]">
+                (isLoggedIn !== undefined) && <div className="mt-[100px]">
                     <ProfileBG />
                     {signFlag === true ? 
                         <SignUp setSignFlag={setSignFlag}/> :

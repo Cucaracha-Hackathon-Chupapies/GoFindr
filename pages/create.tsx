@@ -14,21 +14,24 @@ const Create = () => {
     const [activeSection, setActiveSelection] = useState<Section>("existingTheme");
     const [viewMap, setViewMap] = useState<boolean>(false);
     const [isConnected, setConnected] = useState<boolean>()    
+    const [idExists, setIdExists] = useState<boolean>(false)
     const router = useRouter()
     const toast = useToast()
 
     useEffect(() => {
         if (!localStorage.getItem('id')){
-            router.push('/profile')
-            .then(() => toast({title: 'Please Log In', description: 'You must log in to create shops.', status: 'error', duration: 3000, isClosable: true}))
+            router.push('/profile?errorMsg=true')
             return
         }
+
+        setIdExists(true)
+
         axios.post('/api/account/connected', {id: localStorage.getItem('id')})
         .then((res) => setConnected(res.data.connected))
     }, [])    
 
     return (
-        <div>
+        <div>{idExists && <>
             <CreateBG />
             <Head>
                 <title>Create Shop</title>
@@ -93,6 +96,7 @@ const Create = () => {
                 }
                 
             </div>
+        </>}
         </div>
     )
 }
