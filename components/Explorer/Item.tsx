@@ -27,10 +27,10 @@ const Item = (props: Props) => {
 
     return (
         <div key={id} className="inline-block mr-4">
-            <img src={img} alt={name} className="w-[160px] h-[120px] rounded-t object-cover border-x border-t border-black"/>
+            <img src={img} alt={name} className="w-[150px] h-[100px] rounded-t object-cover border-x border-t border-black"/>
             <div style={styles.description}>
                 <div className='mt-[5px]'>{name}</div>
-                <Flex justifyContent={'space-between'} mt={2}>
+                <Flex justifyContent={'space-between'}>
                     <div className="opacity-50 italic">{price}</div>
                     <Flex alignItems={'center'}>
                         <Text color={'yellow.600'} mr={1}>{rating}</Text>

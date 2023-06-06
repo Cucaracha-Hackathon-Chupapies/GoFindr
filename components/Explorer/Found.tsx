@@ -75,7 +75,7 @@ const Found = ({store, setBackground, setStore}: Props) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <IconButton pos={'absolute'} top={2} left={2} aria-label="back button" w={'40px'} h={'40px'} onClick={() => setStore(undefined)} icon={<BiArrowBack />} />
+            <IconButton fontSize={'22px'} pos={'absolute'} top={2} left={2} aria-label="back button" w={'40px'} h={'40px'} onClick={() => setStore(undefined)} icon={<BiArrowBack />} />
 
             <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] pt-[60px]">
                 <div className="text-[28px] font-light">
