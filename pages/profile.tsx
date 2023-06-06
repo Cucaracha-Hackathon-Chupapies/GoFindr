@@ -8,6 +8,7 @@ import ProfileBG from "@/components/Backgrounds/ProfileBG";
 import Head from "next/head";
 import { Button, Icon, useToast } from "@chakra-ui/react";
 import { BsShop } from 'react-icons/bs'
+import { CopyIcon } from "@chakra-ui/icons";
 
 const Profile = () => {
 
@@ -78,7 +79,7 @@ const Profile = () => {
                         </svg>
                     </button>
 
-                    <button className="w-[370px] h-[54px] text-[18px] bg-white rounded-full border border-black mt-4 pl-8 flex flex-row place-items-center">
+                    <button onClick={() => {navigator.clipboard.writeText("jason.jw.louie@gmail.com"); toast({title: 'Contact Email Copied', description: 'Feel free to shoot us an email about any questions you may have!', status: 'info', duration: 10000, isClosable: true, icon: <CopyIcon fontSize={'24px'}/>})}} className="w-[370px] h-[54px] text-[18px] bg-white rounded-full border border-black mt-4 pl-8 flex flex-row place-items-center">
                         Contact Us
                         <svg className="ml-[176px]" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M21.6667 12.3333C21.6667 8.56209 21.6667 6.67647 20.4951 5.5049C19.3236 4.33333 17.4379 4.33333 13.6667 4.33333H12.3334C8.56214 4.33333 6.67652 4.33333 5.50495 5.5049C4.33337 6.67647 4.33337 8.56209 4.33337 12.3333V19.6667C4.33337 20.6095 4.33337 21.0809 4.62627 21.3738C4.91916 21.6667 5.39056 21.6667 6.33337 21.6667H13.6667C17.4379 21.6667 19.3236 21.6667 20.4951 20.4951C21.6667 19.3235 21.6667 17.4379 21.6667 13.6667V12.3333Z" stroke="#33363F" strokeWidth="2"/>
