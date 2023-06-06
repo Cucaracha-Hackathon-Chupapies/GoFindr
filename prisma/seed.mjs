@@ -19,12 +19,13 @@ async function main() {
       where: { name: 'mishkamushka' },
       update: {},
       create: {
-        displayName: 'Mishka Mushka',
+        displayName: 'Dairy Queen',
         name: 'mishkamushka',
-        lat: 49.249434951721945,
-        lng: -123.11575076022022,
-        description: 'poopie poopie :)',
-        rating: 3.9,
+        lat: 49.23908569087235,
+        lng: -123.06502634908576,
+        description: 'From tasty milkshakes to grilled burgers, Dairy Queen serves quality fresh food. It is not fast food it is fan food.',
+        rating: 3.7,
+        icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Dairy_Queen_logo.svg/640px-Dairy_Queen_logo.svg.png',  
         theme: {
           connect: {
             id: 1
@@ -47,11 +48,11 @@ async function main() {
       where: { name: 'mishkamushka' },
       update: {},
       create: {
-        displayName: 'Mishka Mushka',
+        displayName: 'Dairy Queen',
         name: 'mishkamushka',
-        description: 'Japanese izakaya with splashy decor & a sake-bottle chandelier, serving creative, intricate plates...',
-        icon: 'https://nature-images.sfo3.cdn.digitaloceanspaces.com/gofindr/userfiles/mqio6y714t6o96g5i6f99ikx.jpg',
-        rating: 3.9,
+        description: 'From tasty milkshakes to grilled burgers, Dairy Queen serves quality fresh food. It is not fast food it is fan food.',
+        icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Dairy_Queen_logo.svg/640px-Dairy_Queen_logo.svg.png',
+        rating: 3.7,
         owner: {
           connect: {
             id: 'e9583445-6ddc-44ab-a453-26e68cbfe98f'
