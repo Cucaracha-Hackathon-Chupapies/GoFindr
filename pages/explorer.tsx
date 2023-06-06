@@ -14,8 +14,7 @@ const Explorer = () => {
 
     const getLocation = useCallback(() => {                    
         navigator.geolocation.getCurrentPosition((data) => {
-          //setLocation({lat: data.coords.latitude, lng: data.coords.longitude})                            
-          setLocation({lat: 49.23908569087235, lng: -123.06502634908576})
+          setLocation({lat: data.coords.latitude, lng: data.coords.longitude})                            
         })
 
       }, [setLocation])
