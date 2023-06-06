@@ -13,12 +13,13 @@ const Explorer = () => {
     const [location, setLocation] = useState<google.maps.LatLngLiteral>()    
 
     const getLocation = useCallback(() => {
+        if (storeChoice !== undefined) return;
         navigator.geolocation.getCurrentPosition((data) => {
           //setLocation({lat: data.coords.latitude, lng: data.coords.longitude})                  
           setLocation({lat: 49.23908569087235, lng: -123.06502634908576})
         })
 
-      }, [setLocation])
+      }, [setLocation, storeChoice])
       
       useEffect(() => {
         getLocation();
