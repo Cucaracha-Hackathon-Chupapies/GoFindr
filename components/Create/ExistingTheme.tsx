@@ -25,7 +25,7 @@ const ExistingTheme = () => {
 
                 
             axios.post('/api/create/shop', {...formData, lat: data.coords.latitude, lng: data.coords.longitude, createTheme: false, ...(iconUrl ? {icon: iconUrl} : {}), ownerId: localStorage.getItem('id')})
-            .then(() => router.push('/create' + formData.displayName.toLowerCase().replace(' ', '-')))
+            .then(() => router.push('/create'))
             .catch(() => toast({title: 'Error Creating Shop!', description: 'Something went wrong creating ' + formData.displayName + '.', status: 'error', duration: 3000, isClosable: true}))
         })
     }, [formData, iconUrl, router, toast])
