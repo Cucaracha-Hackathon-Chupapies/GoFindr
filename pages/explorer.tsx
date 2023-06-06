@@ -12,24 +12,25 @@ const Explorer = () => {
     const [background, setBackground] = useState<string>()        
     const [location, setLocation] = useState<google.maps.LatLngLiteral>()    
 
-    const getLocation = useCallback(() => {
-        if (storeChoice !== undefined) return;
+    const getLocation = useCallback(() => {                    
         navigator.geolocation.getCurrentPosition((data) => {
           //setLocation({lat: data.coords.latitude, lng: data.coords.longitude})                  
           setLocation({lat: 49.23908569087235, lng: -123.06502634908576})
         })
 
-      }, [setLocation, storeChoice])
+      }, [setLocation])
       
       useEffect(() => {
         getLocation();
 
         const geolocationPing = setInterval(() => {
-          getLocation()          
+          if (storeChoice === undefined){
+            getLocation()
+          }          
         }, 1000*5)
         return () => clearInterval(geolocationPing)
 
-      }, [])
+      }, [storeChoice])
 
       useEffect(() => {
         if (location){
@@ -41,7 +42,7 @@ const Explorer = () => {
       }, [location])
 
     return (
-        <div className="h-screen relative">            
+        <div className=" relative pb-[70px]">            
             {(background && storeChoice) ?  <Image alt="Shop Background" mt={0} src={background} objectFit={'cover'} pos={'absolute'} w={'100%'} h={'100%'} /> : <ExplorerBG />}
             { (storeChoice) ? <Found store={storeChoice} setBackground={setBackground} setStore={setStoreChoice}/> : <Wandering shops={shops} setStore={setStoreChoice} />}                     
         </div>

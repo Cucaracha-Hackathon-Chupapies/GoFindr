@@ -68,7 +68,7 @@ const Found = ({store, setBackground, setStore}: Props) => {
     }   
 
     return (
-        <div className="relative z-999 pb-[120px]">
+        <div className="relative z-999">
             <Head>
                 <title>{shopData?.displayName || "Store Found!"}</title>
                 <meta name="description" content="Viewing store found using geolocation! Wowzaa that's pretty cool if you ask me :) " />
