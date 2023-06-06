@@ -14,7 +14,8 @@ const Explorer = () => {
 
     const getLocation = useCallback(() => {                    
         navigator.geolocation.getCurrentPosition((data) => {
-          setLocation({lat: data.coords.latitude, lng: data.coords.longitude})                            
+          //setLocation({lat: data.coords.latitude, lng: data.coords.longitude})                            
+          setLocation({lat: 49.23908569087235, lng: -123.06502634908576})
         })
 
       }, [setLocation])
@@ -41,7 +42,7 @@ const Explorer = () => {
       }, [location])
 
     return (
-        <div className=" relative pb-[90px]">            
+        <div className=" relative pb-[90px] h-full">            
             {(background && storeChoice) ?  <Image alt="Shop Background" mt={0} src={background} objectFit={'cover'} pos={'absolute'} w={'100%'} h={'100%'} /> : <ExplorerBG />}
             { (storeChoice) ? <Found store={storeChoice} setBackground={setBackground} setStore={setStoreChoice}/> : <Wandering shops={shops} setStore={setStoreChoice} />}                     
         </div>
