@@ -36,7 +36,7 @@ const NewTheme = () => {
             }, ...(iconUrl ? {icon: iconUrl} : {}),
             ownerId: localStorage.getItem('id')
             })
-            .then(() => router.push('/create'))
+            .then(() => window.location.href="/create?success=true")
             .catch(() => toast({title: 'Error Creating Shop!', description: 'Something went wrong creating ' + formData.displayName + '.', status: 'error', duration: 3000, isClosable: true}))
             
         })

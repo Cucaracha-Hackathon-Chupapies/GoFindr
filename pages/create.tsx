@@ -30,6 +30,12 @@ const Create = () => {
         .then((res) => setConnected(res.data.connected))
     }, [])    
 
+    useEffect(() => {
+        if (router.query.success){
+            toast({title: 'Success!', description: 'Shop successfully created!', status: 'success', duration: 3000, isClosable: true})
+        }
+    }, [router.query.success])
+
     return (
         <div>{idExists && <>
             <CreateBG />
