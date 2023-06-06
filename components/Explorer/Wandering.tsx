@@ -23,7 +23,7 @@ const Wandering = ({shops, setStore}: Props) => {
             {(shops && shops.length > 0) ? 
             <HStack spacing={5} justifyContent={'center'} mt={'5vh'}>
                 {shops.map((data) => (
-                    <Flex color={'white'} alignItems={'center'} bgColor={'rgb(31, 41, 55)'} borderRadius={'md'} p={3} key={data.name} flexDir={'column'}>                        
+                    <Flex maxW={'280px'} color={'white'} alignItems={'center'} bgColor={'rgb(31, 41, 55)'} borderRadius={'md'} p={3} key={data.name} flexDir={'column'}>                        
                         <Flex flexDir={'row'} alignItems={'center'}>
                             {data.icon && <Image mr={5} alt={'Shop Icon'} src={data.icon} w={'100px'} h={'100px'} borderRadius={'full'} objectFit={'cover'}/>}
                             <Flex flexDir={'column'} alignItems={'start'}>

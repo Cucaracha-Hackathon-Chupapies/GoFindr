@@ -35,16 +35,18 @@ const Explorer = () => {
         if (location){
             axios.post('/api/get/shops', {...location, distance: 50})
             .then((res) => setShops(res.data))
+            .catch((err) => console.log(err))
         }
         
       }, [location])
 
     return (
         <div className="h-screen relative">
-            {(background && storeChoice) ?  <Image alt="Shop Background" mt={0} src={background} objectFit={'cover'} pos={'absolute'} w={'100%'} h={'100%'} /> : <ExplorerBG />}
-            { (storeChoice) ? <Found store={storeChoice} setBackground={setBackground} setStore={setStoreChoice}/> : <Wandering shops={shops} setStore={setStoreChoice} />}         
             {JSON.stringify(location)}
             {pinged}
+            {(background && storeChoice) ?  <Image alt="Shop Background" mt={0} src={background} objectFit={'cover'} pos={'absolute'} w={'100%'} h={'100%'} /> : <ExplorerBG />}
+            { (storeChoice) ? <Found store={storeChoice} setBackground={setBackground} setStore={setStoreChoice}/> : <Wandering shops={shops} setStore={setStoreChoice} />}         
+            
         </div>
     )
 }
