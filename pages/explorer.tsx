@@ -42,7 +42,7 @@ const Explorer = () => {
       }, [location])
 
     return (
-        <div className=" relative pb-[70px]">            
+        <div className=" relative pb-[90px]">            
             {(background && storeChoice) ?  <Image alt="Shop Background" mt={0} src={background} objectFit={'cover'} pos={'absolute'} w={'100%'} h={'100%'} /> : <ExplorerBG />}
             { (storeChoice) ? <Found store={storeChoice} setBackground={setBackground} setStore={setStoreChoice}/> : <Wandering shops={shops} setStore={setStoreChoice} />}                     
         </div>

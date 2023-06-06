@@ -4,7 +4,7 @@ import CreateBG from "@/components/Backgrounds/CreateBG";
 import NewTheme from "@/components/Create/NewTheme";
 import ExistingTheme from "@/components/Create/ExistingTheme";
 import LocationMap from "@/components/Create/LocationMap";
-import { Flex, Link, Text } from "@chakra-ui/react";
+import { Flex, Link, Text, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import axios from "axios";
 
@@ -15,10 +15,12 @@ const Create = () => {
     const [viewMap, setViewMap] = useState<boolean>(false);
     const [isConnected, setConnected] = useState<boolean>()    
     const router = useRouter()
+    const toast = useToast()
 
     useEffect(() => {
         if (!localStorage.getItem('id')){
             router.push('/profile')
+            .then(() => toast({title: 'Please Log In', description: 'You must log in to create shops.', status: 'error', duration: 3000, isClosable: true}))
             return
         }
         axios.post('/api/account/connected', {id: localStorage.getItem('id')})
