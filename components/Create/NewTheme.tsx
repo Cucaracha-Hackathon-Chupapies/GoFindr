@@ -2,7 +2,7 @@ import axios from "axios";
 import { useCallback, useEffect, useReducer, useState } from "react";
 import Uploader from "../ImageUpload/Uploader";
 import { useRouter } from "next/router";
-import { useToast } from "@chakra-ui/react";
+import { Box, useToast } from "@chakra-ui/react";
 
 const formReducer = (state: any, event: any) => {
     return {
@@ -68,7 +68,7 @@ const NewTheme = () => {
             {secondUploadError && <h1 className="text-red-600 italic">Error uploading image!</h1>}
 
             <button className="h-[55px] w-[330px] lg:h-[50px] bg-[#ed7bbe] text-white rounded mt-8 lg:mt-4" type="submit">Submit</button>
-        
+            <Box h={'100px'}/>
         </form>
     )
 }
