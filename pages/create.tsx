@@ -45,14 +45,14 @@ const Create = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             
-            <div className="relative z-999 overflow-hidden ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] pt-[50px]">
+            <div className="max-h-full relative z-999 ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] pt-[50px]">
                 <div className="text-[36px] font-light">
                     Pave
                 </div>
                 <div className="text-[44px] font-medium leading-[50px]">
                     The Path
                 </div>
-                <div className="text-[16px] text-[#7A7A7A] font-light italic mt-[5px]">
+                <div className="text-[14px] text-[#7A7A7A] font-light italic mt-[5px]">
                     Starting something new around the corner? Let others see what’s happening in their daily explorations by adding a new shop!
                 </div>
                 <div className="text-[16px] text-[#7A7A7A] font-medium italic mt-[5px]">
@@ -95,7 +95,7 @@ const Create = () => {
                 {activeSection === "existingTheme" ? <ExistingTheme /> : <NewTheme />}
                 </>)
                 :
-                <Flex flexDir={'column'} textAlign={'center'} mt={'20vh'}>
+                <Flex flexDir={'column'} textAlign={'center'} mt={'10vh'}>
                     <Text fontSize={'2xl'}>Please connect your account with Square to create shops.</Text>
                     <Text>Click <Link textDecor={'underline'} color={'#ed7bbe'} onClick={() => router.push('/auth')}>Here</Link> to Connect Account with Square.</Text>
                 </Flex>

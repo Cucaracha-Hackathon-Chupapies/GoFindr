@@ -30,11 +30,10 @@ const EditAccount = () => {
                 <meta name="description" content="GoFindr! An interactive and unique place to find shops near you!" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Flex flexDir={'column'} alignItems={'center'}>
-                <Text mt={10} fontSize={'2xl'} fontWeight={'bold'}>Edit Account</Text>
+            <Flex flexDir={'column'} alignItems={'center'}>                
                 <FormControl mt={10}>
                     <VStack flexDir={'column'} alignItems={'center'} spacing={5}>
-                        <Image alt="User Profile Picture" borderRadius={'50%'} src={url}/>                        
+                        <Image alt="User Profile Picture" w={'150px'} h={'150px'} borderRadius={'50%'} src={url}/>                        
                         <Uploader relate="iconUpload" message="Upload Account Icon" setState={setUrl}/>                
                         <Flex flexDir={'column'}>
                         <FormLabel>Username</FormLabel>
@@ -44,7 +43,7 @@ const EditAccount = () => {
                         <FormLabel>Password</FormLabel>
                         <Input border={'1px solid black'} w={'330px'} value={accountData?.password || ""} onChange={(e) => setAccountData(accountData ? {...accountData, password: e.target.value} : undefined)}/>
                         </Flex>
-                        <Button onClick={saveChanges} fontSize={'20px'} color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'} type="submit">Submit</Button>
+                        <Button mt={3} w={'330px'} onClick={saveChanges} fontSize={'20px'} color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'} type="submit">Submit</Button>
                     </VStack>
                 </FormControl>                
             </Flex>

@@ -13,10 +13,10 @@ export default function Shop({data, highlight}: Props) {
 
   return (
     <Flex color={'white'} flexDir={'column'} alignItems={'center'} bgColor={'rgb(31, 41, 55)'} my={5} borderRadius={'md'} p={5} border={highlight ? '3px solid gold' : ''}>
-        {data.icon && <Image alt={'Shop Icon'} src={data.icon} w={'200px'} h={'200px'} borderRadius={'full'} objectFit={'cover'}/>}
+        {data.icon && <Image alt={'Shop Icon'} src={data.icon} w={'130px'} h={'130px'} borderRadius={'full'} objectFit={'contain'}/>}
         <Text mt={3} fontSize={'2xl'}>{data.displayName}</Text>
-        <Text mt={6} mb={10} maxW={'70%'} fontSize={'sm'} textAlign={'center'}>{data.description}</Text>
-        <Flex justifyContent={'space-between'} w={'85%'}>
+        <Text mt={3} mb={5} maxW={'90%'} fontSize={'xs'} textAlign={'center'}>{data.description}</Text>
+        <Flex textAlign={'center'} flexDir={'column'} w={'100%'}>
             <Text>Theme ID: {data.themeId}</Text>
             <Text>Created: {new Date(data.created).toDateString()}</Text>
         </Flex>

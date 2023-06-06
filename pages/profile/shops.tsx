@@ -1,5 +1,5 @@
 import Shop from "@/components/Profile/Shop"
-import { Flex, SimpleGrid, Text } from "@chakra-ui/react"
+import { Flex, Link, SimpleGrid, Text } from "@chakra-ui/react"
 import { StoreInfo } from "@prisma/client"
 import axios from "axios"
 import Head from "next/head"
@@ -23,18 +23,26 @@ const Shops = () => {
     }, [router])
 
     return (
-        <Flex justifyContent={'center'} alignItems={'center'} flexDir={'column'}>
+        <Flex justifyContent={'center'} alignItems={'center'} flexDir={'column'} pb={'200px'} maxH={'-webkit-fit-content'}>
             <Head>
                 <title>GoFindr</title>
                 <meta name="description" content="GoFindr! An interactive and unique place to find shops near you!" />
                 <link rel="icon" href="/favicon.ico" />
-            </Head>   
-                <Text fontSize={'2xl'} fontWeight={'bold'} mt={'5vh'}>My Shops</Text>
+            </Head>                
+            {(shops && shops.length > 0) ? 
                 <SimpleGrid w={'80%'} maxW={'600px'}>     
                     {shops?.map((shop) => (
                         <Shop key={shop.name} data={shop} highlight={router.query.new === shop.name}/>                                                
                     ))}
-                </SimpleGrid>                
+                </SimpleGrid>           
+                :
+                <Flex flexDir={'column'} textAlign={'center'} alignItems={'center'} mt={'30vh'} maxW={'80vw'}>
+                    <Text fontSize={'2xl'}>
+                        You have not created any shops yet!
+                    </Text>
+                    <Text mt={5} fontSize={'lg'}>Click <Link onClick={() => router.push('/create')} color={'#ed7bbe'} textDecor={'underline'}>Here</Link> to create a shop!</Text>
+                </Flex>
+            }
         </Flex>
     )
 }
