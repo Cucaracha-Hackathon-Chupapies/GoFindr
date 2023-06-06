@@ -61,7 +61,7 @@ const NewTheme = () => {
                 <input type="text" id="componentColor" name="componentColor" placeholder="Accent Color" onChange={handleChange} className="h-[55px] w-[155px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
             </div>
 
-            <Uploader message="Upload Background Theme" relate="themeUpload" setState={setUrl} setUploadError={setFirstUploadError}/>
+            <Uploader message="Upload Background Image" relate="themeUpload" setState={setUrl} setUploadError={setFirstUploadError}/>
             {firstUploadError && <h1 className="text-red-600 italic">Error uploading image!</h1>}
 
             <Uploader message="Upload Store Icon" relate="iconUpload" setState={setIconUrl} setUploadError={setSecondUploadError}/>

@@ -89,8 +89,8 @@ const Create = () => {
                 {activeSection === "existingTheme" ? <ExistingTheme /> : <NewTheme />}
                 </>)
                 :
-                <Flex flexDir={'column'}>
-                    <Text fontSize={'2xl'}>Please connect your account with square to create shops.</Text>
+                <Flex flexDir={'column'} textAlign={'center'} mt={'20vh'}>
+                    <Text fontSize={'2xl'}>Please connect your account with Square to create shops.</Text>
                     <Text>Click <Link textDecor={'underline'} color={'#ed7bbe'} onClick={() => router.push('/auth')}>Here</Link> to Connect Account with Square.</Text>
                 </Flex>
                 }
