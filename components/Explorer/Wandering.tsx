@@ -1,6 +1,5 @@
 import { Button, Flex, HStack, Icon, Image, Text } from "@chakra-ui/react";
 import { Store } from "@prisma/client";
-import Shop from "../Profile/Shop";
 import { Dispatch, SetStateAction } from "react";
 import { StarIcon } from "@chakra-ui/icons";
 
@@ -23,19 +22,21 @@ const Wandering = ({shops, setStore}: Props) => {
             {(shops && shops.length > 0) ? 
             <HStack spacing={5} justifyContent={'center'} mt={'5vh'}>
                 {shops.map((data) => (
-                    <Flex maxW={'280px'} color={'white'} alignItems={'center'} bgColor={'rgb(31, 41, 55)'} borderRadius={'md'} p={3} key={data.name} flexDir={'column'}>                        
-                        <Flex flexDir={'row'} alignItems={'center'}>
-                            {data.icon && <Image mr={5} alt={'Shop Icon'} src={data.icon} w={'100px'} h={'100px'} borderRadius={'full'} objectFit={'cover'}/>}
+                    <Flex maxW={'300px'} color={'white'} alignItems={'center'} bgColor={'rgb(31, 41, 55)'} borderRadius={'md'} p={3} key={data.name} flexDir={'column'}>                        
+                        <Flex flexDir={'row'} alignItems={'center'} justifyContent={'space-between'}>
+                            <Flex flexDir={'column'} mr={5}>
+                                {data.icon && <Image mr={5} alt={'Shop Icon'} src={data.icon} w={'100px'} h={'100px'} borderRadius={'full'} objectFit={'contain'}/>}
+                                <Button mt={2} px={6} fontSize={'16px'} onClick={() => setStore(data.name)} color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'}>View</Button>
+                            </Flex>
                             <Flex flexDir={'column'} alignItems={'start'}>
                                 <Text mt={3} fontSize={'xl'}>{data.displayName}</Text>
                                 <Flex alignItems={'center'}>
                                     <Text color={'yellow.600'} mr={1}>{data.rating}</Text>       
                                     <Icon mb={0.5} fontSize={'15px'} color={'#ed7bbe'} as={StarIcon}/>      
                                 </Flex>
-                                <Text maxW={'70%'} fontSize={'xs'} mt={2}>{data.description}</Text>                        
+                                <Text fontSize={'xs'}  mt={2}>{data.description}</Text>                        
                             </Flex>
-                        </Flex>
-                      <Button mt={2} px={6} fontSize={'16px'} onClick={() => setStore(data.name)} color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'}>View</Button>
+                        </Flex>                      
                      </Flex>
                 ))}
             </HStack>
