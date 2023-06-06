@@ -34,7 +34,7 @@ const NewTheme = () => {
                 font: formData.font || "Poppins",
                 componentColor: formData.componentColor || "#1a9f1a"
             }, ...(iconUrl ? {icon: iconUrl} : {}),
-            ownerId: 'e9583445-6ddc-44ab-a453-26e68cbfe98f'   
+            ownerId: localStorage.getItem('id')
             })
             .then(() => router.push('/profile/shops?new=' + formData.displayName.toLowerCase().replace(' ', '-')))
             .catch(() => toast({title: 'Error Creating Shop!', description: 'Something went wrong creating ' + formData.displayName + '.', status: 'error', duration: 3000, isClosable: true}))
