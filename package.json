@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prodtest": "next dev -p 13243",
     "devv": "concurrently \"pnpm run dev\" \"pnpm run studio\"",
     "studio": "prisma studio",
-    "build": "npm run reset && next build",
-    "start": "next start",
+    "build": "next build",
+    "start": "next start -p 13243",
     "lint": "next lint",
     "reset": "prisma db push --force-reset && prisma db seed"
   },
