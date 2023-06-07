@@ -8,7 +8,7 @@
     "devv": "concurrently \"pnpm run dev\" \"pnpm run studio\"",
     "studio": "prisma studio",
     "build": "next build",
-    "start": "next start -p 13243",
+    "start": "next start",
     "lint": "next lint",
     "reset": "prisma db push --force-reset && prisma db seed"
   },
