@@ -28,13 +28,13 @@ const Create = () => {
 
         axios.post('/api/account/connected', {id: localStorage.getItem('id')})
         .then((res) => setConnected(res.data.connected))
-    }, [])    
+    }, [router])    
 
     useEffect(() => {
         if (router.query.success){
             toast({title: 'Success!', description: 'Shop successfully created!', status: 'success', duration: 3000, isClosable: true})
         }
-    }, [router.query.success])
+    }, [router.query.success, toast])
 
     return (
         <div>{idExists && <>

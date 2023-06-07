@@ -24,7 +24,7 @@ const Profile = () => {
         if (isLoggedIn){
             router.push('/profile')
         }
-    }, [isLoggedIn])
+    }, [isLoggedIn, router])
 
     useEffect(() => {
         if (localStorage.getItem('id')){
@@ -38,7 +38,7 @@ const Profile = () => {
         if (router.query.errorMsg){
             toast({title: 'Please Log In', description: 'You must log in to create shops.', status: 'error', duration: 3000, isClosable: true})
         }
-    }, [])
+    }, [router.query.errorMsg, toast])
 
     useEffect(() => {
 

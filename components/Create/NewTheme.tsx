@@ -40,7 +40,7 @@ const NewTheme = () => {
             .catch(() => toast({title: 'Error Creating Shop!', description: 'Something went wrong creating ' + formData.displayName + '.', status: 'error', duration: 3000, isClosable: true}))
             
         })
-    }, [url, formData, iconUrl, router, toast])
+    }, [url, formData, iconUrl, toast])
 
 
     const handleChange = (event: any) => {

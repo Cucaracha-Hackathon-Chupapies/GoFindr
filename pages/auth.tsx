@@ -46,7 +46,7 @@ const APITest = () => {
             fetchAuthURL();
         }
         
-    }, [])
+    }, [router])
 
     return (
         <div>

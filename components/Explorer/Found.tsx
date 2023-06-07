@@ -50,7 +50,7 @@ const Found = ({store, setBackground, setStore}: Props) => {
         .then((res) => {
             setRatings(res.data)
         })
-    }, [])
+    }, [router, setBackground, setStore, storeName, toast])
 
     const createReview = (e: any) => {
         e.preventDefault()
