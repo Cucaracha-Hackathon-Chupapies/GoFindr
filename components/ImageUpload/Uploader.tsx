@@ -16,7 +16,7 @@ const Uploader = ({message, relate, setState, setUploadError}: Props) => {
         let file = e.target.files?.[0];
         if (file) {
             setFileName(file.name);
-            setPreviewImage(URL.createObjectURL(file));
+            //setPreviewImage(URL.createObjectURL(file));
 
             try {
                 let data = new FormData();

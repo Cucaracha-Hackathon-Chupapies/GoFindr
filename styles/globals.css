@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (pointer:none), (pointer:coarse) {
+  * {
+    max-height: unset;
+  }
+}
+
 * {
-  max-height: -webkit-fill-available;
+  max-height: fill-available;
 }
 
 :root {
