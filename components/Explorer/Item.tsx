@@ -2,6 +2,7 @@ import { StarIcon } from "@chakra-ui/icons";
 import { Flex, Icon, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import React from "react";
+import { AiOutlineStar } from "react-icons/ai";
 
 type Props = {
     id: string;
@@ -36,8 +37,14 @@ const Item = (props: Props) => {
                 <Flex justifyContent={'space-between'}>
                     <div className="opacity-50 italic">{price}</div>
                     <Flex alignItems={'center'}>
+                        {(rating !== 0) ? 
+                        <>
                         <Text color={'yellow.600'} mr={1}>{rating}</Text>
                         <Icon mb={0.5} fontSize={'15px'} color={'#ed7bbe'} as={StarIcon}/>
+                        </>
+                        :
+                        <Icon mb={0.5} fontSize={'18px'} as={AiOutlineStar}/>
+                        }
                     </Flex>
                 </Flex>
             </div>

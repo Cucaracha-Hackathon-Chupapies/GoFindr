@@ -33,6 +33,7 @@ const Create = () => {
     useEffect(() => {
         if (router.query.success){
             toast({title: 'Success!', description: 'Shop successfully created!', status: 'success', duration: 3000, isClosable: true})
+            router.replace('/create', undefined, { shallow: true })
         }
     }, [router.query.success, toast])
 
@@ -92,7 +93,7 @@ const Create = () => {
                     </ul>
                 </nav>
                 
-                {activeSection === "existingTheme" ? <ExistingTheme /> : <NewTheme />}
+                {activeSection === "existingTheme" ? <ExistingTheme key={router.asPath} /> : <NewTheme key={router.asPath} />}
                 </>)
                 :
                 <Flex flexDir={'column'} textAlign={'center'} mt={'10vh'}>

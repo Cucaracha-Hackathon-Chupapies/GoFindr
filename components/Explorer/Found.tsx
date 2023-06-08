@@ -106,13 +106,13 @@ const Found = ({store, setBackground, setStore}: Props) => {
                 {!reviews ? 
                 <div>
                     {(itemViewChoice === 'featured') ?                                     
-                    <div className={`overflow-x-auto bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
+                    <div className={`overflow-x-auto bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4 h-[220px]`}>
                         {shopData?.items.map((item) => (
                             item.featured && <Item id={JSON.stringify(item.id)} name={item.displayName} price={item.price} img={'/placeholder.jpg'} rating={item.rating} key={item.id}/>
                         ))}
                     </div>                    
                     :                
-                    <div className={`overflow-x-auto bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
+                    <div className={`overflow-x-auto bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4 h-[220px]`}>
                         {shopData?.items.map((item) => (
                             item.popular && <Item id={JSON.stringify(item.id)} name={item.displayName} price={item.price} img={'/placeholder.jpg'} rating={item.rating} key={item.id}/>
                         ))}                        
