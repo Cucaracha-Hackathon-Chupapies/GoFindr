@@ -1,5 +1,6 @@
 import { StarIcon } from "@chakra-ui/icons";
 import { Flex, Icon, Text } from "@chakra-ui/react";
+import Image from "next/image";
 import React from "react";
 
 type Props = {
@@ -27,7 +28,9 @@ const Item = (props: Props) => {
 
     return (
         <div key={id} className="inline-block mr-4">
-            <img src={img} alt={name} className="w-[150px] h-[100px] rounded-t object-cover border-x border-t border-black"/>
+                          
+            <Image width={130} height={100} src={img} alt={name} className="rounded-t object-cover border-x border-t border-black"/>
+            
             <div style={styles.description}>
                 <div className='mt-[5px]'>{name}</div>
                 <Flex justifyContent={'space-between'}>

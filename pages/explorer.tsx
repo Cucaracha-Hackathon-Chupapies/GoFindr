@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ExplorerBG from "@/components/Backgrounds/ExplorerBG";
 import Wandering from "@/components/Explorer/Wandering";
 import Found from "@/components/Explorer/Found";
-import { Image, useToast } from "@chakra-ui/react";
+import { Box, Image, useToast } from "@chakra-ui/react";
 import { Store } from "@prisma/client";
 import axios from "axios";
 
@@ -23,7 +23,7 @@ const Explorer = () => {
             localStorage.setItem('seenWarning', "true")
         }
         
-    }, [])
+    }, [toast])
 
     useEffect(() => {
       if (!navigator.geolocation || storeChoice !== undefined) return;      
@@ -42,10 +42,10 @@ const Explorer = () => {
     }, [location])
 
     return (
-        <div className=" relative pb-[90px] h-full">            
-            {(background && storeChoice) ?  <Image alt="Shop Background" mt={0} src={background} objectFit={'cover'} pos={'absolute'} w={'100%'} h={'100%'} /> : <ExplorerBG />}
+        <Box>
+            {(background && storeChoice) ?  <Image alt="Shop Background" src={background} objectFit={'cover'} pos={'absolute'} w={'100%'} h={'100%'} /> : <ExplorerBG />}
             { (storeChoice) ? <Found store={storeChoice} setBackground={setBackground} setStore={setStoreChoice}/> : <Wandering shops={shops} setStore={setStoreChoice} />}                                             
-        </div>
+        </Box>          
     )
 }
 

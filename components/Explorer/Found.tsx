@@ -3,7 +3,7 @@ import Item from "./Item";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Head from "next/head";
 import { Item as ItemType, StoreInfo, StoreRating } from "@prisma/client";
-import { Button, Flex, FormControl, FormHelperText, FormLabel, Heading, IconButton, Input, SimpleGrid, Text, VStack, useToast } from "@chakra-ui/react";
+import { Box, Button, Flex, FormControl, FormLabel, IconButton, Input, SimpleGrid, VStack, useToast } from "@chakra-ui/react";
 import {MdOutlineSaveAlt} from 'react-icons/md'
 import Rating from "./Rating";
 import { AiFillStar } from "react-icons/ai";
@@ -22,13 +22,15 @@ interface Props {
 
 const Found = ({store, setBackground, setStore}: Props) => {
 
-    const storeName = store; //id of the store found
+    const storeName = store;
 
 
     const [shopData, setShopData] = useState<ShopData>()
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState("")
     const [ratings, setRatings] = useState<StoreRating[]>()
+    const [itemViewChoice, setItemViewChoice] = useState<"featured" | "popular" | "all">("featured")
+    const [reviewViewChoice, setReviewViewChoice] = useState<"view" | "make">("view")
 
     const [reviews, toggleReviews] = useState<boolean>(false)
 
@@ -68,16 +70,16 @@ const Found = ({store, setBackground, setStore}: Props) => {
     }   
 
     return (
-        <div className="relative z-999">
+        <div className="relative z-999 max-h-full">
             <Head>
                 <title>{shopData?.displayName || "Store Found!"}</title>
                 <meta name="description" content="Viewing store found using geolocation! Wowzaa that's pretty cool if you ask me :) " />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <IconButton fontSize={'22px'} pos={'absolute'} top={2} left={2} aria-label="back button" w={'40px'} h={'40px'} onClick={() => setStore(undefined)} icon={<BiArrowBack />} />
+            <IconButton bgColor={'#ed7bbe'} color={"white"} fontSize={'22px'} pos={'fixed'} top={2} left={2} aria-label="back button" w={'40px'} h={'40px'} onClick={() => setStore(undefined)} icon={<BiArrowBack />} />
 
-            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] pt-[60px]">
+            <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] pt-[70px]">
                 <div className="text-[28px] font-light">
                     Approaching...
                 </div>
@@ -103,59 +105,84 @@ const Found = ({store, setBackground, setStore}: Props) => {
                 </nav>
                 {!reviews ? 
                 <div>
-                    <div className="text-[20px] mt-[10px] font-medium">
-                        Featured Items
-                    </div>
-
+                    {(itemViewChoice === 'featured') ?                                     
                     <div className={`overflow-x-auto bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
                         {shopData?.items.map((item) => (
                             item.featured && <Item id={JSON.stringify(item.id)} name={item.displayName} price={item.price} img={'/placeholder.jpg'} rating={item.rating} key={item.id}/>
                         ))}
-                    </div>
-
-                    <div className="text-[20px] mt-[10px] font-medium">
-                        Popular Items
-                    </div>
-
+                    </div>                    
+                    :                
                     <div className={`overflow-x-auto bg-[${fill2}] rounded whitespace-nowrap pt-4 pl-4 pb-4`}>
                         {shopData?.items.map((item) => (
                             item.popular && <Item id={JSON.stringify(item.id)} name={item.displayName} price={item.price} img={'/placeholder.jpg'} rating={item.rating} key={item.id}/>
                         ))}                        
-                    </div>
+                    </div>                    
+                    }
+                    <Flex justifyContent={'center'}>
+                        <nav className="flex mt-[30px] mb-[20px]">
+                            <ul className="flex space-x-6">
+                                <button className={(itemViewChoice === 'featured') ? 'text-black border-b-2 border-black' : 'text-gray-400'}
+                                onClick={() => setItemViewChoice("featured")}>
+                                    Featured
+                                </button>
+                                <button className={(itemViewChoice === 'popular') ? 'text-black border-b-2 border-black' : 'text-gray-400'}
+                                onClick={() => setItemViewChoice("popular")}>
+                                    Popular
+                                </button>
+                            </ul>
+                        </nav>
+                    </Flex>
 
                     
                 </div>
                 :
                 <Flex flexDir={'column'}>
-                    <SimpleGrid spacing={2} columns={[1, 1, 2]} maxH={'360px'} overflow={'auto'}>
-                    {ratings?.map((rating) => (
-                        <Rating key={rating.id} data={rating} />
-                    ))}
+                    {(reviewViewChoice === 'view') ? <>
+                    <SimpleGrid spacing={2} columns={[1, 1, 2]} h={'220px'} overflow={'auto'}>
+                        {ratings?.map((rating) => (
+                            <Rating key={rating.id} data={rating} />
+                        ))}
                     </SimpleGrid>
-
+                    </>
+                    :
+                    <>
                     {!shopData?.rated &&
-                    <Flex justifyContent={'center'} flexDir={'column'} alignItems={'center'}>
-                    <Text fontSize={'2xl'} fontWeight={'bold'} mt={'5vh'}>Write a Review</Text>
+                    <Flex justifyContent={'center'} flexDir={'column'} alignItems={'center'}>                    
                     <Flex justifyContent={'center'} alignItems={'center'}>
                         <FormControl onSubmit={createReview}>
-                            <VStack flexDir={'column'} spacing={5} mt={5}>
+                            <VStack flexDir={'column'} spacing={1} mt={2}>
                                 <Flex>
                             {[...Array(5)].map((star, index) => (
                                 <IconButton key={index} fontSize={'20px'} bgColor={'transparent'} color={(index + 1 <= rating) ? 'yellow' : 'black'} aria-label="star" icon={<AiFillStar/>} onClick={() => setRating(index + 1)} />
                             ))}
                             </Flex>                      
-                            <FormLabel>Comment (optional)</FormLabel>
-                            <Input outline={'1px solid black'} value={comment} onChange={(e) => setComment(e.target.value)} />
-                            <FormHelperText>Enter what you thought of your experience here.</FormHelperText>
-                            <Button onClick={createReview} color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'} type="submit" disabled={shopData?.rated ? true : false}>Submit</Button>
+                            <FormLabel>Comments (optional)</FormLabel>
+                            <Input outline={'1px solid black'} value={comment} onChange={(e) => setComment(e.target.value)} />                            
+                            <Button mt={'30px'} onClick={createReview} color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'} type="submit" disabled={shopData?.rated ? true : false}>Submit</Button>
                             </VStack>
                         </FormControl>
                     </Flex>
                     </Flex>
-                    }
+                    }</>
+                }
+                <Flex justifyContent={'center'}>
+                        <nav className="flex mt-[30px] mb-[20px]">
+                            <ul className="flex space-x-6">
+                                <button className={(reviewViewChoice === 'view') ? 'text-black border-b-2 border-black' : 'text-gray-400'}
+                                onClick={() => setReviewViewChoice("view")}>
+                                    View
+                                </button>
+                                <button className={(reviewViewChoice === 'make') ? 'text-black border-b-2 border-black' : 'text-gray-400'}
+                                onClick={() => shopData?.rated ? toast({title: 'Already Reviewed', description: 'You have already written a review.', status: 'error', duration: 3000, isClosable: true}) : setReviewViewChoice("make")}>
+                                    Create
+                                </button>
+                            </ul>
+                        </nav>
+                    </Flex>
                 </Flex>
                 }
             </div>
+            <Box h={'100px'}/>
         </div>
         
     )
