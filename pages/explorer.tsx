@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ExplorerBG from "@/components/Backgrounds/ExplorerBG";
 import Wandering from "@/components/Explorer/Wandering";
 import Found from "@/components/Explorer/Found";
-import { Image } from "@chakra-ui/react";
+import { Image, useToast } from "@chakra-ui/react";
 import { Store } from "@prisma/client";
 import axios from "axios";
 
@@ -11,6 +11,19 @@ const Explorer = () => {
     const [storeChoice, setStoreChoice] = useState<string | undefined>()
     const [background, setBackground] = useState<string>()        
     const [location, setLocation] = useState<google.maps.LatLngLiteral>()    
+    const toast = useToast()
+
+    useEffect(() => {
+        if (window.innerWidth <= 768 && !localStorage.getItem('seenWarning')){
+            toast({
+                title: 'Warning!',
+                description: 'Website is best viewed on mobile. We recommend you switch to your mobile device for the best user experience!', status: 'warning', duration: 10000, isClosable: true
+            })
+
+            localStorage.setItem('seenWarning', "true")
+        }
+        
+    }, [])
 
     useEffect(() => {
       if (!navigator.geolocation || storeChoice !== undefined) return;      
