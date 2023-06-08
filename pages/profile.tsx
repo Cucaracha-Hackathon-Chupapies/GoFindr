@@ -24,7 +24,7 @@ const Profile = () => {
         if (isLoggedIn){
             router.push('/profile')
         }
-    }, [isLoggedIn, router])
+    }, [isLoggedIn])
 
     useEffect(() => {
         if (localStorage.getItem('id')){
