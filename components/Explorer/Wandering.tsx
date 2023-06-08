@@ -31,7 +31,7 @@ const Wandering = ({shops, setStore}: Props) => {
                     <Flex maxW={'300px'} color={'white'} alignItems={'center'} bgColor={'rgb(31, 41, 55)'} borderRadius={'md'} p={3} key={data.name} flexDir={'column'}>                        
                         <Flex flexDir={'row'} alignItems={'center'} justifyContent={'space-between'}>
                             <Flex flexDir={'column'} mr={5}>
-                                {data.icon && <Image mr={5} alt={'Shop Icon'} src={data.icon} w={'100px'} h={'100px'} borderRadius={'full'} objectFit={'contain'}/>}
+                                {data.icon && <Image mr={5} mb={2} alt={'Shop Icon'} src={data.icon} w={'100px'} h={'100px'} borderRadius={'full'} objectFit={'cover'}/>}
                                 <Button mt={2} px={6} fontSize={'16px'} onClick={() => setStore(data.name)} color={'white'} fontWeight={'normal'} bgColor={'#ed7bbe'}>View</Button>
                             </Flex>
                             <Flex flexDir={'column'} alignItems={'start'}>
