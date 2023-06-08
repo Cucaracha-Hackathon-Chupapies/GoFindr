@@ -2,6 +2,7 @@ import { Button, Flex, HStack, Icon, Image, Text } from "@chakra-ui/react";
 import { Store } from "@prisma/client";
 import { Dispatch, SetStateAction } from "react";
 import { StarIcon } from "@chakra-ui/icons";
+import Head from "next/head";
 
 interface Props {
     shops: Store[] | undefined,
@@ -11,6 +12,11 @@ interface Props {
 const Wandering = ({shops, setStore}: Props) => {
     return (
         <div className="relative z-999">
+            <Head>
+                <title>Explorer</title>
+                <meta name="description" content="Find shops near you! We'll let you know when something pops up!" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <div className="ml-[10%] md:ml-[20%] lg:ml-[30%] w-[80%] md:w-[60%] lg:w-[40%] mt-[50px]">
                 <div className="text-[36px] font-light">
                     What&apos;s next?

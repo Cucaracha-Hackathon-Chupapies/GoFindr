@@ -44,5 +44,5 @@
 
 svg path {
   shape-rendering: geometricPrecision;
-  strokeLinejoin: round;
+  stroke-linejoin: round;
 }
