@@ -14,7 +14,7 @@ const Explorer = () => {
     const toast = useToast()
 
     useEffect(() => {
-        if (window.innerWidth <= 768 && !localStorage.getItem('seenWarning')){
+        if (window.innerWidth >= 768 && !localStorage.getItem('seenWarning')){
             toast({
                 title: 'Warning!',
                 description: 'Website is best viewed on mobile. We recommend you switch to your mobile device for the best user experience!', status: 'warning', duration: 10000, isClosable: true
