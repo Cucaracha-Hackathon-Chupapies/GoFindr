@@ -5,17 +5,21 @@ interface Props {
     message: string;
     relate: string;
     setState: Dispatch<SetStateAction<string | undefined>>,
-    setUploadError?: Dispatch<SetStateAction<boolean>>
+    setUploadError?: Dispatch<SetStateAction<boolean>>,
+    setCompleted?: Dispatch<SetStateAction<boolean | undefined>>
 }
 
-const Uploader = ({message, relate, setState, setUploadError}: Props) => {
-    const [previewImage, setPreviewImage] = useState<string | null>(null);
+const Uploader = ({message, relate, setState, setUploadError, setCompleted}: Props) => {
+    //const [previewImage, setPreviewImage] = useState<string | null>(null);
     const [fileName, setFileName] = useState<string | undefined>(undefined);
 
     const handleUpload = useCallback(async (e: any) => {
         let file = e.target.files?.[0];
         if (file) {
             setFileName(file.name);
+            if (setCompleted){
+                setCompleted(false)
+            }
             //setPreviewImage(URL.createObjectURL(file));
 
             try {
@@ -25,7 +29,12 @@ const Uploader = ({message, relate, setState, setUploadError}: Props) => {
                 let upload = await axios.post("/api/uploadimage", data, {
                     headers: {
                         "Content-Type": "multipart/form-data",
-                    }
+                    },
+                    onUploadProgress(progressEvent) {
+                        if (progressEvent.total && progressEvent.loaded/progressEvent.total === 1 && setCompleted){
+                            setCompleted(undefined)
+                        }
+                    },
                 });
 
                 if (upload) {

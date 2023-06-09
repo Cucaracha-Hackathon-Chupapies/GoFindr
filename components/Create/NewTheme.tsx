@@ -18,12 +18,18 @@ const NewTheme = () => {
     const [iconUrl, setIconUrl] = useState<string>();
     const [firstUploadError, setFirstUploadError] = useState<boolean>(false);
     const [secondUploadError, setSecondUploadError] = useState<boolean>(false);
+    const [completed, setCompleted] = useState<boolean>()
 
-    const router = useRouter()
     const toast = useToast()
 
     const handleSubmit = useCallback((e: any) => {
         e.preventDefault()
+
+        if (completed !== undefined){
+            toast({title: 'Error Creating Shop!', description: 'Please wait for the image(s) to finish uploading before submitting!', status: 'error', duration: 3000, isClosable: true})
+            return
+        }
+
         if (!formData.displayName || formData.displayName.length > 30 || !formData.description) return;
         navigator.geolocation.getCurrentPosition((data) => {
 
@@ -40,7 +46,7 @@ const NewTheme = () => {
             .catch(() => toast({title: 'Error Creating Shop!', description: 'Something went wrong creating ' + formData.displayName + '.', status: 'error', duration: 3000, isClosable: true}))
             
         })
-    }, [url, formData, iconUrl, toast])
+    }, [url, formData, iconUrl, toast, completed])
 
 
     const handleChange = (event: any) => {
@@ -61,10 +67,10 @@ const NewTheme = () => {
                 <input type="text" id="componentColor" name="componentColor" placeholder="Accent Color" onChange={handleChange} className="h-[55px] w-[155px] lg:h-[50px] border border-black rounded italic pl-4 mt-8 lg:mt-4"/>
             </div>
 
-            <Uploader message="Upload Background Image" relate="themeUpload" setState={setUrl} setUploadError={setFirstUploadError}/>
+            <Uploader message="Upload Background Image" relate="themeUpload" setState={setUrl} setUploadError={setFirstUploadError} setCompleted={setCompleted}/>
             {firstUploadError && <h1 className="text-red-600 italic">Error uploading image!</h1>}
 
-            <Uploader message="Upload Store Icon" relate="iconUpload" setState={setIconUrl} setUploadError={setSecondUploadError}/>
+            <Uploader message="Upload Store Icon" relate="iconUpload" setState={setIconUrl} setUploadError={setSecondUploadError} setCompleted={setCompleted}/>
             {secondUploadError && <h1 className="text-red-600 italic">Error uploading image!</h1>}
 
             <button className="h-[55px] w-[330px] lg:h-[50px] bg-[#ed7bbe] text-white rounded mt-8 lg:mt-4" type="submit">Submit</button>

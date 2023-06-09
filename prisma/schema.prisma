@@ -69,7 +69,7 @@ model Account {
   id            String      @id @unique @default(uuid())
   username      String      @unique @db.VarChar(255)
   password      String      @db.VarChar(255)
-  icon          String?     
+  icon          String     @default("/default-profile.webp")
   createdAt     DateTime    @default(now())
   connected Boolean @default(false)
   createdStores StoreInfo[] @relation("CreatedStores")
