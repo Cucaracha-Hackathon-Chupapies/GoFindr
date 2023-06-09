@@ -53,7 +53,7 @@ const Uploader = ({message, relate, setState, setUploadError}: Props) => {
                 <input type="file" id={relate} accept="image/*" onChange={handleUpload} className="hidden"/>
             </label>
 
-            {previewImage && (
+            {/*previewImage && (
                 <div className="fixed w-[330px] -ml-4 mt-[-20%] bg-gray-800 bg-opacity-70 items-center self-center rounded-2xl">
                     <div className="flex flex-col items-center p-8">
                         <img src={previewImage} alt="Preview" className="w-full h-full rounded-2xl" />
@@ -63,7 +63,7 @@ const Uploader = ({message, relate, setState, setUploadError}: Props) => {
                         </button>
                     </div>
                 </div>
-            )}
+            )*/}
         </div>
 
     )
